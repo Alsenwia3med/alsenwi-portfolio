@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --border: rgba(0, 0, 0, 0.08);
+  --accent-gold: #B48A00;
+  --accent-amber: #D97706;
+  --accent-blue: #2563eb;
+  --accent-green: #059669;
+}
+
+.dark {
+  --bg: #050505;
+  --text: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.01);
+  --border: rgba(255, 255, 255, 0.03);
+  --accent-gold: #D4AF37;
+  --accent-amber: #FFBF00;
+  --accent-blue: #3b82f6;
+  --accent-green: #10b981;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-arabic: "Cairo", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-amber: var(--accent-amber);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-green: var(--accent-green);
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-card-bg: var(--card-bg);
+  --color-border: var(--border);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg text-text selection:bg-accent-gold selection:text-black transition-colors duration-500;
+  }
+  [lang="ar"], .rtl {
+    font-family: var(--font-arabic);
+  }
+}
+
+.rtl {
+  direction: rtl;
+  font-family: var(--font-arabic);
+}
+
+.ltr {
+  direction: ltr;
+  font-family: var(--font-sans);
+}
+
+/* Luxury Glass Effect */
+.glass {
+  @apply bg-card-bg backdrop-blur-2xl border border-border;
+}
+
+.glass-card {
+  @apply bg-card-bg backdrop-blur-3xl border border-border shadow-[0_4px_24px_0_rgba(0,0,0,0.1)];
+}
+
+.dark .glass-card {
+  @apply shadow-[0_4px_24px_0_rgba(0,0,0,0.5)];
+}
+
+.magic-glow {
+  @apply relative overflow-hidden;
+}
+
+.magic-glow::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-tr from-accent-gold/10 via-transparent to-accent-amber/10 opacity-0 transition-opacity duration-500;
+}
+
+.magic-glow:hover::after {
+  @apply opacity-100;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-accent-gold/50 transition-colors;
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.4); }
+}
+
+.animate-glow {
+  animation: glow 8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
