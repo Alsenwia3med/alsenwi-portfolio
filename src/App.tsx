@@ -587,6 +587,16 @@ export default function App() {
 
       {/* Background Elements */}
       <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        {/* Background Image */}
+        <div
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500 ${
+            theme === 'dark' ? 'opacity-10' : 'opacity-5'
+          }`}
+          style={{
+            backgroundImage: `url('/images/Background.png')`,
+          }}
+        />
+
         {/* Dark Theme Enhanced Background */}
         {theme === 'dark' && (
           <>
