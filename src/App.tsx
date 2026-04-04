@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
   Globe, 
@@ -81,6 +81,7 @@ interface Content {
       period: string;
       details: string[];
       image: string;
+      link?: string;
     }[];
   };
   certifications: {
@@ -122,11 +123,18 @@ interface Content {
   };
 }
 
+const resolvePublicPath = (path: string) => {
+  if (path.startsWith('/')) {
+    return `${import.meta.env.BASE_URL}${path.slice(1)}`;
+  }
+  return path;
+};
+
 const translations: Record<Language, Content> = {
   en: {
     nav: { hero: 'Home', about: 'About', experience: 'Experience', projects: 'Portfolio', education: 'Education', contact: 'Contact' },
     hero: {
-      name: 'AHMED ABDULKARIM AL-SANWI',
+      name: 'Ahmed Abdulkareem Al-Senwi',
       role: 'Software Developer',
       summary: 'I am a dedicated Software Developer with a passion for building high-performance web and mobile applications. I focus on creating impactful digital solutions with timeless design and robust architecture.',
       cta: 'View Portfolio',
@@ -148,7 +156,7 @@ const translations: Record<Language, Content> = {
           country: 'Malaysia',
           period: 'Oct 2025 — Mar 2026', 
           desc: 'Completed 450+ hours of intensive development focused on fintech and automation.',
-          image: '/images/six digit club.png',
+          image: '/images/six%20digit%20club.png',
           achievements: [
             'Python trading bots APIs (65% win rate)',
             'React/Chart.js real-time dashboard (5 KPIs, 30s refresh)',
@@ -196,6 +204,7 @@ const translations: Record<Language, Content> = {
           country: 'Malaysia',
           period: '2022 — 2026 (Graduation: March 2026)',
           image: '/images/utem.png',
+          link: 'https://ftmk.utem.edu.my/web/index.php/academics/undergraduate/bachelor-of-computer-science-software-development/',
           details: [
             'Focus: Full-Stack Development, Software Engineering',
             'Key Projects: Smart Attendance System (C++/PHP QR codes)',
@@ -276,7 +285,7 @@ const translations: Record<Language, Content> = {
           country: 'ماليزيا',
           period: 'أكتوبر ٢٠٢٥ — مارس ٢٠٢٦', 
           desc: 'أكملت أكثر من ٤٥٠ ساعة من التطوير المكثف الذي ركز على التكنولوجيا المالية والأتمتة.',
-          image: '/images/SDC%20Dashboard.png',
+          image: '/images/six%20digit%20club.png',
           achievements: [
             'بوتات تداول بايثون (معدل فوز ٦٥٪)',
             'لوحة تحكم React/Chart.js (٥ مؤشرات أداء، تحديث كل ٣٠ ثانية)',
@@ -291,7 +300,7 @@ const translations: Record<Language, Content> = {
           country: 'ماليزيا',
           period: 'أغسطس ٢٠٢٥ — الآن', 
           desc: 'قيادة التطور التقني لمنصة تعليمية حديثة.',
-          image: '/images/Inspire-U.png',
+          image: '/images/inspire-logo.png',
           achievements: [
             'هندسة المنصة الكاملة (PHP/MySQL REST APIs)',
             'أتمتة ٧٠٪ من سير العمل الداخلي',
@@ -324,6 +333,7 @@ const translations: Record<Language, Content> = {
           country: 'ماليزيا',
           period: '٢٠٢٢ — ٢٠٢٦ (التخرج: مارس ٢٠٢٦)',
           image: '/images/utem.png',
+          link: 'https://ftmk.utem.edu.my/web/index.php/academics/undergraduate/bachelor-of-computer-science-software-development/',
           details: [
             'التركيز: تطوير الواجهات الكاملة، هندسة البرمجيات',
             'المشاريع الرئيسية: نظام الحضور الذكي (C++/PHP QR codes)',
@@ -391,9 +401,20 @@ function ProjectCard({ project, isRtl }: any) {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+  const imageSrc = resolvePublicPath(project.image);
+
+  const CardWrapper = project.link ? motion.a : motion.div;
+  const wrapperProps = project.link
+    ? {
+        href: project.link,
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      }
+    : {};
 
   return (
-    <motion.div 
+    <CardWrapper
+      {...wrapperProps}
       ref={ref}
       layout
       initial={{ opacity: 0, y: 20 }}
@@ -403,44 +424,27 @@ function ProjectCard({ project, isRtl }: any) {
       className="group relative glass-card rounded-[2rem] overflow-hidden border border-white/5 hover:border-accent-gold/40 transition-all duration-500 magic-glow"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
-        {project.link ? (
-          <a href={project.link} target="_blank" rel="noopener noreferrer" className="absolute inset-0 block">
-            <motion.img 
-              style={{ y, scale: 1.05 }}
-              src={project.image} 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.1]"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${project.title}/800/600`;
-              }}
-            />
-          </a>
-        ) : (
-          <motion.img 
-            style={{ y, scale: 1.05 }}
-            src={project.image} 
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.1]"
-            referrerPolicy="no-referrer"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${project.title}/800/600`;
-            }}
-          />
-        )}
+        <motion.img 
+          style={{ y, scale: 1.05 }}
+          src={imageSrc} 
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.1]"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${project.title}/800/600`;
+          }}
+        />
         
         {/* Overlay with glass effect on hover */}
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[4px]">
           {project.link && (
-            <motion.a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <motion.div 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-3 bg-accent-gold text-black rounded-full shadow-2xl font-bold text-xs uppercase tracking-widest flex items-center gap-2"
             >
               {isRtl ? 'عرض المشروع' : 'View Project'}
               <ExternalLink size={14} />
-            </motion.a>
+            </motion.div>
           )}
         </div>
 
@@ -466,7 +470,7 @@ function ProjectCard({ project, isRtl }: any) {
           ))}
         </div>
       </div>
-    </motion.div>
+    </CardWrapper>
   );
 }
 
@@ -478,6 +482,11 @@ export default function App() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -533,6 +542,38 @@ export default function App() {
 
   const toggleLang = () => setLang(prev => prev === 'en' ? 'ar' : 'en');
 
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { name, email, message } = contactForm;
+    
+    if (!name.trim() || !message.trim()) {
+      alert(lang === 'en' ? 'Please fill in your name and message' : 'يرجى ملء الاسم والرسالة');
+      return;
+    }
+
+    // WhatsApp number - replace with actual number
+    const phoneNumber = '+60143646834'; // The phone number from contact info
+    
+    // Construct WhatsApp message
+    const whatsappMessage = `*New Contact Form Message*\n\n*Name:* ${name}\n*Email:* ${email}\n*Message:* ${message}`;
+    
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodedMessage}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Reset form
+    setContactForm({ name: '', email: '', message: '' });
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setContactForm(prev => ({ ...prev, [field]: value }));
+  };
+
   return (
     <div className={`min-h-screen transition-all duration-700 selection:bg-accent-blue/30 ${isRtl ? 'rtl' : 'ltr'}`}>
       
@@ -546,41 +587,106 @@ export default function App() {
 
       {/* Background Elements */}
       <div className="fixed inset-0 z-[-1] overflow-hidden">
-        <motion.div 
-          animate={{ 
-            backgroundColor: activeSection === 'experience' ? 'rgba(139, 92, 246, 0.1)' : 
-                             activeSection === 'projects' ? 'rgba(59, 130, 246, 0.1)' : 
-                             'rgba(59, 130, 246, 0.1)'
-          }}
-          className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] blur-[120px] rounded-full animate-glow transition-colors duration-1000" 
-        />
-        <motion.div 
-          animate={{ 
-            backgroundColor: activeSection === 'experience' ? 'rgba(236, 72, 153, 0.1)' : 
-                             activeSection === 'projects' ? 'rgba(16, 185, 129, 0.1)' : 
-                             'rgba(16, 185, 129, 0.1)'
-          }}
-          className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] blur-[120px] rounded-full animate-glow transition-colors duration-1000" 
-          style={{ animationDelay: '2s' }} 
-        />
+        {/* Dark Theme Enhanced Background */}
+        {theme === 'dark' && (
+          <>
+            <motion.div 
+              animate={{ 
+                backgroundColor: activeSection === 'experience' ? 'rgba(139, 92, 246, 0.15)' : 
+                                 activeSection === 'projects' ? 'rgba(59, 130, 246, 0.15)' : 
+                                 'rgba(59, 130, 246, 0.1)',
+                scale: activeSection === 'hero' ? 1.2 : 1
+              }}
+              className="absolute top-[-15%] left-[-15%] w-[50%] h-[50%] blur-[150px] rounded-full animate-glow transition-all duration-1000" 
+            />
+            <motion.div 
+              animate={{ 
+                backgroundColor: activeSection === 'experience' ? 'rgba(236, 72, 153, 0.15)' : 
+                                 activeSection === 'projects' ? 'rgba(16, 185, 129, 0.15)' : 
+                                 'rgba(16, 185, 129, 0.1)',
+                scale: activeSection === 'about' ? 1.3 : 1
+              }}
+              className="absolute bottom-[-15%] right-[-15%] w-[50%] h-[50%] blur-[150px] rounded-full animate-glow transition-colors duration-1000" 
+              style={{ animationDelay: '2s' }} 
+            />
+            
+            {/* Additional Dark Theme Elements */}
+            <motion.div 
+              animate={{ 
+                backgroundColor: 'rgba(212, 175, 55, 0.08)',
+                rotate: [0, 360]
+              }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute top-[30%] right-[20%] w-[25%] h-[25%] blur-[100px] rounded-full" 
+            />
+            <motion.div 
+              animate={{ 
+                backgroundColor: 'rgba(59, 130, 246, 0.06)',
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-[40%] left-[15%] w-[30%] h-[30%] blur-[120px] rounded-full" 
+            />
+          </>
+        )}
+
+        {/* Light Theme Background */}
+        {theme === 'light' && (
+          <>
+            <motion.div 
+              animate={{ 
+                backgroundColor: activeSection === 'experience' ? 'rgba(139, 92, 246, 0.05)' : 
+                                 activeSection === 'projects' ? 'rgba(59, 130, 246, 0.05)' : 
+                                 'rgba(59, 130, 246, 0.03)'
+              }}
+              className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] blur-[120px] rounded-full animate-glow transition-colors duration-1000" 
+            />
+            <motion.div 
+              animate={{ 
+                backgroundColor: activeSection === 'experience' ? 'rgba(236, 72, 153, 0.05)' : 
+                                 activeSection === 'projects' ? 'rgba(16, 185, 129, 0.05)' : 
+                                 'rgba(16, 185, 129, 0.03)'
+              }}
+              className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] blur-[120px] rounded-full animate-glow transition-colors duration-1000" 
+              style={{ animationDelay: '2s' }} 
+            />
+          </>
+        )}
         
-        {/* Magic Floating Shapes */}
+        {/* Magic Floating Shapes - Enhanced for Dark Theme */}
         <motion.div 
           animate={{ 
             y: [0, -20, 0],
-            rotate: [0, 10, 0]
+            rotate: [0, 10, 0],
+            scale: theme === 'dark' ? [1, 1.1, 1] : [1, 1.05, 1]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] right-[15%] w-24 h-24 border border-white/5 rounded-full backdrop-blur-sm"
+          className={`absolute top-[20%] right-[15%] w-24 h-24 border ${
+            theme === 'dark' ? 'border-accent-gold/20 bg-accent-gold/5' : 'border-white/5'
+          } rounded-full backdrop-blur-sm`}
         />
         <motion.div 
           animate={{ 
             y: [0, 30, 0],
-            rotate: [0, -15, 0]
+            rotate: [0, -15, 0],
+            scale: theme === 'dark' ? [1, 1.2, 1] : [1, 1.1, 1]
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[30%] left-[10%] w-32 h-32 border border-white/5 rounded-2xl backdrop-blur-sm"
+          className={`absolute bottom-[30%] left-[10%] w-32 h-32 border ${
+            theme === 'dark' ? 'border-accent-blue/20 bg-accent-blue/5' : 'border-white/5'
+          } rounded-2xl backdrop-blur-sm`}
         />
+
+        {/* Dark Theme Stars */}
+        {theme === 'dark' && (
+          <>
+            <div className="absolute top-[15%] left-[25%] w-1 h-1 bg-accent-gold rounded-full animate-pulse" />
+            <div className="absolute top-[35%] right-[30%] w-1 h-1 bg-accent-blue rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-[25%] left-[35%] w-1 h-1 bg-accent-green rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+            <div className="absolute top-[45%] left-[60%] w-1 h-1 bg-accent-gold rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+            <div className="absolute bottom-[45%] right-[25%] w-1 h-1 bg-accent-blue rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
+          </>
+        )}
       </div>
 
       {/* Navigation */}
@@ -591,7 +697,9 @@ export default function App() {
             animate={{ opacity: 1 }}
             className="text-lg font-mono font-bold tracking-tighter flex items-center gap-3"
           >
-            <img src="/images/alsenwi.jpg" alt="Al Sanwi" className="w-10 h-10 rounded-2xl object-cover border border-white/10 shadow-md" />
+            <div className="w-10 h-10 rounded-2xl overflow-hidden border border-white/10 shadow-lg shadow-accent-blue/10">
+              <img src={resolvePublicPath('/images/alsenwi.jpg')} alt="Alsenwi" className="w-full h-full object-cover" />
+            </div>
             <span className="hidden sm:block uppercase tracking-[0.2em] text-xs font-bold">AL-SANWI<span className="text-accent-blue">.</span>DEV</span>
           </motion.div>
 
@@ -654,8 +762,8 @@ export default function App() {
               <div className="p-8 flex flex-col gap-6 border-b border-border">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/10 shadow-lg shadow-accent-blue/20">
-                      <img src="/images/alsenwi.jpg" alt="Al Sanwi" className="w-full h-full object-cover" />
+                    <div className="w-10 h-10 bg-gradient-to-br from-accent-blue to-accent-green rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-accent-blue/20">
+                      AS
                     </div>
                     <div className="flex flex-col">
                       <span className="text-sm font-bold tracking-widest uppercase">Al-Sanwi</span>
@@ -977,7 +1085,7 @@ export default function App() {
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-accent-blue/20 bg-slate-900 group-hover:border-accent-blue/50 transition-colors">
                       <img 
-                        src={item.image} 
+                        src={resolvePublicPath(item.image)} 
                         alt={item.company}
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -1033,20 +1141,25 @@ export default function App() {
           </div>
 
           <div className="max-w-4xl mx-auto space-y-8">
-            {t.education.items.map((item, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, x: isRtl ? 30 : -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="glass-card rounded-3xl p-8 border border-white/5 hover:border-accent-green/20 transition-all group magic-glow"
-              >
+            {t.education.items.map((item, idx) => {
+              const Wrapper = item.link ? motion.a : motion.div;
+              const wrapperProps = item.link ? { href: item.link, target: '_blank', rel: 'noopener noreferrer' } : {};
+
+              return (
+                <Wrapper
+                  key={idx}
+                  {...wrapperProps}
+                  initial={{ opacity: 0, x: isRtl ? 30 : -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className={`glass-card rounded-3xl p-8 border border-white/5 hover:border-accent-green/20 transition-all group magic-glow ${item.link ? 'cursor-pointer' : ''}`}
+                >
                 <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
                   {/* Small Circular Logo */}
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-accent-green/20 bg-slate-900 group-hover:border-accent-green/50 transition-colors">
                       <img 
-                        src={item.image} 
+                        src={resolvePublicPath(item.image)} 
                         alt={item.school}
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -1082,8 +1195,9 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              </Wrapper>
+            );
+          })}
           </div>
 
           {/* Magic Languages & Certs Grid */}
@@ -1208,23 +1322,50 @@ export default function App() {
               viewport={{ once: true }}
               className="glass-card p-10 rounded-3xl border-white/5 magic-glow"
             >
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={handleContactSubmit}>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">Name</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all" />
+                    <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">
+                      {lang === 'en' ? 'Name' : 'الاسم'}
+                    </label>
+                    <input 
+                      type="text" 
+                      value={contactForm.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all" 
+                      required
+                    />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">Email</label>
-                    <input type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all" />
+                    <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">
+                      {lang === 'en' ? 'Email' : 'البريد الإلكتروني'}
+                    </label>
+                    <input 
+                      type="email" 
+                      value={contactForm.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all" 
+                    />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">Message</label>
-                  <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all resize-none" />
+                  <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">
+                    {lang === 'en' ? 'Message' : 'الرسالة'}
+                  </label>
+                  <textarea 
+                    rows={4} 
+                    value={contactForm.message}
+                    onChange={(e) => handleInputChange('message', e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all resize-none" 
+                    required
+                  />
                 </div>
-                <button className="w-full bg-accent-blue text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-accent-blue/90 transition-all">
-                  Send Message
+                <button 
+                  type="submit"
+                  className="w-full bg-accent-blue text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-accent-blue/90 transition-all flex items-center justify-center gap-2"
+                >
+                  <MessageSquare size={16} />
+                  {lang === 'en' ? 'Send via WhatsApp' : 'إرسال عبر واتساب'}
                 </button>
               </form>
             </motion.div>
@@ -1259,7 +1400,7 @@ export default function App() {
               </motion.a>
             </div>
             <p className="text-[10px] uppercase tracking-[0.5em] text-slate-700">
-              © 2026 {lang === 'en' ? 'AHMED AL-SANWI' : 'أحمد عبدالكريم الصنوي'} • {lang === 'en' ? 'BUILT WITH REACT' : 'بني باستخدام ريأكت'}
+              © 2026 {lang === 'en' ? 'Ahmed Abdulkareem Al-Senwi' : 'أحمد عبدالكريم الصنوي'} • {lang === 'en' ? 'BUILT WITH REACT' : 'بني باستخدام ريأكت'}
             </p>
           </div>
         </div>
