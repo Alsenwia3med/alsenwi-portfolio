@@ -564,7 +564,7 @@ export default function App() {
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodedMessage}`;
     
     // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
+    window.location.href = whatsappUrl;
     
     // Reset form
     setContactForm({ name: '', email: '', message: '' });
@@ -586,7 +586,7 @@ export default function App() {
       </div>
 
       {/* Background Elements */}
-      <div className="fixed inset-0 z-[-1] overflow-hidden">
+      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
         {/* Dark Theme Enhanced Background */}
         {theme === 'dark' && (
           <>
@@ -928,23 +928,19 @@ export default function App() {
                 transition={{ delay: 0.6 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 w-full sm:w-auto"
               >
-                <a 
-                  href="https://alsenwia3med.github.io/alsenwi-portfolio/#projects"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-accent-gold text-black px-6 md:px-8 py-3 md:py-3.5 rounded-full text-[9px] md:text-[10px] uppercase tracking-widest font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all group"
-                >
-                  <span>{t.hero.cta}</span>
-                  <ArrowRight className={`group-hover:translate-x-1 transition-transform ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : ''}`} size={12} />
-                </a>
-                <a 
-                  href="https://wa.me/60143646834?text=Hello%20Ahmed,%20I%20would%20like%20to%20hire%20you%20for%20a%20project"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-card-bg border border-border text-text px-6 md:px-8 py-3 md:py-3.5 rounded-full text-[9px] md:text-[10px] uppercase tracking-widest font-bold hover:bg-card-bg/80 transition-all"
-                >
-                  {t.hero.hireMe}
-                </a>
+                <a
+  href="#projects"
+  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-accent-gold text-black px-6 md:px-8 py-3 md:py-3.5 rounded-full text-9px md:text-10px uppercase tracking-widest font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all group"
+>
+  <span>{t.hero.cta}</span>
+  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={12} />
+</a>
+                <a
+  href="#contact"
+  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-card-bg border border-border text-text px-6 md:px-8 py-3 md:py-3.5 rounded-full text-9px md:text-10px uppercase tracking-widest font-bold hover:bg-card-bg/80 transition-all"
+>
+  {t.hero.hireMe}
+</a>
               </motion.div>
             </div>
           </motion.div>
@@ -1276,7 +1272,7 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 bg-bg border-t border-border">
+      <section id="contact" className="relative z-30 py-32 bg-bg border-t border-border">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div
@@ -1324,9 +1320,9 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="glass-card p-10 rounded-3xl border-white/5 magic-glow"
+              className="relative z-40 pointer-events-auto glass-card p-10 rounded-3xl border-white/5 magic-glow"
             >
-              <form className="space-y-6" onSubmit={handleContactSubmit}>
+              <form className="relative z-50 pointer-events-auto space-y-6" onSubmit={handleContactSubmit}>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">
