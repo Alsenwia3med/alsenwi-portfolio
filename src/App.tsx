@@ -143,7 +143,7 @@ const translations: Record<Language, Content> = {
     about: {
       title: 'The Developer',
       bio: 'I am a passionate software developer dedicated to building high-performance applications that solve real-world problems. My expertise spans across the full stack, from crafting intuitive UI/UX in Figma to architecting robust backends in Python and Node.js. I thrive on creating digital solutions that are both functional and visually stunning.',
-      skillsTitle: 'Technical Arsenal',
+      skillsTitle: 'Skills',
       skills: ['Python', 'JavaScript', 'PHP', 'React', 'MySQL', 'Flutter', 'Dart', 'C++', 'REST APIs', 'Node.js', 'Figma UI/UX', 'Chart.js', 'Brevo APIs', 'Git/GitHub', 'Agile/Scrum', 'CI/CD']
     },
     experience: {
@@ -910,7 +910,7 @@ export default function App() {
                 transition={{ delay: 0.3 }}
                 className="text-[8px] md:text-[10px] uppercase tracking-[0.4em] text-text-dim mb-8 md:mb-10 font-medium"
               >
-                {lang === 'en' ? 'Human-Crafted Digital Experience' : 'تجربة رقمية صُنعت بلمسة إنسانية'}
+                {lang === 'en' ? 'Bachelor of Computer Science' : 'بكلاريوس علوم الحاسوب '}
               </motion.div>
 
               <motion.p
