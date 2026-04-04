@@ -929,14 +929,18 @@ export default function App() {
                 className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 w-full sm:w-auto"
               >
                 <a 
-                  href="#projects"
+                  href="https://alsenwia3med.github.io/alsenwi-portfolio/#projects"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-accent-gold text-black px-6 md:px-8 py-3 md:py-3.5 rounded-full text-[9px] md:text-[10px] uppercase tracking-widest font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all group"
                 >
                   <span>{t.hero.cta}</span>
                   <ArrowRight className={`group-hover:translate-x-1 transition-transform ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : ''}`} size={12} />
                 </a>
                 <a 
-                  href="#contact"
+                  href="https://wa.me/60143646834?text=Hello%20Ahmed,%20I%20would%20like%20to%20hire%20you%20for%20a%20project"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-card-bg border border-border text-text px-6 md:px-8 py-3 md:py-3.5 rounded-full text-[9px] md:text-[10px] uppercase tracking-widest font-bold hover:bg-card-bg/80 transition-all"
                 >
                   {t.hero.hireMe}
