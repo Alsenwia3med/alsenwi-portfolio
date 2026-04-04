@@ -913,7 +913,7 @@ export default function App() {
                 {lang === 'en' ? 'Human-Crafted Digital Experience' : 'تجربة رقمية صُنعت بلمسة إنسانية'}
               </motion.div>
 
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
@@ -921,27 +921,6 @@ export default function App() {
               >
                 {t.hero.summary}
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 w-full sm:w-auto"
-              >
-                <a
-  href="#projects"
-  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-accent-gold text-black px-6 md:px-8 py-3 md:py-3.5 rounded-full text-9px md:text-10px uppercase tracking-widest font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all group"
->
-  <span>{t.hero.cta}</span>
-  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={12} />
-</a>
-                <a
-  href="#contact"
-  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-card-bg border border-border text-text px-6 md:px-8 py-3 md:py-3.5 rounded-full text-9px md:text-10px uppercase tracking-widest font-bold hover:bg-card-bg/80 transition-all"
->
-  {t.hero.hireMe}
-</a>
-              </motion.div>
             </div>
           </motion.div>
         </div>
