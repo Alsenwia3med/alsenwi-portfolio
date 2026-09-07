@@ -1,20 +1,20 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Ahmed Al-Senwi | Personal Portfolio Website
 
-# Run and deploy your AI Studio app
+Personal portfolio website built to showcase my software development projects, technical skills, web applications, and professional experience as a Software Engineer & Full-Stack Developer.
 
-This contains everything you need to run your app locally.
+🌐 **Live Portfolio:** [https://alsenwia3med.github.io/alsenwi-portfolio/](https://alsenwia3med.github.io/alsenwi-portfolio/)
 
-View your app in AI Studio: https://ai.studio/apps/1bd368cb-cf73-4e9a-8f09-871a6c6c87c6
+---
 
-## Run Locally
+## 📌 Features & Highlights
+* **Interactive Showcase:** Highlights key projects including SDC Fintech Platform, Inspire-U, and YCIM Web Portal.
+* **Modern UI/UX:** Clean, dark-themed responsive interface designed with optimized user experience.
+* **Direct Communication Integration:** Embedded contact forms and direct WhatsApp chat for client and professional inquiries.
 
-**Prerequisites:**  Node.js
+---
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🚀 Tech Stack
+* **Frontend Framework:** React.js / TypeScript
+* **Build Tool:** Vite
+* **Styling:** HTML5, CSS3, Modern Web Components
+* **Deployment:** GitHub Pages
