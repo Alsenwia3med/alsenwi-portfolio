@@ -267,8 +267,8 @@ export default function App() {
             </div>
           </div>
           <motion.div {...fade} className="skwrap p-5 sm:p-7 mt-5">
-            <div className="flex items-end justify-between flex-wrap gap-2"><div><div className="text-[11px] tracking-[.24em] uppercase font-semibold" style={{ color: '#a8841f' }}>{t.skTitle}</div><h3 className="mt-1 text-[20px] sm:text-[24px] font-semibold" style={{ color: '#14120d' }}>{lang === 'ar' ? 'من الفكرة إلى نظام يعمل' : 'From idea to a working system'}</h3></div><div className="text-[12px] sk-mut">{lang === 'ar' ? 'واجهات · خلفية · جوال · أدوات' : 'Frontend · Backend · Mobile · Tooling'}</div></div>
-            <SkillsLab lang={lang} />
+            <div className="flex items-end justify-between flex-wrap gap-2"><div><div className="text-[11px] tracking-[.24em] uppercase font-semibold sk-gold">{t.skTitle}</div><h3 className="mt-1 text-[20px] sm:text-[24px] font-semibold sk-ink">{lang === 'ar' ? 'من الفكرة إلى نظام يعمل' : 'From idea to a working system'}</h3></div><div className="text-[12px] sk-mut">{lang === 'ar' ? 'واجهات · خلفية · جوال · أدوات' : 'Frontend · Backend · Mobile · Tooling'}</div></div>
+            <SkillsLab lang={lang} dark={theme === 'dark'} />
           </motion.div>
         </div>
       </section>
