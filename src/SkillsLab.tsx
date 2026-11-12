@@ -97,8 +97,8 @@ export default function SkillsLab({ lang, dark }: { lang: L; dark: boolean }) {
     <div className="mt-3 grid lg:grid-cols-5 gap-4 items-center">
       <div className="lg:col-span-3">
         <div className="flex flex-wrap gap-2 mb-3">
-          <button className="sk-chip" style={filter === null ? { borderColor: P.ink, background: P.ink, color: P.on } : {}} onClick={() => setFilter(null)}>{lang === 'ar' ? 'الكل' : 'All'}</button>
-          {gl.map((g, i) => <button key={g} className="sk-chip" style={filter === i ? { borderColor: COL[i], background: COL[i], color: P.on } : {}} onClick={() => setFilter(filter === i ? null : i)}><span style={{ background: filter === i ? P.on : COL[i] }} className="w-1.5 h-1.5 rounded-full" />{g}</button>)}
+          <button className="sk-chip" style={filter === null ? { borderColor: P.ink, background: P.ink, color: P.on } : {}} onPointerEnter={() => setFilter(null)} onClick={() => setFilter(null)}>{lang === 'ar' ? 'الكل' : 'All'}</button>
+          {gl.map((g, i) => <button key={g} className="sk-chip" style={filter === i ? { borderColor: COL[i], background: COL[i], color: P.on } : {}} onPointerEnter={() => setFilter(i)} onClick={() => setFilter(i)}><span style={{ background: filter === i ? P.on : COL[i] }} className="w-1.5 h-1.5 rounded-full" />{g}</button>)}
         </div>
         <div ref={wrap} className="relative mx-auto select-none touch-none" style={{ height: 'min(108vw,540px)', marginTop: 22, marginBottom: 22, perspective: 900, cursor: 'grab' }} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} dir="ltr">
           <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
