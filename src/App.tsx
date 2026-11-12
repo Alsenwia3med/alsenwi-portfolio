@@ -71,7 +71,7 @@ const T = {
     jTitle: 'Experience & education',
     exp: [
       ['Software Engineer (Frontend)', 'Roots AI', 'Present', ['Frontend engineer on a B2B Health AI platform', 'Next.js, Tailwind CSS and Motion; production UI and design-system work']],
-      ['Full-Stack Developer Intern', 'Six Digit Club Sdn Bhd · Selangor', 'Oct 2025 — Mar 2026', ['450+ hours on fintech and automation', 'React/Chart.js real-time dashboard (5 KPIs, 30s refresh)', 'Brevo email automation across 300+ lists', 'Figma redesign of 60+ pages']],
+      ['Full-Stack Developer Intern', 'Six Digit Club Sdn Bhd · Selangor', 'Oct 2025 — Mar 2026', ['450+ hours on the live sdc.cx fintech platform', 'Email-automation dashboard on the Brevo API: batches, media, templates, 300+ lists', 'Investment dashboard: investor portal and admin panel with capital requests and termination flow', 'Redesigned landing, 30/60-day and Early Bird pages and their payment-gateway pages', 'Referral tracking plus e-learning and payment integration', 'React/Chart.js real-time dashboard (5 KPIs, 30s refresh) · Figma redesign of 60+ pages']],
       ['UI/UX & Full-Stack Developer', 'Inspire-U Edtech · Melaka', 'Aug 2025 — Present', ['Platform architecture with PHP/MySQL REST APIs', 'Automated about 70% of internal workflows', 'Modernised the student management system']],
       ['Freelance Web Developer', 'Self-employed · Remote', 'Aug 2024 — Jun 2025', ['Landing pages and automation for local businesses and startups', 'Third-party API integrations, SEO and performance tuning']],
     ],
@@ -121,7 +121,7 @@ const T = {
     jTitle: 'الخبرة والتعليم',
     exp: [
       ['مهندس برمجيات (الواجهات الأمامية)', 'Roots AI', 'الآن', ['مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات', 'Next.js وTailwind وMotion وبناء واجهات إنتاجية ونظام تصميم']],
-      ['متدرب مطوّر واجهات كاملة', 'Six Digit Club Sdn Bhd · سيلانجور', 'أكتوبر 2025 — مارس 2026', ['أكثر من 450 ساعة في التقنية المالية والأتمتة', 'لوحة React/Chart.js لحظية (5 مؤشرات، تحديث كل 30 ثانية)', 'أتمتة بريد Brevo لأكثر من 300 قائمة', 'إعادة تصميم أكثر من 60 صفحة في Figma']],
+      ['متدرب مطوّر واجهات كاملة', 'Six Digit Club Sdn Bhd · سيلانجور', 'أكتوبر 2025 — مارس 2026', ['أكثر من 450 ساعة على منصة sdc.cx التقنية المالية الحية', 'لوحة أتمتة البريد عبر Brevo API: دفعات ووسائط وقوالب لأكثر من 300 قائمة', 'لوحة الاستثمار: بوابة للمستثمر ولوحة إدارة بطلبات رأس المال ومسار الإنهاء', 'إعادة تصميم صفحات الهبوط و30/60 يوم والـ Early Bird وصفحات بوابات الدفع', 'تتبّع الإحالات وربط التعلّم الإلكتروني بالدفع', 'لوحة React/Chart.js لحظية (5 مؤشرات، كل 30 ثانية) · إعادة تصميم 60+ صفحة في Figma']],
       ['مطوّر UI/UX وواجهات كاملة', 'Inspire-U Edtech · ملقا', 'أغسطس 2025 — الآن', ['هندسة المنصة بـ PHP/MySQL وواجهات REST', 'أتمتة نحو 70% من سير العمل الداخلي', 'تحديث نظام إدارة الطلاب']],
       ['مطوّر ويب مستقل', 'عمل حر · عن بعد', 'أغسطس 2024 — يونيو 2025', ['صفحات هبوط وأتمتة للشركات المحلية والناشئة', 'تكاملات API خارجية وتحسين SEO والأداء']],
     ],
@@ -262,7 +262,7 @@ export default function App() {
           <motion.h2 {...fade} className="text-[22px] font-semibold mb-2">{t.aTitle}</motion.h2>
           <motion.p {...fade} className="text-[13.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
           <div className="grid lg:grid-cols-5 gap-3.5">
-            <motion.div {...fade} className="card p-5 lg:col-span-3 lg:self-start">
+            <motion.div {...fade} className="card p-5 lg:col-span-3">
               <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
               <div className="mt-4 flex flex-col gap-5 border-s border-white/10 ps-5">
                 {t.exp.map(([r, c, d, pts]: any, i: number) => (
