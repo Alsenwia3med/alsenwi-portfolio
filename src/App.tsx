@@ -21,7 +21,7 @@ function Logo({ src, name, size = 40 }: { src?: string; name: string; size?: num
   );
 }
 const EXP_META: [string | undefined, string | undefined][] = [
-  [fav('roots-ai.health'), 'https://roots-ai.health/'],
+  [img('roots-logo.png'), 'https://roots-ai.health/'],
   [img('six digit club.png'), 'https://sdc.cx/'],
   [img('inspire-logo.png'), 'https://inspire-u.net/'],
   [undefined, undefined],
@@ -59,7 +59,7 @@ const T = {
       ['Inspire U', 'Education platform', 'Student registration platform with bilingual site and lead flow.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'Health AI · B2B', 'Frontend engineer on a B2B Health AI platform: Next.js, Tailwind, Motion.', 'roots.jpg', 'https://roots-ai.health/'],
       ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'sdc-card.jpg', 'https://sdc.cx/'],
-      ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.png', 'https://astra-bot.tech/'],
+      ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.jpg', 'https://astra-bot.tech/'],
       ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', 'ycim.jpg', 'https://ycim.org/'],
       ['Safar Easy', 'Tourism', 'Arabic/RTL luxury redesign for a Malaysia tourism company.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
       ['E-Mart Mobile App', 'Mobile e-commerce', 'Flutter/Dart cross-platform app with product catalog and cart.', 'emart.jpg', ''],
@@ -109,7 +109,7 @@ const T = {
       ['Inspire U', 'منصة تعليمية', 'منصة تسجيل طلاب بموقع ثنائي اللغة ومسار استقبال العملاء.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'ذكاء صحي · B2B', 'مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات: Next.js وTailwind وMotion.', 'roots.jpg', 'https://roots-ai.health/'],
       ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'sdc-card.jpg', 'https://sdc.cx/'],
-      ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.png', 'https://astra-bot.tech/'],
+      ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.jpg', 'https://astra-bot.tech/'],
       ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', 'ycim.jpg', 'https://ycim.org/'],
       ['سفر إيز', 'سياحة', 'إعادة تصميم عربية فاخرة لشركة سياحة في ماليزيا.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
       ['E-Mart تطبيق جوال', 'تجارة إلكترونية', 'تطبيق Flutter/Dart متعدد المنصات بكتالوج منتجات وسلة.', 'emart.jpg', ''],

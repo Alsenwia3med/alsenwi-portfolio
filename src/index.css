@@ -78,8 +78,5 @@ a.xhead:hover{background:rgba(226,185,79,.08)}
 .xcert{align-items:center;padding:5px 8px;margin:0 -8px}
 .xbody{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease}
 .xbody>*{overflow:hidden;min-height:0;padding-inline-start:calc(40px + 12px + 1rem)}
-@media (hover:hover){
-  .xbody{grid-template-rows:0fr}
-  .xrow:hover .xbody,.xrow:focus-within .xbody{grid-template-rows:1fr}
-}
+
 html[data-theme=light] a.xhead:hover{background:rgba(168,132,31,.09)}
