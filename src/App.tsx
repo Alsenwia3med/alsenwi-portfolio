@@ -183,7 +183,7 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try { localStorage.setItem('theme', theme); } catch {}
-    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#07070a' : '#f6f2ea');
+    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#04070c' : '#ffffff');
   }, [theme]);
   const c = CT[lang];
   const brief = [`*${c.head}*`, `• ${c.f[0]}: ${name || c.dash}`, `• ${c.f[1]}: ${ty !== null ? c.types[ty] : c.dash}`, `• ${c.f[2]}: ${msg || c.dash}`].join('\n');

@@ -92,3 +92,45 @@ html[data-theme=light] a.xhead:hover{background:rgba(168,132,31,.09)}
 .ctable td a:hover{color:var(--gold)}
 .ctable tr{display:grid;grid-template-columns:130px 1fr}
 .ctable tr+tr{border-top:0}
+
+/* ===== v8: sky-blue luxury, pure-white light / deep-black dark ===== */
+:root{--bg:#04070c;--panel:#0a1119;--line:rgba(130,200,255,.12);--tx:#e9f1f8;--mut:#93a5b6;--gold:#5cc8ff;--gold2:#c4ecff;--sky:#38bdf8;--skyd:#0b7fb8}
+body{background:radial-gradient(1100px 560px at 88% -8%,rgba(56,189,248,.16),transparent 60%),radial-gradient(900px 520px at -8% 20%,rgba(20,120,170,.20),transparent 60%),radial-gradient(800px 520px at 60% 75%,rgba(120,170,255,.10),transparent 60%),linear-gradient(180deg,#03060a,#08111a 50%,#03060a);background-attachment:fixed}
+.gold{background:linear-gradient(120deg,#e3f6ff,#5cc8ff 45%,#9fdcff 70%,#3aa6e0);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn-gold{background:linear-gradient(120deg,#d6f2ff,#5cc8ff 60%,#38a8e6);color:#03121c;box-shadow:0 8px 28px -8px rgba(56,189,248,.6)}
+.hair{background:linear-gradient(90deg,transparent,rgba(92,200,255,.45),transparent)}
+.card{background:linear-gradient(180deg,rgba(18,30,44,.72),rgba(8,14,22,.72));border-color:rgba(130,200,255,.14);box-shadow:inset 0 1px 0 rgba(200,235,255,.08),0 18px 40px -24px rgba(0,0,0,.9)}
+.card::after{background:linear-gradient(110deg,transparent 35%,rgba(160,225,255,.13) 50%,transparent 65%)}
+.card:hover{border-color:rgba(92,200,255,.4)}
+.bg-\[\#d4b25c\]{background:#38bdf8!important}
+.skwrap{background:radial-gradient(900px 420px at 15% -10%,rgba(56,189,248,.15),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(100,140,255,.14),transparent 60%),linear-gradient(145deg,#091018,#05080d)}
+.skwrap::before{background:linear-gradient(135deg,rgba(160,225,255,.75),transparent 35%,transparent 65%,rgba(120,160,255,.5))}
+.sk-gold{color:#7fd4ff}.sk-card{border-color:rgba(92,200,255,.3)}
+.cchip[data-on=true],.cchip[data-on=true]:hover{background:linear-gradient(135deg,#d6f2ff,#5cc8ff)!important;color:#03121c!important}
+html[data-theme=dark] header.fixed{background:rgba(4,8,13,.72)}
+
+/* light: pure white, sky + silver gloss */
+html[data-theme=light]{--bg:#fff;--panel:#fff;--line:rgba(11,80,130,.12);--tx:#0b1622;--mut:#526477;--gold:#0b7fb8;--gold2:#2aa8e4}
+html[data-theme=light] body{background:radial-gradient(900px 420px at 95% -10%,rgba(56,189,248,.10),transparent 60%),#fff;background-attachment:fixed}
+html[data-theme=light] .gold{background:linear-gradient(120deg,#07507a,#1593d4 50%,#0b6fa3);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme=light] .btn-gold{color:#fff;background:linear-gradient(120deg,#2aa8e4,#0b7fb8);box-shadow:0 10px 26px -10px rgba(11,127,184,.65)}
+html[data-theme=light] .card{background:linear-gradient(180deg,#fff,#f6fbff);border-color:rgba(11,100,160,.14);box-shadow:0 1px 2px rgba(10,60,100,.05),0 16px 36px -20px rgba(11,100,160,.28)}
+html[data-theme=light] .card::after{background:linear-gradient(110deg,transparent 35%,rgba(56,189,248,.14) 50%,transparent 65%)}
+html[data-theme=light] .card:hover{border-color:rgba(11,127,184,.5);box-shadow:0 18px 40px -18px rgba(11,127,184,.4)}
+html[data-theme=light] .hair{background:linear-gradient(90deg,transparent,rgba(11,127,184,.4),transparent)}
+html[data-theme=light] header.fixed{background:rgba(255,255,255,.82)!important;border-color:rgba(11,80,130,.1)!important}
+html[data-theme=light] footer,html[data-theme=light] .border-white\/10,html[data-theme=light] .border-white\/5{border-color:rgba(11,80,130,.12)!important}
+html[data-theme=light] [class*="text-white/"]{color:rgba(11,22,34,.64)!important}
+html[data-theme=light] .text-white\/80,html[data-theme=light] .text-white\/70{color:rgba(11,22,34,.82)!important}
+html[data-theme=light] .text-white\/40,html[data-theme=light] .text-white\/35{color:rgba(11,22,34,.46)!important}
+html[data-theme=light] ::selection{background:#2aa8e4;color:#fff}
+html[data-theme=light] .hover\:text-white:hover{color:#0b1622!important}
+html[data-theme=light] .skwrap{background:#fff;border:1px solid rgba(11,127,184,.3);box-shadow:0 30px 70px -34px rgba(11,100,160,.45)}
+html[data-theme=light] .sk-gold{color:#0b7fb8}
+html[data-theme=light] .sk-card{border:1.5px solid #cfe6f5;box-shadow:0 14px 34px -18px rgba(11,100,160,.4)}
+html[data-theme=light] .sk-chip{border-color:#cfe6f5}
+html[data-theme=light] a.xhead:hover{background:rgba(11,127,184,.08)}
+html[data-theme=light] .cchip[data-on=true],html[data-theme=light] .cchip[data-on=true]:hover{background:linear-gradient(135deg,#2aa8e4,#0b7fb8)!important;color:#fff!important}
+html[data-theme=light] .cchip{background:#fff}
+html[data-theme=light] .xlogo{border-color:rgba(11,100,160,.14)}
+html[data-theme=light] .glow{display:none}
