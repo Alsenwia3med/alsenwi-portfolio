@@ -168,9 +168,9 @@ html[data-theme=light] .more:hover{background:linear-gradient(120deg,#08486f,#15
 .skwrap .more:hover{color:#14120d}
 html[data-theme=light] .skwrap .more:hover{color:#fff}
 /* section bands */
-#services,#about{background:rgba(255,255,255,.028)}
+#services,#about{background:rgba(255,255,255,.028);border-block:1px solid rgba(255,255,255,.05)}
 html[data-theme=light] #top,html[data-theme=light] #work,html[data-theme=light] #contact{background:#fff}
-html[data-theme=light] #services,html[data-theme=light] #about{background:#f4f9fe}
+html[data-theme=light] #services,html[data-theme=light] #about{background:linear-gradient(180deg,#e9f5fd,#f4faff);border-block:1px solid rgba(11,100,160,.12)}
 html[data-theme=light] #services .card,html[data-theme=light] #about .card{background:#fff}
 /* footer */
 .foot{border-top:1px solid var(--line);padding:16px 0;background:rgba(255,255,255,.02)}
@@ -180,7 +180,3 @@ html[data-theme=light] .foot{background:#f4faff;border-color:rgba(11,100,160,.14
 /* brand-coloured contact icons */
 .ctable tr:nth-child(1) th svg{color:#ef4444}.ctable tr:nth-child(2) th svg{color:#25D366}.ctable tr:nth-child(3) th svg{color:#ea4335}.ctable tr:nth-child(4) th svg{color:#3b8ee0}.ctable tr:nth-child(5) th svg{color:var(--tx)}
 .ctable th svg{width:18px;height:18px}
-
-.hair{display:none}
-.foot{border-top:0}
-html[data-theme=light] .foot{border-top:0}
