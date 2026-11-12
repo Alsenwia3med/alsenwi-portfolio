@@ -33,6 +33,7 @@ const T = {
       ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', '', 'https://ycim.org/'],
       ['Safar Easy', 'Tourism', 'Arabic/RTL luxury redesign for a Malaysia tourism company.', '', ''],
+      ['E-Mart Mobile App', 'Mobile e-commerce', 'Flutter/Dart cross-platform app with product catalog and cart.', '', ''],
       ['Melaka Tourist Guide', 'Travel', 'Interactive guide with maps and local insights.', 'melaka.jpeg', ''],
     ],
     pTitle: 'How we work',
@@ -46,7 +47,7 @@ const T = {
     ],
     edu: ['Bachelor of Computer Science (Software Development)', 'Universiti Teknikal Malaysia Melaka (UTeM) · FTMK', '2022 — 2026 · Graduated March 2026', ['Focus: full-stack development, software engineering', 'Projects: Smart Attendance System (C++/PHP, QR), Student Performance Dashboard, Melaka Tourist Guide']],
     certTitle: 'Certifications', certs: ['IEEE Associate Software Developer Workshop (2024)', 'LinkedIn Learning: Time Management (2018)', 'Introduction to Dart', 'Basics of Software Testing'],
-    langTitle: 'Languages', langs: [['Arabic', 'Native'], ['English', 'Fluent'], ['Bahasa Malaysia', 'Conversational'], ['German', 'Basic (A2)']],
+    langTitle: 'Languages', langs: [['Arabic', 'Native'], ['English', 'Professional working'], ['Bahasa Malaysia', 'Conversational'], ['German', 'Elementary (A1)']],
     skTitle: 'Skills',
     skillGroups: [['Frontend', ['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'Figma UI/UX']], ['Backend & data', ['PHP', 'Python', 'Node.js', 'MySQL', 'REST APIs', 'Supabase']], ['Mobile', ['Flutter', 'Dart', 'C++']], ['Tools & process', ['Git/GitHub', 'WordPress/Elementor', 'Brevo APIs', 'Chart.js', 'CI/CD', 'Agile/Scrum']]],
 
@@ -80,6 +81,7 @@ const T = {
       ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', '', 'https://ycim.org/'],
       ['سفر إيز', 'سياحة', 'إعادة تصميم عربية فاخرة لشركة سياحة في ماليزيا.', '', ''],
+      ['E-Mart تطبيق جوال', 'تجارة إلكترونية', 'تطبيق Flutter/Dart متعدد المنصات بكتالوج منتجات وسلة.', '', ''],
       ['دليل ملقا السياحي', 'سفر', 'دليل تفاعلي بخرائط ومعلومات محلية.', 'melaka.jpeg', ''],
     ],
     pTitle: 'طريقة العمل',
@@ -93,7 +95,7 @@ const T = {
     ],
     edu: ['بكالوريوس علوم الحاسب (تطوير البرمجيات)', 'جامعة ملقا التقنية الماليزية (UTeM) · FTMK', '2022 — 2026 · التخرج مارس 2026', ['التركيز: تطوير الواجهات الكاملة وهندسة البرمجيات', 'مشاريع: نظام الحضور الذكي (C++/PHP وQR)، لوحة أداء الطلاب، دليل ملقا السياحي']],
     certTitle: 'الشهادات', certs: ['ورشة IEEE لمطوّر برمجيات مشارك (2024)', 'LinkedIn Learning: إدارة الوقت (2018)', 'مقدمة في لغة Dart', 'أساسيات اختبار البرمجيات'],
-    langTitle: 'اللغات', langs: [['العربية', 'اللغة الأم'], ['الإنجليزية', 'طلاقة'], ['الملايو', 'محادثة'], ['الألمانية', 'أساسي (A2)']],
+    langTitle: 'اللغات', langs: [['العربية', 'اللغة الأم'], ['الإنجليزية', 'مهني عملي'], ['الملايو', 'محادثة'], ['الألمانية', 'مبتدئ (A1)']],
     skTitle: 'المهارات',
     skillGroups: [['الواجهات', ['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'Figma UI/UX']], ['الخلفية والبيانات', ['PHP', 'Python', 'Node.js', 'MySQL', 'REST APIs', 'Supabase']], ['الجوال', ['Flutter', 'Dart', 'C++']], ['الأدوات والمنهجية', ['Git/GitHub', 'WordPress/Elementor', 'Brevo APIs', 'Chart.js', 'CI/CD', 'Agile/Scrum']]],
 
