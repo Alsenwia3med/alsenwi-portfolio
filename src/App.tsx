@@ -30,12 +30,12 @@ const T = {
     wTitle: 'Selected work',
     work: [
       ['Inspire U', 'Education platform', 'Student registration platform with bilingual site and lead flow.', 'Inspire-U.png', 'https://inspire-u.net/'],
-      ['Roots AI', 'Health AI · B2B', 'Frontend engineer on a B2B Health AI platform: Next.js, Tailwind, Motion.', 'live:https://roots-ai.health/', 'https://roots-ai.health/'],
+      ['Roots AI', 'Health AI · B2B', 'Frontend engineer on a B2B Health AI platform: Next.js, Tailwind, Motion.', 'roots.jpg', 'https://roots-ai.health/'],
       ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
       ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.png', 'https://astra-bot.tech/'],
-      ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', 'live:https://ycim.org/', 'https://ycim.org/'],
-      ['Safar Easy', 'Tourism', 'Arabic/RTL luxury redesign for a Malaysia tourism company.', 'live:https://paleturquoise-wasp-229356.hostingersite.com/', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
-      ['E-Mart Mobile App', 'Mobile e-commerce', 'Flutter/Dart cross-platform app with product catalog and cart.', '', ''],
+      ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', 'ycim.jpg', 'https://ycim.org/'],
+      ['Safar Easy', 'Tourism', 'Arabic/RTL luxury redesign for a Malaysia tourism company.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
+      ['E-Mart Mobile App', 'Mobile e-commerce', 'Flutter/Dart cross-platform app with product catalog and cart.', 'emart.jpg', ''],
       ['Melaka Tourist Guide', 'Travel', 'Interactive guide with maps and local insights.', 'melaka.jpeg', ''],
     ],
     pTitle: 'How we work',
@@ -80,12 +80,12 @@ const T = {
     wTitle: 'أعمال مختارة',
     work: [
       ['Inspire U', 'منصة تعليمية', 'منصة تسجيل طلاب بموقع ثنائي اللغة ومسار استقبال العملاء.', 'Inspire-U.png', 'https://inspire-u.net/'],
-      ['Roots AI', 'ذكاء صحي · B2B', 'مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات: Next.js وTailwind وMotion.', 'live:https://roots-ai.health/', 'https://roots-ai.health/'],
+      ['Roots AI', 'ذكاء صحي · B2B', 'مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات: Next.js وTailwind وMotion.', 'roots.jpg', 'https://roots-ai.health/'],
       ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
       ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.png', 'https://astra-bot.tech/'],
-      ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', 'live:https://ycim.org/', 'https://ycim.org/'],
-      ['سفر إيز', 'سياحة', 'إعادة تصميم عربية فاخرة لشركة سياحة في ماليزيا.', 'live:https://paleturquoise-wasp-229356.hostingersite.com/', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
-      ['E-Mart تطبيق جوال', 'تجارة إلكترونية', 'تطبيق Flutter/Dart متعدد المنصات بكتالوج منتجات وسلة.', '', ''],
+      ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', 'ycim.jpg', 'https://ycim.org/'],
+      ['سفر إيز', 'سياحة', 'إعادة تصميم عربية فاخرة لشركة سياحة في ماليزيا.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
+      ['E-Mart تطبيق جوال', 'تجارة إلكترونية', 'تطبيق Flutter/Dart متعدد المنصات بكتالوج منتجات وسلة.', 'emart.jpg', ''],
       ['دليل ملقا السياحي', 'سفر', 'دليل تفاعلي بخرائط ومعلومات محلية.', 'melaka.jpeg', ''],
     ],
     pTitle: 'طريقة العمل',
@@ -196,7 +196,7 @@ export default function App() {
                 <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: (i % 3) * 0.07 }}>
                   <Wrap {...(href ? { href, target: '_blank', rel: 'noreferrer' } : {})} className="card block overflow-hidden group">
                     <div className="h-28 sm:h-40 relative overflow-hidden bg-gradient-to-br from-[#1b1710] via-[#0d0d12] to-[#141026]">
-                      {im ? <img src={im.startsWith('live:') ? `https://image.thum.io/get/width/900/crop/560/noanimate/${im.slice(5)}` : img(im)} alt={h} loading="lazy" referrerPolicy="no-referrer" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} className="absolute inset-0 z-10 w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-[1.05] transition duration-700" />
+                      {im ? <img src={img(im.replace('logo:', ''))} alt={h} loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} className={im.startsWith('logo:') ? 'absolute inset-0 z-10 w-full h-full object-contain bg-white p-2 group-hover:scale-[1.04] transition duration-700' : 'absolute inset-0 z-10 w-full h-full object-cover object-top group-hover:scale-[1.05] transition duration-700'} />
                         : null}
                       <div className="absolute inset-0 grid place-items-center text-[24px] font-semibold gold tracking-wide z-0 pointer-events-none">{h}</div>
                       {href && <span className="absolute z-20 top-2 end-2 text-[10px] tracking-wider font-semibold px-2 py-0.5 rounded-full bg-black/55 text-white backdrop-blur flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />LIVE</span>}
