@@ -68,3 +68,18 @@ html[data-theme=light] .sk-ink{color:#14120d}html[data-theme=light] .sk-gold{col
 html[data-theme=light] .sk-card{background:#fff;border:1.5px solid #e5dcc4;box-shadow:0 14px 34px -18px rgba(60,45,10,.35);backdrop-filter:none}
 html[data-theme=light] .sk-chip{border-color:#d9cfb4;color:#14120d;background:#fff}
 html[data-theme=light] .sk-chip:hover{background:#fff;box-shadow:0 6px 14px -8px rgba(60,45,10,.4)}
+
+/* v7 logos + hover-open rows */
+.xlogo{display:inline-flex;align-items:center;justify-content:center;border-radius:11px;background:#fff;border:1px solid rgba(0,0,0,.08);overflow:hidden;box-shadow:0 4px 14px -6px rgba(0,0,0,.5)}
+.xlogo img{width:100%;height:100%;object-fit:contain;padding:12%}
+.xlogo b{font-size:12px;color:#14120d;letter-spacing:.04em}
+.xhead{display:flex;align-items:flex-start;gap:12px;border-radius:12px;padding:6px 8px;margin:-6px -8px;transition:background .2s}
+a.xhead:hover{background:rgba(226,185,79,.08)}
+.xcert{align-items:center;padding:5px 8px;margin:0 -8px}
+.xbody{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease}
+.xbody>*{overflow:hidden;min-height:0;padding-inline-start:calc(40px + 12px + 1rem)}
+@media (hover:hover){
+  .xbody{grid-template-rows:0fr}
+  .xrow:hover .xbody,.xrow:focus-within .xbody{grid-template-rows:1fr}
+}
+html[data-theme=light] a.xhead:hover{background:rgba(168,132,31,.09)}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import SkillsLab from './SkillsLab';
-import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, QrCode, Sparkles, ChevronRight, Sun, Moon, GraduationCap, Briefcase, Award, Languages as LangIcon } from 'lucide-react';
+import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, Server, QrCode, Sparkles, ChevronRight, Sun, Moon, GraduationCap, Briefcase, Award, Languages as LangIcon } from 'lucide-react';
 
 type L = 'en' | 'ar';
 const WA = '601162206173';
@@ -10,24 +10,51 @@ const LI = 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/';
 const GH = 'https://github.com/Alsenwia3med';
 const img = (p: string) => `${import.meta.env.BASE_URL}images/${p}`;
 
+
+const fav = (d: string) => `https://www.google.com/s2/favicons?domain=${d}&sz=128`;
+function Logo({ src, name, size = 40 }: { src?: string; name: string; size?: number }) {
+  const [bad, setBad] = useState(!src);
+  return (
+    <span className="xlogo shrink-0" style={{ width: size, height: size }}>
+      {!bad && src ? <img src={src} alt={name} onError={() => setBad(true)} loading="lazy" /> : <b>{name.replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase() || '•'}</b>}
+    </span>
+  );
+}
+const EXP_META: [string | undefined, string | undefined][] = [
+  [fav('roots-ai.health'), 'https://roots-ai.health/'],
+  [img('six digit club.png'), 'https://sdc.cx/'],
+  [img('inspire-logo.png'), 'https://inspire-u.net/'],
+  [undefined, undefined],
+];
+const EDU_META: [string, string] = [img('utem.png'), 'https://www.utem.edu.my/'];
+const CERT_META: [string | undefined, string | undefined][] = [
+  [fav('ieee.org'), 'https://www.ieee.org/'],
+  [fav('linkedin.com'), 'https://www.linkedin.com/learning/'],
+  [fav('dart.dev'), 'https://dart.dev/'],
+  [undefined, undefined],
+];
+function Wrap({ href, children, className }: { href?: string; children: any; className?: string; k?: string }) {
+  return href ? <a href={href} target="_blank" rel="noreferrer" className={className}>{children}</a> : <div className={className}>{children}</div>;
+}
+
 const T = {
   en: {
     nav: ['Services', 'Work', 'About', 'Contact'],
     cta: 'Start a project',
     eyebrow: 'Software Engineer · Full-stack · UI/UX · Malaysia',
-    h1a: 'Websites and systems',
-    h1b: 'that make companies look — and run — like leaders.',
-    sub: 'I turn any idea into a working system. I design and build luxury websites, dashboards and business systems for Arab and Malaysian companies. One person accountable from design to launch.',
+    h1a: 'Software systems',
+    h1b: 'that make companies run — and look — like leaders.',
+    sub: 'I\'m a software engineer: I turn any idea into a working system — frontend, backend and data. Companies bring me into their teams, and I build complete business systems end to end.',
     see: 'See the work',
     chips: ['Arabic · English · Bahasa', 'Malaysia · Gulf · Worldwide', 'RTL-first design'],
-    sTitle: 'What I build',
+    sTitle: 'Systems I build',
     services: [
-      ['Luxury websites', 'Fast, bilingual (Arabic/English) sites that turn visitors into enquiries.', Globe],
-      ['Dashboards', 'Live control panels for sales, finance and operations — on phone and desktop.', LayoutDashboard],
-      ['Company systems', 'Registration, bookings, CRM and workflow automation built around how you work.', Building2],
-      ['QR menus & e-commerce', 'Menus, ordering and online stores that are simple to manage.', QrCode],
+      ['Business systems', 'Registration, bookings, CRM and workflow automation — the core of what I engineer.', Building2],
+      ['Dashboards & analytics', 'Real-time control panels on live data: sales, finance and operations.', LayoutDashboard],
+      ['APIs & integrations', 'REST backends, authentication, payments and third-party integrations.', Server],
+      ['Product interfaces', 'Fast, bilingual front ends that sit on top of the system — design to launch.', Globe],
     ],
-    wTitle: 'Selected work',
+   wTitle: 'Selected work',
     work: [
       ['Inspire U', 'Education platform', 'Student registration platform with bilingual site and lead flow.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'Health AI · B2B', 'Frontend engineer on a B2B Health AI platform: Next.js, Tailwind, Motion.', 'roots.jpg', 'https://roots-ai.health/'],
@@ -65,19 +92,19 @@ const T = {
     nav: ['الخدمات', 'أعمالي', 'نبذة', 'تواصل'],
     cta: 'ابدأ مشروعك',
     eyebrow: 'مهندس برمجيات · واجهات كاملة · UI/UX · ماليزيا',
-    h1a: 'مواقع وأنظمة',
-    h1b: 'تجعل شركتك تبدو — وتعمل — كالكبار.',
-    sub: 'أحوّل أي فكرة إلى نظام يعمل. أصمّم وأبني مواقع فخمة ولوحات تحكم وأنظمة أعمال للشركات العربية والماليزية. مسؤول واحد من التصميم حتى الإطلاق.',
+    h1a: 'أنظمة برمجية',
+    h1b: 'تجعل شركتك تعمل — وتبدو — كالكبار.',
+    sub: 'أنا مهندس برمجيات: أحوّل أي فكرة إلى نظام يعمل — واجهات وخلفية وبيانات. تستعين بي الشركات داخل فرقها، وأبني أنظمة أعمال متكاملة من الصفر.',
     see: 'شاهد الأعمال',
     chips: ['عربي · English · Bahasa', 'ماليزيا · الخليج · العالم', 'تصميم يبدأ من RTL'],
-    sTitle: 'ماذا أبني',
+    sTitle: 'الأنظمة التي أبنيها',
     services: [
-      ['مواقع فاخرة', 'مواقع سريعة بلغتين (عربي/إنجليزي) تحوّل الزائر إلى استفسار.', Globe],
-      ['لوحات تحكم', 'لوحات حيّة للمبيعات والمالية والعمليات — على الجوال والكمبيوتر.', LayoutDashboard],
-      ['أنظمة شركات', 'تسجيل وحجوزات وCRM وأتمتة مبنية على طريقة عملك.', Building2],
-      ['منيو QR ومتاجر', 'قوائم وطلبات ومتاجر إلكترونية سهلة الإدارة.', QrCode],
+      ['أنظمة أعمال', 'تسجيل وحجوزات وCRM وأتمتة سير العمل — جوهر ما أهندسه.', Building2],
+      ['لوحات تحكم وتحليلات', 'لوحات لحظية على بيانات حية: مبيعات ومالية وعمليات.', LayoutDashboard],
+      ['واجهات API وتكاملات', 'خلفيات REST ومصادقة ومدفوعات وتكامل مع خدمات خارجية.', Server],
+      ['واجهات المنتج', 'واجهات سريعة بلغتين فوق النظام — من التصميم حتى الإطلاق.', Globe],
     ],
-    wTitle: 'أعمال مختارة',
+   wTitle: 'أعمال مختارة',
     work: [
       ['Inspire U', 'منصة تعليمية', 'منصة تسجيل طلاب بموقع ثنائي اللغة ومسار استقبال العملاء.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'ذكاء صحي · B2B', 'مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات: Next.js وTailwind وMotion.', 'roots.jpg', 'https://roots-ai.health/'],
@@ -138,7 +165,7 @@ export default function App() {
     <div className="relative overflow-x-clip">
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[#07070a]/70 border-b border-white/5">
         <div className="wrap h-14 flex items-center justify-between">
-          <a href="#top" className="font-semibold tracking-wide text-[15px]"><span className="gold">MR</span><span className="text-white/40 mx-2">/</span><span className="text-white/80 text-[13px]">{lang === 'ar' ? 'أحمد الصنوي' : 'Ahmed Al-Senwi'}</span></a>
+          <a href="#top" className="font-semibold tracking-wide text-[15px]"><span className="flex items-center gap-2.5"><img src={img('alsenwi.jpg')} alt="Ahmed Al-Senwi" className="w-8 h-8 rounded-full object-cover object-top" style={{ boxShadow: '0 0 0 1.5px var(--gold), 0 0 14px rgba(226,185,79,.35)' }} /><span className="text-[13.5px] font-medium">{lang === 'ar' ? 'أحمد الصنوي' : 'Ahmed Al-Senwi'}</span></span></a>
           <nav className="hidden md:flex gap-7 text-[13px] text-white/60">
             {t.nav.map((n, i) => <a key={n} href={`#${ids[i]}`} className="hover:text-white transition">{n}</a>)}
           </nav>
@@ -235,15 +262,20 @@ export default function App() {
           <motion.h2 {...fade} className="text-[22px] font-semibold mb-2">{t.aTitle}</motion.h2>
           <motion.p {...fade} className="text-[13.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
           <div className="grid lg:grid-cols-5 gap-3.5">
-            <motion.div {...fade} className="card p-5 lg:col-span-3">
+            <motion.div {...fade} className="card p-5 lg:col-span-3 lg:self-start">
               <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
               <div className="mt-4 flex flex-col gap-5 border-s border-white/10 ps-5">
-                {t.exp.map(([r, c, d, pts]: any) => (
-                  <div key={r} className="relative">
-                    <span className="absolute -start-[25px] top-1.5 w-2 h-2 rounded-full bg-[color:var(--gold)]" />
-                    <div className="flex flex-wrap items-baseline justify-between gap-x-3"><h3 className="font-medium text-[14.5px]">{r}</h3><span className="text-[11.5px] text-white/40">{d}</span></div>
-                    <div className="text-[12.5px] text-[color:var(--gold)]">{c}</div>
-                    <ul className="mt-1.5 text-[12.5px] text-white/55 leading-relaxed list-disc ps-4">{pts.map((x: string) => <li key={x}>{x}</li>)}</ul>
+                {t.exp.map(([r, c, d, pts]: any, i: number) => (
+                  <div key={r} className="relative xrow">
+                    <span className="absolute -start-[25px] top-3 w-2 h-2 rounded-full bg-[color:var(--gold)]" />
+                    <Wrap href={EXP_META[i][1]} className="xhead">
+                      <Logo src={EXP_META[i][0]} name={c} />
+                      <span className="min-w-0 flex-1">
+                        <span className="flex flex-wrap items-baseline justify-between gap-x-3"><h3 className="font-medium text-[14.5px]">{r}</h3><span className="text-[11.5px] text-white/40">{d}</span></span>
+                        <span className="block text-[12.5px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5" />}</span>
+                      </span>
+                    </Wrap>
+                    <div className="xbody"><ul className="text-[12.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{pts.map((x: string) => <li key={x}>{x}</li>)}</ul></div>
                   </div>
                 ))}
               </div>
@@ -251,14 +283,22 @@ export default function App() {
             <div className="lg:col-span-2 flex flex-col gap-3.5">
               <motion.div {...fade} className="card p-5">
                 <div className="flex items-center gap-2 eyebrow"><GraduationCap size={14} />{lang === 'ar' ? 'التعليم' : 'Education'}</div>
-                <h3 className="mt-3 font-medium text-[14.5px]">{t.edu[0]}</h3>
-                <div className="text-[12.5px] text-[color:var(--gold)]">{t.edu[1]}</div>
-                <div className="text-[11.5px] text-white/40">{t.edu[2]}</div>
-                <ul className="mt-1.5 text-[12.5px] text-white/55 leading-relaxed list-disc ps-4">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul>
+                <div className="xrow mt-3">
+                  <Wrap href={EDU_META[1]} className="xhead">
+                    <Logo src={EDU_META[0]} name="UTeM" size={44} />
+                    <span className="min-w-0 flex-1"><h3 className="font-medium text-[14.5px]">{t.edu[0]}</h3><span className="block text-[12.5px] text-[color:var(--gold)]">{t.edu[1]}<ArrowUpRight size={11} className="inline ms-1 -mt-0.5" /></span><span className="block text-[11.5px] text-white/40">{t.edu[2]}</span></span>
+                  </Wrap>
+                  <div className="xbody"><ul className="text-[12.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul></div>
+                </div>
               </motion.div>
               <motion.div {...fade} className="card p-5">
                 <div className="flex items-center gap-2 eyebrow"><Award size={14} />{t.certTitle}</div>
-                <ul className="mt-2.5 text-[12.5px] text-white/60 leading-relaxed list-disc ps-4">{t.certs.map(x => <li key={x}>{x}</li>)}</ul>
+                <div className="mt-2.5 flex flex-col gap-1.5">{t.certs.map((x, i) => (
+                  <div key={x}><Wrap href={CERT_META[i][1]} className="xhead xcert">
+                    <Logo src={CERT_META[i][0]} name={x} size={30} />
+                    <span className="flex-1 text-[12.5px] text-white/70">{x}{CERT_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5 opacity-60" />}</span>
+                  </Wrap></div>
+                ))}</div>
               </motion.div>
               <motion.div {...fade} className="card p-5">
                 <div className="flex items-center gap-2 eyebrow"><LangIcon size={14} />{t.langTitle}</div>
