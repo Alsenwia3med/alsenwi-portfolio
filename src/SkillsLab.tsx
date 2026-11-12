@@ -54,6 +54,7 @@ export default function SkillsLab({ lang, dark }: { lang: L; dark: boolean }) {
   const [sel, setSel] = useState<number>(0);
   const [hov, setHov] = useState<number | null>(null);
   const [filter, setFilter] = useState<number | null>(null);
+  const [allSk, setAllSk] = useState(false);
   const rot = useRef({ x: -0.25, y: 0, vx: 0.0016, vy: 0, drag: false, lx: 0, ly: 0 });
   const nodes = useRef<(HTMLButtonElement | null)[]>([]);
   const pts = useMemo(() => SK.map((_, i) => {
@@ -132,7 +133,7 @@ export default function SkillsLab({ lang, dark }: { lang: L; dark: boolean }) {
           <div key={g}>
             <div className="flex items-center gap-2 text-[12px] font-semibold tracking-wide mb-2" style={{ color: COL[gi] }}><span className="w-2 h-2 rounded-full" style={{ background: COL[gi] }} />{g}</div>
             <div className="flex flex-col gap-1.5">
-              {SK.map((k, i) => k.g === gi && (
+              {SK.map((k, i) => ({ k, i })).filter(x => x.k.g === gi).slice(0, allSk ? 99 : 3).map(({ k, i }) => (
                 <button key={k.n} onClick={() => setSel(i)} onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)} className="text-start group">
                   <div className="flex justify-between text-[12.5px]" style={{ color: act === i ? COL[gi] : P.ink, fontWeight: act === i ? 600 : 500 }}><span>{k.n}</span><span className="sk-mut">{k.lv}%</span></div>
                   <div className="h-1 rounded-full overflow-hidden" style={{ background: P.track }}><div className="h-full rounded-full" style={{ width: k.lv + '%', background: `linear-gradient(90deg,${COL[gi]}99,${COL[gi]})` }} /></div>
@@ -141,6 +142,7 @@ export default function SkillsLab({ lang, dark }: { lang: L; dark: boolean }) {
             </div>
           </div>
         ))}
+        <div className="sm:col-span-2 lg:col-span-4 flex justify-center pt-1"><button type="button" className="more" onClick={() => setAllSk(v => !v)}>{allSk ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض كل المهارات (${SK.length})` : `View all skills (${SK.length})`)}</button></div>
       </div>
     </div>
   );

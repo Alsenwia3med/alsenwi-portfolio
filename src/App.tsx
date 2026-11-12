@@ -174,6 +174,8 @@ export default function App() {
   const [name, setName] = useState('');
   const [msg, setMsg] = useState('');
   const [ty, setTy] = useState<number | null>(null);
+  const [openRows, setOpenRows] = useState<number[]>([]);
+  const [allCerts, setAllCerts] = useState(false);
   const t = T[lang];
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -312,7 +314,8 @@ export default function App() {
                         <span className="block text-[13.5px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5" />}</span>
                       </span>
                     </Wrap>
-                    <div className="xbody"><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{pts.map((x: string) => <li key={x}>{x}</li>)}</ul></div>
+                    <div className="xbody"><div><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(openRows.includes(i) ? pts : pts.slice(0, 3)).map((x: string) => <li key={x}>{x}</li>)}</ul>
+                      {pts.length > 3 && <button type="button" className="more" onClick={() => setOpenRows(o => o.includes(i) ? o.filter(x => x !== i) : [...o, i])}>{openRows.includes(i) ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض المزيد (${pts.length - 3})` : `Show more (${pts.length - 3})`)}</button>}</div></div>
                   </div>
                 ))}
               </div>
@@ -330,12 +333,13 @@ export default function App() {
               </motion.div>
               <motion.div {...fade} className="card p-5">
                 <div className="flex items-center gap-2 eyebrow"><Award size={14} />{t.certTitle}</div>
-                <div className="mt-2.5 flex flex-col gap-1.5">{t.certs.map((x, i) => (
+                <div className="mt-2.5 flex flex-col gap-1.5">{t.certs.map((x, i) => (i < 4 || allCerts) && (
                   <div key={x}><Wrap href={CERT_META[i][1]} className="xhead xcert">
                     <Logo src={CERT_META[i][0]} name={x} size={30} />
                     <span className="flex-1 text-[13.5px] text-white/70">{x}{CERT_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5 opacity-60" />}</span>
                   </Wrap></div>
                 ))}</div>
+                <button type="button" className="more mt-3" onClick={() => setAllCerts(v => !v)}>{allCerts ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض كل الشهادات (${t.certs.length})` : `View all certifications (${t.certs.length})`)}</button>
               </motion.div>
               <motion.div {...fade} className="card p-5">
                 <div className="flex items-center gap-2 eyebrow"><LangIcon size={14} />{t.langTitle}</div>
@@ -381,7 +385,18 @@ export default function App() {
         </div>
       </section>
 
-      <footer className="border-t border-white/5 py-6 text-center text-[12px] text-white/35">© {new Date().getFullYear()} {t.rights}</footer>
+      <footer className="foot">
+        <div className="wrap flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span className="text-[13px] opacity-70">© {new Date().getFullYear()} {t.rights}</span>
+          <nav className="flex gap-5 text-[13px] opacity-80">{t.nav.map((n, i) => <a key={n} href={`#${ids[i]}`} className="hover:opacity-100 transition">{n}</a>)}</nav>
+          <div className="flex gap-3.5">
+            <a href={LI} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="fi" style={{ color: '#3b8ee0' }}><Linkedin size={17} /></a>
+            <a href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="fi" style={{ color: '#25D366' }}><MessageCircle size={17} /></a>
+            <a href={`mailto:${MAIL}`} aria-label="Email" className="fi" style={{ color: '#ea4335' }}><Mail size={17} /></a>
+            <a href={GH} target="_blank" rel="noreferrer" aria-label="GitHub" className="fi"><Github size={17} /></a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -4,7 +4,7 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--tx);font-size:15px;line-height:1.65;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Arabic","Geeza Pro",sans-serif;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--gold);color:#000}
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1320px;margin:0 auto;padding:0 28px}
 .gold{background:linear-gradient(120deg,var(--gold2),var(--gold) 55%,#a98334);-webkit-background-clip:text;background-clip:text;color:transparent}
 .card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid var(--line);border-radius:16px;transition:border-color .3s,transform .3s}
 .card:hover{border-color:rgba(212,178,92,.4);transform:translateY(-2px)}
@@ -154,3 +154,29 @@ html[data-theme=light] .eyebrow svg{color:#1593d4}
 .chip{transition:background .25s,color .25s,border-color .25s,transform .25s,box-shadow .25s;cursor:default}
 .chip:hover{background:linear-gradient(120deg,var(--gold2),var(--gold));color:#14120d;border-color:transparent;transform:translateY(-2px);box-shadow:0 8px 20px -8px var(--gold)}
 html[data-theme=light] .chip:hover{background:linear-gradient(120deg,#08486f,#1593d4 60%,#5ec0f0);color:#fff;box-shadow:0 8px 20px -8px rgba(11,127,184,.7)}
+
+/* v10: alternating sections, bigger type, show-more, footer, brand icons */
+body{font-size:16px}
+section h2{font-size:30px!important;letter-spacing:-.01em}
+.text-\[11px\]{font-size:12px!important}.text-\[11\.5px\]{font-size:12.5px!important}.text-\[12px\]{font-size:13px!important}
+.text-\[12\.5px\]{font-size:13.5px!important}.text-\[13px\]{font-size:14px!important}.text-\[13\.5px\]{font-size:14.5px!important}
+.text-\[14px\]{font-size:15px!important}.text-\[14\.5px\]{font-size:15.5px!important}.text-\[15\.5px\]{font-size:16.5px!important}
+.more{display:inline-flex;align-items:center;gap:6px;margin-top:8px;margin-inline-start:16px;padding:6px 16px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;font-weight:600;color:var(--gold);background:transparent;cursor:pointer;transition:.25s}
+.more:hover{background:linear-gradient(120deg,var(--gold2),var(--gold));color:#14120d;border-color:transparent;transform:translateY(-1px)}
+html[data-theme=light] .more:hover{background:linear-gradient(120deg,#08486f,#1593d4);color:#fff}
+.skwrap .more{margin-inline-start:0;color:inherit}
+.skwrap .more:hover{color:#14120d}
+html[data-theme=light] .skwrap .more:hover{color:#fff}
+/* section bands */
+#services,#about{background:rgba(255,255,255,.028);border-block:1px solid rgba(255,255,255,.05)}
+html[data-theme=light] #top,html[data-theme=light] #work,html[data-theme=light] #contact{background:#fff}
+html[data-theme=light] #services,html[data-theme=light] #about{background:linear-gradient(180deg,#e9f5fd,#f4faff);border-block:1px solid rgba(11,100,160,.12)}
+html[data-theme=light] #services .card,html[data-theme=light] #about .card{background:#fff}
+/* footer */
+.foot{border-top:1px solid var(--line);padding:16px 0;background:rgba(255,255,255,.02)}
+html[data-theme=light] .foot{background:#f4faff;border-color:rgba(11,100,160,.14)}
+.fi{display:inline-flex;transition:transform .2s,opacity .2s;opacity:.9}.fi:hover{transform:translateY(-2px) scale(1.12);opacity:1}
+.fi:not([style]){color:var(--tx)}
+/* brand-coloured contact icons */
+.ctable tr:nth-child(1) th svg{color:#ef4444}.ctable tr:nth-child(2) th svg{color:#25D366}.ctable tr:nth-child(3) th svg{color:#ea4335}.ctable tr:nth-child(4) th svg{color:#3b8ee0}.ctable tr:nth-child(5) th svg{color:var(--tx)}
+.ctable th svg{width:18px;height:18px}
