@@ -207,14 +207,30 @@ html[data-theme=light] .sech{background:linear-gradient(90deg,#08486f,#1593d4 70
 /* v13: light motion, single accent in experience, dark process cards */
 .xrow,.explist>.xrow:nth-child(n){--ac:var(--gold)}
 .rv{transform:translateY(6px);transition:opacity .4s ease,transform .4s ease}
-.card:hover{transform:none;border-color:var(--gold)}
 .xbody li:hover{transform:none;background:color-mix(in srgb,var(--gold) 7%,transparent)}
 .xrow>span.absolute{box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 18%,transparent)}
-.pcard{position:relative;padding:30px 28px 28px;min-height:190px;border-radius:18px;background:linear-gradient(150deg,#0a1626,#0f2740 70%,#123456);border:1px solid rgba(255,255,255,.08);color:#fff;overflow:hidden}
-.pcard::after{content:"";position:absolute;inset-inline:0;top:0;height:2px;background:linear-gradient(90deg,#22b5d8,#1593d4,transparent)}
-.pnum{font-size:40px;font-weight:600;line-height:1;background:linear-gradient(90deg,#8fe3e6,#22b5d8);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ptit{margin-top:18px;font-size:18px;font-weight:600;color:#fff}
-.pdes{margin-top:8px;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.7)}
-html:not([data-theme=light]) .pcard{background:linear-gradient(150deg,#0d0d12,#15130d 70%,#1c1810);border-color:rgba(212,178,92,.18)}
-html:not([data-theme=light]) .pcard::after{background:linear-gradient(90deg,var(--gold2),var(--gold),transparent)}
-html:not([data-theme=light]) .pnum{background:linear-gradient(90deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text}
+.pcard{padding:30px 28px 28px;min-height:190px;border-radius:18px}
+.pnum{font-size:40px;font-weight:600;line-height:1;background:linear-gradient(90deg,#08486f,#22b5d8);-webkit-background-clip:text;background-clip:text;color:transparent;transition:filter .3s}
+.ptit{margin-top:18px;font-size:18px;font-weight:600}
+.pdes{margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--mut)}
+/* v14: luxe hover/press — box grows slightly and fills dark */
+.lux{--sc:1.03;background-repeat:no-repeat!important;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s,color .35s,background-size .5s cubic-bezier(.22,1,.36,1)!important;position:relative}
+html[data-theme=light] .lux{background:linear-gradient(150deg,#0a1626,#0f2740 70%,#123456) bottom/100% 0% no-repeat,linear-gradient(180deg,#fff,#f6fbff)!important}
+html:not([data-theme=light]) .lux{background:linear-gradient(150deg,#1c1810,#2a2113 70%,#33281a) bottom/100% 0% no-repeat,linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012))!important}
+.lux-lg{--sc:1.012}
+.lux:hover,.lux:active{transform:scale(var(--sc))!important;z-index:5;background-size:100% 100%,100% 100%!important;box-shadow:0 26px 50px -22px rgba(5,20,40,.55)!important;border-color:transparent!important}
+html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active{--tx:#fff;--mut:rgba(255,255,255,.72);--gold:#8fe3e6;--gold2:#bff3f4;color:#fff}
+html:not([data-theme=light]) .lux:hover,html:not([data-theme=light]) .lux:active{--gold:#f1d98f;--mut:rgba(255,255,255,.72);border-color:rgba(212,178,92,.35)!important}
+html[data-theme=light] .lux:hover :is(h3,h2,li,td,b,span,p,a,strong):not(.xlogo *):not(.eyebrow):not(.pnum),html[data-theme=light] .lux:active :is(h3,h2,li,td,b,span,p,a,strong):not(.xlogo *):not(.eyebrow):not(.pnum){color:#fff}
+html[data-theme=light] .lux:hover [class*="text-white/"],html[data-theme=light] .lux:active [class*="text-white/"]{color:rgba(255,255,255,.72)!important}
+html[data-theme=light] .lux:hover .eyebrow,html[data-theme=light] .lux:active .eyebrow{background:none;color:#8fe3e6!important;-webkit-text-fill-color:#8fe3e6}
+html[data-theme=light] .lux:hover .pnum,html[data-theme=light] .lux:active .pnum{background:linear-gradient(90deg,#8fe3e6,#fff);-webkit-background-clip:text;background-clip:text}
+html[data-theme=light] .lux:hover .text-\[color\:var\(--gold\)\],html[data-theme=light] .lux:hover a[class*="gold"]{color:#8fe3e6!important}
+html[data-theme=light] .lux:hover::before{opacity:0}
+html[data-theme=light] .lux:hover .ctable tr+tr th,html[data-theme=light] .lux:hover .ctable tr+tr td{border-color:rgba(255,255,255,.12)}
+html[data-theme=light] .lux:hover .sk-chip,html[data-theme=light] .lux:hover .xbody li{color:#fff}
+html[data-theme=light] .lux:hover .skills-mini{color:#fff}
+.lux::before{transition:opacity .3s}
+@media (prefers-reduced-motion:reduce){.lux:hover,.lux:active{transform:none!important}}
+@media(hover:none){.lux:hover{transform:none!important}.lux:active{transform:scale(var(--sc))!important}}
+html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active,html:not([data-theme=light]) .lux:hover,html:not([data-theme=light]) .lux:active{background-size:100% 100%,100% 100%!important}

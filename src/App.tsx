@@ -247,7 +247,7 @@ export default function App() {
           <motion.h2 {...fade} className="sech">{t.sTitle}</motion.h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {t.services.map(([h, d, Icon]: any, i: number) => (
-              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.07 }} className="card p-5">
+              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.07 }} className="card lux p-5">
                 <Icon size={19} className="text-[color:var(--gold)]" />
                 <h3 className="mt-3.5 font-medium text-[15px]">{h}</h3>
                 <p className="mt-1.5 text-[13px] text-white/55 leading-relaxed">{d}</p>
@@ -290,7 +290,7 @@ export default function App() {
           <motion.h2 {...fade} className="sech">{t.pTitle}</motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {t.process.map(([h, d], i) => (
-              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} className="pcard">
+              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} className="card lux pcard">
                 <div className="pnum">0{i + 1}</div>
                 <h3 className="ptit">{h}</h3>
                 <p className="pdes">{d}</p>
@@ -306,7 +306,7 @@ export default function App() {
           <motion.h2 {...fade} className="sech">{t.aTitle}</motion.h2>
           <motion.p {...fade} className="text-[14.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
           <div className="grid lg:grid-cols-5 gap-4">
-            <motion.div {...fade} className="card p-5 lg:col-span-3 flex flex-col">
+            <motion.div {...fade} className="card lux lux-lg p-5 lg:col-span-3 flex flex-col">
               <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
               <div className="explist mt-4 flex-1 flex flex-col justify-between gap-6 border-s border-white/10 ps-5">
                 {t.exp.map(([r, c, d, pts]: any, i: number) => (
@@ -326,7 +326,7 @@ export default function App() {
               </div>
             </motion.div>
             <div className="lg:col-span-2 flex flex-col gap-3.5">
-              <motion.div {...fade} className="card p-5">
+              <motion.div {...fade} className="card lux p-5">
                 <div className="flex items-center gap-2 eyebrow"><GraduationCap size={14} />{lang === 'ar' ? 'التعليم' : 'Education'}</div>
                 <div className="xrow mt-3">
                   <Wrap href={EDU_META[1]} className="xhead">
@@ -336,7 +336,7 @@ export default function App() {
                   <div className="xbody"><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul></div>
                 </div>
               </motion.div>
-              <motion.div {...fade} className="card p-5">
+              <motion.div {...fade} className="card lux p-5">
                 <div className="flex items-center gap-2 eyebrow"><Award size={14} />{t.certTitle}</div>
                 <div className="mt-2.5 flex flex-col gap-1.5">{t.certs.map((x, i) => (i < 4 || allCerts) && (
                   <div key={x}><Wrap href={CERT_META[i][1]} className="xhead xcert">
@@ -346,7 +346,7 @@ export default function App() {
                 ))}</div>
                 <button type="button" className="more mt-3" onClick={() => setAllCerts(v => !v)}>{allCerts ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض كل الشهادات (${t.certs.length})` : `View all certifications (${t.certs.length})`)}</button>
               </motion.div>
-              <motion.div {...fade} className="card p-5">
+              <motion.div {...fade} className="card lux p-5">
                 <div className="flex items-center gap-2 eyebrow"><LangIcon size={14} />{t.langTitle}</div>
                 <div className="mt-2.5 flex flex-wrap gap-1.5">{t.langs.map(([n, l]: string[]) => <span key={n} className="chip">{n} · {l}</span>)}</div>
               </motion.div>
@@ -368,7 +368,7 @@ export default function App() {
               <h2 className="text-[28px] font-semibold leading-tight">{c.title}</h2>
               <p className="mt-2 text-white/60 text-[14.5px]">{c.sub}</p>
             </div>
-            <div className="card overflow-hidden">
+            <div className="card lux lux-lg overflow-hidden">
               <table className="w-full text-[14px] ctable"><tbody>
                 <tr><th><MapPin size={15} />{c.lab[0]}</th><td>{c.loc}</td></tr>
                 <tr><th><MessageCircle size={15} />{c.lab[1]}</th><td><a href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer" dir="ltr">{WA_SHOW}</a></td></tr>
