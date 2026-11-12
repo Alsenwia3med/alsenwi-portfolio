@@ -84,3 +84,11 @@ html[data-theme=light] a.xhead:hover{background:rgba(168,132,31,.09)}
 .cchip{border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;color:var(--mut);background:rgba(255,255,255,.03);transition:.2s;cursor:pointer}
 .cchip:hover{border-color:var(--gold);color:var(--tx)}
 .cchip[data-on=true],.cchip[data-on=true]:hover{background:linear-gradient(135deg,#f0d78a,#d4b25c);color:#14120d !important;border-color:transparent;font-weight:600}
+
+.ctable tr+tr th,.ctable tr+tr td{border-top:1px solid var(--line)}
+.ctable th{display:flex;align-items:center;gap:9px;text-align:start;font-weight:500;font-size:12.5px;color:var(--mut);padding:13px 16px;white-space:nowrap}
+.ctable th svg{color:var(--gold)}
+.ctable td{padding:13px 16px;text-align:start;color:var(--tx)}
+.ctable td a:hover{color:var(--gold)}
+.ctable tr{display:grid;grid-template-columns:130px 1fr}
+.ctable tr+tr{border-top:0}

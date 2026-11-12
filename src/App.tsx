@@ -149,14 +149,14 @@ const fade = { initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }
 const CT = {
   en: {
     title: 'Get in touch', sub: 'Hiring, a project or a quick question — pick a topic and send. It reaches me directly on WhatsApp.',
-    loc: 'Kuala Lumpur, Malaysia', locSub: 'Based in Malaysia · open to remote and on-site roles', mail: 'Send by email',
+    loc: 'Kuala Lumpur, Malaysia', lab: ['Location', 'WhatsApp', 'Email', 'LinkedIn', 'GitHub'], mail: 'Send by email',
     name: 'Your name', msg: 'Your message', send: 'Send on WhatsApp',
     typeT: 'Topic', types: ['Interview request', 'Job opportunity', 'Project enquiry', 'Collaboration', 'General question'],
     head: 'New message from your portfolio', f: ['Name', 'Topic', 'Message'], dash: 'Not specified',
   },
   ar: {
     title: 'تواصل معي', sub: 'توظيف أو مشروع أو سؤال سريع — اختر الموضوع وأرسل. تصلني مباشرة على واتساب.',
-    loc: 'كوالالمبور، ماليزيا', locSub: 'أقيم في ماليزيا · متاح للعمل عن بعد أو حضورياً', mail: 'أرسل بالبريد',
+    loc: 'كوالالمبور، ماليزيا', lab: ['الموقع', 'واتساب', 'البريد', 'LinkedIn', 'GitHub'], mail: 'أرسل بالبريد',
     name: 'اسمك', msg: 'رسالتك', send: 'أرسل عبر واتساب',
     typeT: 'الموضوع', types: ['طلب مقابلة', 'فرصة عمل', 'استفسار عن مشروع', 'تعاون', 'سؤال عام'],
     head: 'رسالة جديدة من البورتفوليو', f: ['الاسم', 'الموضوع', 'الرسالة'], dash: 'غير محدد',
@@ -352,15 +352,14 @@ export default function App() {
               <h2 className="text-[28px] font-semibold leading-tight">{c.title}</h2>
               <p className="mt-2 text-white/60 text-[14.5px]">{c.sub}</p>
             </div>
-            <div className="flex flex-col gap-1.5 text-[14.5px]">
-              <span className="flex items-center gap-2 font-medium"><MapPin size={16} className="text-[color:var(--gold)]" />{c.loc}</span>
-              <span className="text-[13px] text-white/55 ps-6">{c.locSub}</span>
-            </div>
-            <div className="flex flex-col gap-2.5 text-[14px]">
-              <a className="flex items-center gap-3 text-white/75 hover:text-white" href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer"><MessageCircle size={16} className="text-[color:var(--gold)]" /><span dir="ltr">{WA_SHOW}</span></a>
-              <a className="flex items-center gap-3 text-white/75 hover:text-white" href={`mailto:${MAIL}`}><Mail size={16} className="text-[color:var(--gold)]" />{MAIL}</a>
-              <a className="flex items-center gap-3 text-white/75 hover:text-white" href={LI} target="_blank" rel="noreferrer"><Linkedin size={16} className="text-[color:var(--gold)]" />LinkedIn</a>
-              <a className="flex items-center gap-3 text-white/75 hover:text-white" href={GH} target="_blank" rel="noreferrer"><Github size={16} className="text-[color:var(--gold)]" />GitHub</a>
+            <div className="card overflow-hidden">
+              <table className="w-full text-[14px] ctable"><tbody>
+                <tr><th><MapPin size={15} />{c.lab[0]}</th><td>{c.loc}</td></tr>
+                <tr><th><MessageCircle size={15} />{c.lab[1]}</th><td><a href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer" dir="ltr">{WA_SHOW}</a></td></tr>
+                <tr><th><Mail size={15} />{c.lab[2]}</th><td><a href={`mailto:${MAIL}`}>{MAIL}</a></td></tr>
+                <tr><th><Linkedin size={15} />{c.lab[3]}</th><td><a href={LI} target="_blank" rel="noreferrer">alsenwi-ahmed</a></td></tr>
+                <tr><th><Github size={15} />{c.lab[4]}</th><td><a href={GH} target="_blank" rel="noreferrer">Alsenwia3med</a></td></tr>
+              </tbody></table>
             </div>
           </motion.div>
           <motion.form {...fade} onSubmit={e => { e.preventDefault(); window.open(wa, '_blank'); }} className="card p-5 sm:p-6 flex flex-col gap-4 lg:col-span-3">
