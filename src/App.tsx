@@ -73,7 +73,7 @@ const T = {
     aTitle: 'About',
     jTitle: 'Experience & education',
     exp: [
-      ['Software Engineer (Frontend)', 'Roots AI', 'Present', ['Frontend engineer on a B2B Health AI platform', 'Next.js, Tailwind CSS and Motion; production UI and design-system work']],
+      ['Software Engineer (Frontend)', 'Roots AI', 'Present', ['Software engineer on a B2B Health AI platform: frontend, dashboards and integrations', 'Build the product frontend in Next.js, Tailwind CSS and Motion with a shared design system', 'Design UI/UX flows and interactive dashboards for health data and AI-agent reports', 'Integrate APIs and AI services into the product and shape its front-end architecture']],
       ['Full-Stack Developer Intern', 'Six Digit Club Sdn Bhd · Selangor', 'Oct 2025 — Mar 2026', ['450+ hours on the live sdc.cx fintech platform', 'Email-automation dashboard on the Brevo API: batches, media, templates, 300+ lists', 'Investment dashboard: investor portal and admin panel with capital requests and termination flow', 'Redesigned landing, 30/60-day and Early Bird pages and their payment-gateway pages', 'Referral tracking plus e-learning and payment integration', 'React/Chart.js real-time dashboard (5 KPIs, 30s refresh) · Figma redesign of 60+ pages']],
       ['UI/UX & Full-Stack Developer', 'Inspire-U Edtech · Melaka', 'Aug 2025 — Present', ['Platform architecture with PHP/MySQL REST APIs', 'Automated about 70% of internal workflows', 'Modernised the student management system']],
       ['Freelance Web Developer', 'Self-employed · Remote', 'Aug 2024 — Jun 2025', ['Landing pages and automation for local businesses and startups', 'Third-party API integrations, SEO and performance tuning']],
@@ -123,7 +123,7 @@ const T = {
     aTitle: 'نبذة',
     jTitle: 'الخبرة والتعليم',
     exp: [
-      ['مهندس برمجيات (الواجهات الأمامية)', 'Roots AI', 'الآن', ['مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات', 'Next.js وTailwind وMotion وبناء واجهات إنتاجية ونظام تصميم']],
+      ['مهندس برمجيات (الواجهات الأمامية)', 'Roots AI', 'الآن', ['مهندس برمجيات في منصة ذكاء اصطناعي صحي للمؤسسات: واجهات ولوحات تحكم وتكاملات', 'أبني واجهة المنتج بـ Next.js وTailwind وMotion مع نظام تصميم موحّد', 'أصمّم تجربة المستخدم ولوحات تفاعلية لبيانات الصحة وتقارير وكلاء الذكاء الاصطناعي', 'أربط واجهات API وخدمات الذكاء الاصطناعي بالمنتج وأرسم معمارية الواجهة']],
       ['متدرب مطوّر واجهات كاملة', 'Six Digit Club Sdn Bhd · سيلانجور', 'أكتوبر 2025 — مارس 2026', ['أكثر من 450 ساعة على منصة sdc.cx التقنية المالية الحية', 'لوحة أتمتة البريد عبر Brevo API: دفعات ووسائط وقوالب لأكثر من 300 قائمة', 'لوحة الاستثمار: بوابة للمستثمر ولوحة إدارة بطلبات رأس المال ومسار الإنهاء', 'إعادة تصميم صفحات الهبوط و30/60 يوم والـ Early Bird وصفحات بوابات الدفع', 'تتبّع الإحالات وربط التعلّم الإلكتروني بالدفع', 'لوحة React/Chart.js لحظية (5 مؤشرات، كل 30 ثانية) · إعادة تصميم 60+ صفحة في Figma']],
       ['مطوّر UI/UX وواجهات كاملة', 'Inspire-U Edtech · ملقا', 'أغسطس 2025 — الآن', ['هندسة المنصة بـ PHP/MySQL وواجهات REST', 'أتمتة نحو 70% من سير العمل الداخلي', 'تحديث نظام إدارة الطلاب']],
       ['مطوّر ويب مستقل', 'عمل حر · عن بعد', 'أغسطس 2024 — يونيو 2025', ['صفحات هبوط وأتمتة للشركات المحلية والناشئة', 'تكاملات API خارجية وتحسين SEO والأداء']],
@@ -175,7 +175,7 @@ export default function App() {
           <div className="flex items-center gap-2">
             <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="chip hover:text-white" aria-label="language">{lang === 'en' ? 'عربي' : 'EN'}</button>
             <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="chip hover:text-white !px-2.5" aria-label="theme">{theme === 'dark' ? <Sun size={13} /> : <Moon size={13} />}</button>
-            <a href={wa} target="_blank" rel="noreferrer" className="btn btn-gold !py-1.5 !px-4 !text-[12.5px] hidden sm:inline-flex">{t.cta}</a>
+            <a href={wa} target="_blank" rel="noreferrer" className="btn btn-gold !py-1.5 !px-4 !text-[13.5px] hidden sm:inline-flex">{t.cta}</a>
           </div>
         </div>
       </header>
@@ -234,7 +234,7 @@ export default function App() {
                     <div className="p-4">
                       <div className="flex items-center justify-between"><span className="eyebrow !text-[10px]">{k}</span>{href && <ArrowUpRight size={14} className="text-white/40 group-hover:text-[color:var(--gold)] transition rtl:-scale-x-100" />}</div>
                       <h3 className="mt-1.5 font-medium text-[15px]">{h}</h3>
-                      <p className="mt-1 text-[12.5px] text-white/50 leading-relaxed">{d}</p>
+                      <p className="mt-1 text-[13.5px] text-white/50 leading-relaxed">{d}</p>
                     </div>
                   </Wrap>
                 </motion.div>
@@ -263,22 +263,22 @@ export default function App() {
       <section id="about" className="py-14 scroll-mt-14">
         <div className="wrap">
           <motion.h2 {...fade} className="text-[22px] font-semibold mb-2">{t.aTitle}</motion.h2>
-          <motion.p {...fade} className="text-[13.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
-          <div className="grid lg:grid-cols-5 gap-3.5">
-            <motion.div {...fade} className="card p-5 lg:col-span-3">
+          <motion.p {...fade} className="text-[14.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
+          <div className="grid lg:grid-cols-5 gap-4">
+            <motion.div {...fade} className="card p-5 lg:col-span-3 flex flex-col">
               <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
-              <div className="mt-4 flex flex-col gap-5 border-s border-white/10 ps-5">
+              <div className="mt-4 flex-1 flex flex-col justify-between gap-6 border-s border-white/10 ps-5">
                 {t.exp.map(([r, c, d, pts]: any, i: number) => (
                   <div key={r} className="relative xrow">
                     <span className="absolute -start-[25px] top-3 w-2 h-2 rounded-full bg-[color:var(--gold)]" />
                     <Wrap href={EXP_META[i][1]} className="xhead">
                       <Logo src={EXP_META[i][0]} name={c} />
                       <span className="min-w-0 flex-1">
-                        <span className="flex flex-wrap items-baseline justify-between gap-x-3"><h3 className="font-medium text-[14.5px]">{r}</h3><span className="text-[11.5px] text-white/40">{d}</span></span>
-                        <span className="block text-[12.5px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5" />}</span>
+                        <span className="flex flex-wrap items-baseline justify-between gap-x-3"><h3 className="font-medium text-[15.5px]">{r}</h3><span className="text-[12.5px] text-white/40">{d}</span></span>
+                        <span className="block text-[13.5px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5" />}</span>
                       </span>
                     </Wrap>
-                    <div className="xbody"><ul className="text-[12.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{pts.map((x: string) => <li key={x}>{x}</li>)}</ul></div>
+                    <div className="xbody"><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{pts.map((x: string) => <li key={x}>{x}</li>)}</ul></div>
                   </div>
                 ))}
               </div>
@@ -289,9 +289,9 @@ export default function App() {
                 <div className="xrow mt-3">
                   <Wrap href={EDU_META[1]} className="xhead">
                     <Logo src={EDU_META[0]} name="UTeM" size={44} />
-                    <span className="min-w-0 flex-1"><h3 className="font-medium text-[14.5px]">{t.edu[0]}</h3><span className="block text-[12.5px] text-[color:var(--gold)]">{t.edu[1]}<ArrowUpRight size={11} className="inline ms-1 -mt-0.5" /></span><span className="block text-[11.5px] text-white/40">{t.edu[2]}</span></span>
+                    <span className="min-w-0 flex-1"><h3 className="font-medium text-[15.5px]">{t.edu[0]}</h3><span className="block text-[13.5px] text-[color:var(--gold)]">{t.edu[1]}<ArrowUpRight size={11} className="inline ms-1 -mt-0.5" /></span><span className="block text-[12.5px] text-white/40">{t.edu[2]}</span></span>
                   </Wrap>
-                  <div className="xbody"><ul className="text-[12.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul></div>
+                  <div className="xbody"><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul></div>
                 </div>
               </motion.div>
               <motion.div {...fade} className="card p-5">
@@ -299,7 +299,7 @@ export default function App() {
                 <div className="mt-2.5 flex flex-col gap-1.5">{t.certs.map((x, i) => (
                   <div key={x}><Wrap href={CERT_META[i][1]} className="xhead xcert">
                     <Logo src={CERT_META[i][0]} name={x} size={30} />
-                    <span className="flex-1 text-[12.5px] text-white/70">{x}{CERT_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5 opacity-60" />}</span>
+                    <span className="flex-1 text-[13.5px] text-white/70">{x}{CERT_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5 opacity-60" />}</span>
                   </Wrap></div>
                 ))}</div>
               </motion.div>
