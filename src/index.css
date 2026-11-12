@@ -139,8 +139,8 @@ html[data-theme=light] .xbody li:hover{color:#0b1622}
 #services .card{transition:transform .3s,border-color .3s,box-shadow .3s}
 #services .card:hover{transform:translateY(-5px)}
 #services .card svg{transition:transform .3s}#services .card:hover svg{transform:scale(1.18) rotate(-4deg)}
-#services .card:nth-child(1) svg{color:#14b8a6}#services .card:nth-child(2) svg{color:#8b5cf6}#services .card:nth-child(3) svg{color:#f59e0b}#services .card:nth-child(4) svg{color:#f43f5e}
-#services .card:nth-child(1):hover{border-color:#14b8a6}#services .card:nth-child(2):hover{border-color:#8b5cf6}#services .card:nth-child(3):hover{border-color:#f59e0b}#services .card:nth-child(4):hover{border-color:#f43f5e}
+#services .card svg{color:var(--gold)}
+#services .card:hover{border-color:var(--gold)}
 /* light: dark→light blue gradients */
 html[data-theme=light] section h2{background:linear-gradient(90deg,#08486f,#1593d4 60%,#6cc4f2);-webkit-background-clip:text;background-clip:text;color:transparent}
 html[data-theme=light] .card:not(:has(img))::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#08486f,#1593d4 55%,#9fdcff)}
