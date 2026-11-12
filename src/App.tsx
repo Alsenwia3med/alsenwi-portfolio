@@ -31,7 +31,7 @@ const T = {
     work: [
       ['Inspire U', 'Education platform', 'Student registration platform with bilingual site and lead flow.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'Health AI · B2B', 'Frontend engineer on a B2B Health AI platform: Next.js, Tailwind, Motion.', 'roots.jpg', 'https://roots-ai.health/'],
-      ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'sdc-card.png', 'https://sdc.cx/'],
+      ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'sdc-card.jpg', 'https://sdc.cx/'],
       ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', 'ycim.jpg', 'https://ycim.org/'],
       ['Safar Easy', 'Tourism', 'Arabic/RTL luxury redesign for a Malaysia tourism company.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
@@ -81,7 +81,7 @@ const T = {
     work: [
       ['Inspire U', 'منصة تعليمية', 'منصة تسجيل طلاب بموقع ثنائي اللغة ومسار استقبال العملاء.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'ذكاء صحي · B2B', 'مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات: Next.js وTailwind وMotion.', 'roots.jpg', 'https://roots-ai.health/'],
-      ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'sdc-card.png', 'https://sdc.cx/'],
+      ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'sdc-card.jpg', 'https://sdc.cx/'],
       ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', 'ycim.jpg', 'https://ycim.org/'],
       ['سفر إيز', 'سياحة', 'إعادة تصميم عربية فاخرة لشركة سياحة في ماليزيا.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
