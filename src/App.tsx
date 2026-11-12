@@ -27,6 +27,8 @@ const EXP_META: [string | undefined, string | undefined][] = [
   [img('inspire-logo.png'), 'https://inspire-u.net/'],
   [undefined, undefined],
 ];
+const CTAGS_EN = [['Next.js', 'Tailwind CSS', 'Design system', 'Health AI'], ['Fintech', 'Brevo API', 'Admin dashboards', 'Investor portal'], ['PHP / MySQL', 'REST APIs', 'Automation', 'Edtech'], ['Landing pages', 'API integrations', 'SEO']];
+const CTAGS_AR = [['Next.js', 'Tailwind CSS', 'نظام تصميم', 'ذكاء صحي'], ['تقنية مالية', 'Brevo API', 'لوحات إدارة', 'بوابة المستثمرين'], ['PHP / MySQL', 'واجهات REST', 'أتمتة', 'تعليم'], ['صفحات هبوط', 'تكاملات API', 'تحسين SEO']];
 const EDU_META: [string, string] = [img('utem.png'), 'https://www.utem.edu.my/'];
 const CERT_META: [string | undefined, string | undefined][] = [
   [fav('linkedin.com'), 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/details/certifications/'],
@@ -175,7 +177,7 @@ function Chips({ items, v, set }: { items: string[]; v: number | null; set: (i: 
 
 export default function App() {
   const [lang, setLang] = useState<L>(() => (localStorage.getItem('lang') as L) || (navigator.language.startsWith('ar') ? 'ar' : 'en'));
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('theme') as any) || 'dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('theme2') as any) || 'dark');
   const [name, setName] = useState('');
   const [msg, setMsg] = useState('');
   const [ty, setTy] = useState<number | null>(null);
@@ -189,8 +191,8 @@ export default function App() {
   }, [lang]);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    try { localStorage.setItem('theme', theme); } catch {}
-    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#07070a' : '#ffffff');
+    try { localStorage.setItem('theme2', theme); } catch {}
+    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#060d1a' : '#ffffff');
   }, [theme]);
   const c = CT[lang];
   const brief = [`*${c.head}*`, `• ${c.f[0]}: ${name || c.dash}`, `• ${c.f[1]}: ${ty !== null ? c.types[ty] : c.dash}`, `• ${c.f[2]}: ${msg || c.dash}`].join('\n');
@@ -207,7 +209,7 @@ export default function App() {
 
   return (
     <div className="relative overflow-x-clip">
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[#07070a]/70 border-b border-white/5">
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[#060d1a]/75 border-b border-white/5">
         <div className="wrap h-14 flex items-center justify-between">
           <a href="#top" className="font-semibold tracking-wide text-[15px]"><span className="flex items-center gap-2.5"><img src={img('alsenwi.jpg')} alt="Ahmed Al-Senwi" className="w-8 h-8 rounded-full object-cover object-top" style={{ boxShadow: '0 0 0 1.5px var(--gold), 0 0 14px rgba(226,185,79,.35)' }} /><span className="text-[13.5px] font-medium">{lang === 'ar' ? 'أحمد الصنوي' : 'Ahmed Al-Senwi'}</span></span></a>
           <nav className="hidden md:flex gap-7 text-[13px] text-white/60">
@@ -306,25 +308,35 @@ export default function App() {
           <motion.h2 {...fade} className="sech">{t.aTitle}</motion.h2>
           <motion.p {...fade} className="text-[14.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
           <div className="grid lg:grid-cols-5 gap-4">
-            <motion.div {...fade} className="card lux lux-lg p-5 lg:col-span-3 flex flex-col">
-              <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
-              <div className="explist mt-4 flex-1 flex flex-col justify-between gap-6 border-s border-white/10 ps-5">
-                {t.exp.map(([r, c, d, pts]: any, i: number) => (
-                  <div key={r} className="relative xrow">
-                    <span className="absolute -start-[25px] top-3 w-2 h-2 rounded-full bg-[color:var(--gold)]" />
-                    <Wrap href={EXP_META[i][1]} className="xhead">
-                      <Logo src={EXP_META[i][0]} name={c} />
-                      <span className="min-w-0 flex-1">
-                        <span className="flex flex-wrap items-baseline justify-between gap-x-3"><h3 className="font-medium text-[15.5px]">{r}</h3><span className="text-[12.5px] text-white/40">{d}</span></span>
-                        <span className="block text-[13.5px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5" />}</span>
-                      </span>
-                    </Wrap>
-                    <div className="xbody"><div><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(openRows.includes(i) ? pts : pts.slice(0, 3)).map((x: string) => <li key={x}>{x}</li>)}</ul>
-                      {pts.length > 3 && <button type="button" className="more" onClick={() => setOpenRows(o => o.includes(i) ? o.filter(x => x !== i) : [...o, i])}>{openRows.includes(i) ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض المزيد (${pts.length - 3})` : `Show more (${pts.length - 3})`)}</button>}</div></div>
-                  </div>
+            <div className="lg:col-span-3 cmap">
+              <div className="flex items-center gap-2 eyebrow mb-4"><Briefcase size={13} />{lang === 'ar' ? 'خريطة مسيرتي المهنية' : 'Career map'}</div>
+              <div className="cstats">
+                {(lang === 'ar' ? [['4', 'أدوار مهنية'], ['450+', 'ساعة على منصة مالية حية'], ['~70%', 'من سير العمل تمت أتمتته'], ['3', 'قطاعات: صحة، مال، تعليم']] : [['4', 'Professional roles'], ['450+', 'Hours on a live fintech platform'], ['~70%', 'Of internal workflows automated'], ['3', 'Sectors: health, finance, education']]).map(([n, l]) => (
+                  <div key={l} className="cstat"><b>{n}</b><span>{l}</span></div>
                 ))}
               </div>
-            </motion.div>
+              <div className="crail">
+                {t.exp.map(([r, c, d, pts]: any, i: number) => (
+                  <motion.div key={r} {...fade} className="cnode">
+                    <span className="cdot" />
+                    <div className="card lux p-5">
+                      <Wrap href={EXP_META[i][1]} className="xhead">
+                        <Logo src={EXP_META[i][0]} name={c} size={46} />
+                        <span className="min-w-0 flex-1">
+                          <span className="cdate">{d}</span>
+                          <h3 className="font-semibold text-[17px] leading-snug">{r}</h3>
+                          <span className="block text-[14px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={12} className="inline ms-1 -mt-0.5" />}</span>
+                        </span>
+                      </Wrap>
+                      <div className="ctags">{(lang === 'ar' ? CTAGS_AR : CTAGS_EN)[i].map((x: string) => <span key={x}>{x}</span>)}</div>
+                      <div className="xbody"><div><ul className="text-[14px] text-white/65 leading-relaxed list-disc ps-4 pt-1.5">{(openRows.includes(i) ? pts : pts.slice(0, 3)).map((x: string) => <li key={x}>{x}</li>)}</ul>
+                        {pts.length > 3 && <button type="button" className="more" onClick={() => setOpenRows(o => o.includes(i) ? o.filter(x => x !== i) : [...o, i])}>{openRows.includes(i) ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض المزيد (${pts.length - 3})` : `Show more (${pts.length - 3})`)}</button>}</div></div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              <a href="#contact" className="btn-gold cta-hire">{lang === 'ar' ? 'تحدث معي عن وظيفة أو مشروع' : 'Discuss a role or project'}<ArrowUpRight size={15} className="rtl:-scale-x-100" /></a>
+            </div>
             <div className="lg:col-span-2 flex flex-col gap-3.5">
               <motion.div {...fade} className="card lux p-5">
                 <div className="flex items-center gap-2 eyebrow"><GraduationCap size={14} />{lang === 'ar' ? 'التعليم' : 'Education'}</div>
