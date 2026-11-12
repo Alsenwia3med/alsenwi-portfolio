@@ -23,3 +23,24 @@ html[dir=rtl] .eyebrow{letter-spacing:.05em}
 input,textarea{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:10px 14px;width:100%;color:var(--tx);font-size:14px;outline:none;transition:border-color .2s}
 input:focus,textarea:focus{border-color:var(--gold)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Light theme ===== */
+html[data-theme=light]{--bg:#f6f2ea;--panel:#fffdf8;--line:rgba(40,30,10,.1);--tx:#1c1912;--mut:#6b665a;--gold:#a97f1f;--gold2:#c79a2e;color-scheme:light}
+html[data-theme=light] body{background:var(--bg);color:var(--tx)}
+html[data-theme=light] .gold{background:linear-gradient(120deg,#8a6512,#b88a22 55%,#8a6512);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme=light] .card{background:linear-gradient(180deg,#fffefb,#fbf7ef);box-shadow:0 1px 2px rgba(60,45,10,.04),0 12px 30px -16px rgba(60,45,10,.18)}
+html[data-theme=light] .btn-gold{color:#fff;background:linear-gradient(120deg,#c79a2e,#a97f1f);box-shadow:0 8px 22px -10px rgba(169,127,31,.6)}
+html[data-theme=light] .btn-line{border-color:rgba(40,30,10,.18)}
+html[data-theme=light] .hair{background:linear-gradient(90deg,transparent,rgba(169,127,31,.4),transparent)}
+html[data-theme=light] .glow{opacity:.16}
+html[data-theme=light] header.fixed{background:rgba(246,242,234,.78)!important;border-color:rgba(40,30,10,.08)!important}
+html[data-theme=light] footer{border-color:rgba(40,30,10,.08)!important}
+html[data-theme=light] [class*="text-white/"]{color:rgba(28,25,18,.62)!important}
+html[data-theme=light] .text-white\/80,html[data-theme=light] .text-white\/70{color:rgba(28,25,18,.8)!important}
+html[data-theme=light] .text-white\/40,html[data-theme=light] .text-white\/35{color:rgba(28,25,18,.45)!important}
+html[data-theme=light] .border-white\/10,html[data-theme=light] .border-white\/5{border-color:rgba(40,30,10,.12)!important}
+html[data-theme=light] .chip{color:#5b564a}
+html[data-theme=light] input,html[data-theme=light] textarea{background:#fff}
+html[data-theme=light] .from-\[\#1b1710\]{--tw-gradient-from:#efe6d2!important;--tw-gradient-via:#f6f2ea!important;--tw-gradient-to:#e7e1f1!important}
+html[data-theme=light] ::selection{background:#c79a2e;color:#fff}
+html[data-theme=light] .hover\:text-white:hover{color:#1c1912!important}

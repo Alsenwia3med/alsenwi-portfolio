@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, QrCode, Sparkles, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, QrCode, Sparkles, ChevronRight, Sun, Moon, GraduationCap, Briefcase, Award, Languages as LangIcon } from 'lucide-react';
 
 type L = 'en' | 'ar';
 const WA = '601162206173';
@@ -11,7 +11,7 @@ const img = (p: string) => `${import.meta.env.BASE_URL}images/${p}`;
 
 const T = {
   en: {
-    nav: ['Services', 'Work', 'Process', 'Contact'],
+    nav: ['Services', 'Work', 'About', 'Contact'],
     cta: 'Start a project',
     eyebrow: 'Full-stack developer · UI/UX designer · Malaysia',
     h1a: 'Websites and systems',
@@ -38,6 +38,18 @@ const T = {
     pTitle: 'How we work',
     process: [['Discover', 'A short call: goals, audience, timeline.'], ['Design', 'You see the look first — approve before any build.'], ['Build & launch', 'Clean code, fast load, handover and support.']],
     aTitle: 'About',
+    jTitle: 'Experience & education',
+    exp: [
+      ['Full-Stack Developer Intern', 'Six Digit Club Sdn Bhd · Selangor', 'Oct 2025 — Mar 2026', ['450+ hours on fintech and automation', 'React/Chart.js real-time dashboard (5 KPIs, 30s refresh)', 'Brevo email automation across 300+ lists', 'Figma redesign of 60+ pages']],
+      ['UI/UX & Full-Stack Developer', 'Inspire-U Edtech · Melaka', 'Aug 2025 — Present', ['Platform architecture with PHP/MySQL REST APIs', 'Automated about 70% of internal workflows', 'Modernised the student management system']],
+      ['Freelance Web Developer', 'Self-employed · Remote', 'Aug 2024 — Jun 2025', ['Landing pages and automation for local businesses and startups', 'Third-party API integrations, SEO and performance tuning']],
+    ],
+    edu: ['Bachelor of Computer Science (Software Development)', 'Universiti Teknikal Malaysia Melaka (UTeM) · FTMK', '2022 — 2026 · Graduated March 2026', ['Focus: full-stack development, software engineering', 'Projects: Smart Attendance System (C++/PHP, QR), Student Performance Dashboard, Melaka Tourist Guide']],
+    certTitle: 'Certifications', certs: ['IEEE Associate Software Developer Workshop (2024)', 'LinkedIn Learning: Time Management (2018)', 'Introduction to Dart', 'Basics of Software Testing'],
+    langTitle: 'Languages', langs: [['Arabic', 'Native'], ['English', 'Fluent'], ['Bahasa Malaysia', 'Conversational'], ['German', 'Basic (A2)']],
+    skTitle: 'Skills',
+    skillGroups: [['Frontend', ['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'Figma UI/UX']], ['Backend & data', ['PHP', 'Python', 'Node.js', 'MySQL', 'REST APIs', 'Supabase']], ['Mobile', ['Flutter', 'Dart', 'C++']], ['Tools & process', ['Git/GitHub', 'WordPress/Elementor', 'Brevo APIs', 'Chart.js', 'CI/CD', 'Agile/Scrum']]],
+
     about: 'Computer Science graduate (UTeM, 2026) with hands-on work across fintech, education and tourism. I pair a designer’s eye with full-stack engineering, so what looks premium also performs.',
     skills: ['React', 'Next.js', 'Tailwind', 'PHP', 'Python', 'SQL', 'Node.js', 'Figma', 'REST APIs', 'WordPress'],
     cTitle: 'Let’s talk about your project',
@@ -46,7 +58,7 @@ const T = {
     rights: 'Ahmed Al-Senwi · Malaysia',
   },
   ar: {
-    nav: ['الخدمات', 'أعمالي', 'طريقة العمل', 'تواصل'],
+    nav: ['الخدمات', 'أعمالي', 'نبذة', 'تواصل'],
     cta: 'ابدأ مشروعك',
     eyebrow: 'مطوّر ومصمم واجهات · ماليزيا',
     h1a: 'مواقع وأنظمة',
@@ -73,6 +85,18 @@ const T = {
     pTitle: 'طريقة العمل',
     process: [['الاستكشاف', 'مكالمة قصيرة: الهدف والجمهور والموعد.'], ['التصميم', 'ترى الشكل أولاً — وتعتمد قبل أي بناء.'], ['البناء والإطلاق', 'كود نظيف وسرعة تحميل وتسليم ودعم.']],
     aTitle: 'نبذة',
+    jTitle: 'الخبرة والتعليم',
+    exp: [
+      ['متدرب مطوّر واجهات كاملة', 'Six Digit Club Sdn Bhd · سيلانجور', 'أكتوبر 2025 — مارس 2026', ['أكثر من 450 ساعة في التقنية المالية والأتمتة', 'لوحة React/Chart.js لحظية (5 مؤشرات، تحديث كل 30 ثانية)', 'أتمتة بريد Brevo لأكثر من 300 قائمة', 'إعادة تصميم أكثر من 60 صفحة في Figma']],
+      ['مطوّر UI/UX وواجهات كاملة', 'Inspire-U Edtech · ملقا', 'أغسطس 2025 — الآن', ['هندسة المنصة بـ PHP/MySQL وواجهات REST', 'أتمتة نحو 70% من سير العمل الداخلي', 'تحديث نظام إدارة الطلاب']],
+      ['مطوّر ويب مستقل', 'عمل حر · عن بعد', 'أغسطس 2024 — يونيو 2025', ['صفحات هبوط وأتمتة للشركات المحلية والناشئة', 'تكاملات API خارجية وتحسين SEO والأداء']],
+    ],
+    edu: ['بكالوريوس علوم الحاسب (تطوير البرمجيات)', 'جامعة ملقا التقنية الماليزية (UTeM) · FTMK', '2022 — 2026 · التخرج مارس 2026', ['التركيز: تطوير الواجهات الكاملة وهندسة البرمجيات', 'مشاريع: نظام الحضور الذكي (C++/PHP وQR)، لوحة أداء الطلاب، دليل ملقا السياحي']],
+    certTitle: 'الشهادات', certs: ['ورشة IEEE لمطوّر برمجيات مشارك (2024)', 'LinkedIn Learning: إدارة الوقت (2018)', 'مقدمة في لغة Dart', 'أساسيات اختبار البرمجيات'],
+    langTitle: 'اللغات', langs: [['العربية', 'اللغة الأم'], ['الإنجليزية', 'طلاقة'], ['الملايو', 'محادثة'], ['الألمانية', 'أساسي (A2)']],
+    skTitle: 'المهارات',
+    skillGroups: [['الواجهات', ['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'Figma UI/UX']], ['الخلفية والبيانات', ['PHP', 'Python', 'Node.js', 'MySQL', 'REST APIs', 'Supabase']], ['الجوال', ['Flutter', 'Dart', 'C++']], ['الأدوات والمنهجية', ['Git/GitHub', 'WordPress/Elementor', 'Brevo APIs', 'Chart.js', 'CI/CD', 'Agile/Scrum']]],
+
     about: 'خريج علوم حاسب (UTeM، 2026) بخبرة عملية في التقنية المالية والتعليم والسياحة. أجمع عين المصمم مع هندسة الواجهات الكاملة، فما يبدو فاخراً يعمل بكفاءة.',
     skills: ['React', 'Next.js', 'Tailwind', 'PHP', 'Python', 'SQL', 'Node.js', 'Figma', 'REST APIs', 'WordPress'],
     cTitle: 'لنتحدث عن مشروعك',
@@ -86,6 +110,7 @@ const fade = { initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }
 
 export default function App() {
   const [lang, setLang] = useState<L>(() => (localStorage.getItem('lang') as L) || (navigator.language.startsWith('ar') ? 'ar' : 'en'));
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('theme') as any) || 'dark');
   const [name, setName] = useState('');
   const [msg, setMsg] = useState('');
   const t = T[lang];
@@ -94,8 +119,13 @@ export default function App() {
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     try { localStorage.setItem('lang', lang); } catch {}
   }, [lang]);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem('theme', theme); } catch {}
+    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#07070a' : '#f6f2ea');
+  }, [theme]);
   const wa = `https://wa.me/${WA}?text=${encodeURIComponent(`${name ? name + ' — ' : ''}${msg || (lang === 'ar' ? 'مرحباً أحمد، أرغب بمناقشة مشروع.' : 'Hi Ahmed, I would like to discuss a project.')}`)}`;
-  const ids = ['services', 'work', 'process', 'contact'];
+  const ids = ['services', 'work', 'about', 'contact'];
 
   return (
     <div className="relative overflow-x-clip">
@@ -107,6 +137,7 @@ export default function App() {
           </nav>
           <div className="flex items-center gap-2">
             <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="chip hover:text-white" aria-label="language">{lang === 'en' ? 'عربي' : 'EN'}</button>
+            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="chip hover:text-white !px-2.5" aria-label="theme">{theme === 'dark' ? <Sun size={13} /> : <Moon size={13} />}</button>
             <a href={wa} target="_blank" rel="noreferrer" className="btn btn-gold !py-1.5 !px-4 !text-[12.5px] hidden sm:inline-flex">{t.cta}</a>
           </div>
         </div>
@@ -174,7 +205,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="process" className="py-14 scroll-mt-14">
+      <section id="process" className="py-10 scroll-mt-14">
         <div className="wrap">
           <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.pTitle}</motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -186,13 +217,56 @@ export default function App() {
               </motion.div>
             ))}
           </div>
-          <motion.div {...fade} className="card p-5 mt-3.5 md:flex gap-8 items-start">
-            <div className="md:w-1/2"><h3 className="eyebrow">{t.aTitle}</h3><p className="mt-2 text-[13.5px] text-white/60">{t.about}</p></div>
-            <div className="md:w-1/2 mt-4 md:mt-0 flex flex-wrap gap-1.5">{t.skills.map(s => <span key={s} className="chip">{s}</span>)}</div>
-          </motion.div>
         </div>
       </section>
 
+
+      <section id="about" className="py-14 scroll-mt-14">
+        <div className="wrap">
+          <motion.h2 {...fade} className="text-[22px] font-semibold mb-2">{t.aTitle}</motion.h2>
+          <motion.p {...fade} className="text-[13.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
+          <div className="grid lg:grid-cols-5 gap-3.5">
+            <motion.div {...fade} className="card p-5 lg:col-span-3">
+              <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
+              <div className="mt-4 flex flex-col gap-5 border-s border-white/10 ps-5">
+                {t.exp.map(([r, c, d, pts]: any) => (
+                  <div key={r} className="relative">
+                    <span className="absolute -start-[25px] top-1.5 w-2 h-2 rounded-full bg-[color:var(--gold)]" />
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-3"><h3 className="font-medium text-[14.5px]">{r}</h3><span className="text-[11.5px] text-white/40">{d}</span></div>
+                    <div className="text-[12.5px] text-[color:var(--gold)]">{c}</div>
+                    <ul className="mt-1.5 text-[12.5px] text-white/55 leading-relaxed list-disc ps-4">{pts.map((x: string) => <li key={x}>{x}</li>)}</ul>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            <div className="lg:col-span-2 flex flex-col gap-3.5">
+              <motion.div {...fade} className="card p-5">
+                <div className="flex items-center gap-2 eyebrow"><GraduationCap size={14} />{lang === 'ar' ? 'التعليم' : 'Education'}</div>
+                <h3 className="mt-3 font-medium text-[14.5px]">{t.edu[0]}</h3>
+                <div className="text-[12.5px] text-[color:var(--gold)]">{t.edu[1]}</div>
+                <div className="text-[11.5px] text-white/40">{t.edu[2]}</div>
+                <ul className="mt-1.5 text-[12.5px] text-white/55 leading-relaxed list-disc ps-4">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul>
+              </motion.div>
+              <motion.div {...fade} className="card p-5">
+                <div className="flex items-center gap-2 eyebrow"><Award size={14} />{t.certTitle}</div>
+                <ul className="mt-2.5 text-[12.5px] text-white/60 leading-relaxed list-disc ps-4">{t.certs.map(x => <li key={x}>{x}</li>)}</ul>
+              </motion.div>
+              <motion.div {...fade} className="card p-5">
+                <div className="flex items-center gap-2 eyebrow"><LangIcon size={14} />{t.langTitle}</div>
+                <div className="mt-2.5 flex flex-wrap gap-1.5">{t.langs.map(([n, l]: string[]) => <span key={n} className="chip">{n} · {l}</span>)}</div>
+              </motion.div>
+            </div>
+          </div>
+          <motion.div {...fade} className="card p-5 mt-3.5">
+            <div className="eyebrow">{t.skTitle}</div>
+            <div className="mt-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4">
+              {t.skillGroups.map(([g, items]: any) => (
+                <div key={g}><div className="text-[12px] text-white/45 mb-1.5">{g}</div><div className="flex flex-wrap gap-1.5">{items.map((x: string) => <span key={x} className="chip">{x}</span>)}</div></div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
       <div className="hair" />
 
       <section id="contact" className="py-16 scroll-mt-14 relative">
