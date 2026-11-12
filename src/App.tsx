@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import SkillsLab from './SkillsLab';
 import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, QrCode, Sparkles, ChevronRight, Sun, Moon, GraduationCap, Briefcase, Award, Languages as LangIcon } from 'lucide-react';
 
 type L = 'en' | 'ar';
@@ -13,7 +14,7 @@ const T = {
   en: {
     nav: ['Services', 'Work', 'About', 'Contact'],
     cta: 'Start a project',
-    eyebrow: 'Full-stack developer · UI/UX designer · Malaysia',
+    eyebrow: 'Software Engineer · Full-stack · UI/UX · Malaysia',
     h1a: 'Websites and systems',
     h1b: 'that make companies look — and run — like leaders.',
     sub: 'I design and build luxury websites, dashboards and business systems for Arab and Malaysian companies. One person accountable from design to launch.',
@@ -29,6 +30,7 @@ const T = {
     wTitle: 'Selected work',
     work: [
       ['Inspire U', 'Education platform', 'Student registration platform with bilingual site and lead flow.', 'Inspire-U.png', 'https://inspire-u.net/'],
+      ['Roots AI', 'Health AI · B2B', 'Frontend engineering for a B2B Health AI platform: Next.js, Tailwind, Motion.', '', 'https://roots-ai.health/'],
       ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
       ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', '', 'https://ycim.org/'],
@@ -41,6 +43,7 @@ const T = {
     aTitle: 'About',
     jTitle: 'Experience & education',
     exp: [
+      ['Software Engineer', 'Roots AI', 'Present', ['Frontend engineering for a B2B Health AI platform', 'Next.js, Tailwind CSS and Motion; production UI and design-system work']],
       ['Full-Stack Developer Intern', 'Six Digit Club Sdn Bhd · Selangor', 'Oct 2025 — Mar 2026', ['450+ hours on fintech and automation', 'React/Chart.js real-time dashboard (5 KPIs, 30s refresh)', 'Brevo email automation across 300+ lists', 'Figma redesign of 60+ pages']],
       ['UI/UX & Full-Stack Developer', 'Inspire-U Edtech · Melaka', 'Aug 2025 — Present', ['Platform architecture with PHP/MySQL REST APIs', 'Automated about 70% of internal workflows', 'Modernised the student management system']],
       ['Freelance Web Developer', 'Self-employed · Remote', 'Aug 2024 — Jun 2025', ['Landing pages and automation for local businesses and startups', 'Third-party API integrations, SEO and performance tuning']],
@@ -61,7 +64,7 @@ const T = {
   ar: {
     nav: ['الخدمات', 'أعمالي', 'نبذة', 'تواصل'],
     cta: 'ابدأ مشروعك',
-    eyebrow: 'مطوّر ومصمم واجهات · ماليزيا',
+    eyebrow: 'مهندس برمجيات · واجهات كاملة · UI/UX · ماليزيا',
     h1a: 'مواقع وأنظمة',
     h1b: 'تجعل شركتك تبدو — وتعمل — كالكبار.',
     sub: 'أصمّم وأبني مواقع فخمة ولوحات تحكم وأنظمة أعمال للشركات العربية والماليزية. مسؤول واحد من التصميم حتى الإطلاق.',
@@ -77,6 +80,7 @@ const T = {
     wTitle: 'أعمال مختارة',
     work: [
       ['Inspire U', 'منصة تعليمية', 'منصة تسجيل طلاب بموقع ثنائي اللغة ومسار استقبال العملاء.', 'Inspire-U.png', 'https://inspire-u.net/'],
+      ['Roots AI', 'ذكاء صحي · B2B', 'هندسة الواجهات لمنصة ذكاء اصطناعي صحي للمؤسسات: Next.js وTailwind وMotion.', '', 'https://roots-ai.health/'],
       ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
       ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', '', 'https://ycim.org/'],
@@ -89,6 +93,7 @@ const T = {
     aTitle: 'نبذة',
     jTitle: 'الخبرة والتعليم',
     exp: [
+      ['مهندس برمجيات', 'Roots AI', 'الآن', ['هندسة واجهات منصة ذكاء اصطناعي صحي للمؤسسات', 'Next.js وTailwind وMotion وبناء واجهات إنتاجية ونظام تصميم']],
       ['متدرب مطوّر واجهات كاملة', 'Six Digit Club Sdn Bhd · سيلانجور', 'أكتوبر 2025 — مارس 2026', ['أكثر من 450 ساعة في التقنية المالية والأتمتة', 'لوحة React/Chart.js لحظية (5 مؤشرات، تحديث كل 30 ثانية)', 'أتمتة بريد Brevo لأكثر من 300 قائمة', 'إعادة تصميم أكثر من 60 صفحة في Figma']],
       ['مطوّر UI/UX وواجهات كاملة', 'Inspire-U Edtech · ملقا', 'أغسطس 2025 — الآن', ['هندسة المنصة بـ PHP/MySQL وواجهات REST', 'أتمتة نحو 70% من سير العمل الداخلي', 'تحديث نظام إدارة الطلاب']],
       ['مطوّر ويب مستقل', 'عمل حر · عن بعد', 'أغسطس 2024 — يونيو 2025', ['صفحات هبوط وأتمتة للشركات المحلية والناشئة', 'تكاملات API خارجية وتحسين SEO والأداء']],
@@ -261,11 +266,7 @@ export default function App() {
           </div>
           <motion.div {...fade} className="card p-5 mt-3.5">
             <div className="eyebrow">{t.skTitle}</div>
-            <div className="mt-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4">
-              {t.skillGroups.map(([g, items]: any) => (
-                <div key={g}><div className="text-[12px] text-white/45 mb-1.5">{g}</div><div className="flex flex-wrap gap-1.5">{items.map((x: string) => <span key={x} className="chip">{x}</span>)}</div></div>
-              ))}
-            </div>
+            <SkillsLab lang={lang} />
           </motion.div>
         </div>
       </section>
