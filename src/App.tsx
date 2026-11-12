@@ -177,7 +177,7 @@ function Chips({ items, v, set }: { items: string[]; v: number | null; set: (i: 
 
 export default function App() {
   const [lang, setLang] = useState<L>(() => (localStorage.getItem('lang') as L) || (navigator.language.startsWith('ar') ? 'ar' : 'en'));
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('theme2') as any) || 'dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('theme3') as any) || 'light');
   const [name, setName] = useState('');
   const [msg, setMsg] = useState('');
   const [ty, setTy] = useState<number | null>(null);
@@ -191,7 +191,7 @@ export default function App() {
   }, [lang]);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    try { localStorage.setItem('theme2', theme); } catch {}
+    try { localStorage.setItem('theme3', theme); } catch {}
     document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#060d1a' : '#ffffff');
   }, [theme]);
   const c = CT[lang];

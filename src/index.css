@@ -215,10 +215,10 @@ html[data-theme=light] .sech{background:linear-gradient(90deg,#08486f,#1593d4 70
 .pdes{margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--mut)}
 /* v14: luxe hover/press — box grows slightly and fills dark */
 .lux{--sc:1.03;background-repeat:no-repeat!important;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s,color .35s,background-size .5s cubic-bezier(.22,1,.36,1)!important;position:relative}
-html[data-theme=light] .lux{background:linear-gradient(135deg,rgba(207,232,248,.92),rgba(234,246,254,.92)) bottom/100% 0% no-repeat,linear-gradient(180deg,#fff,#f6fbff)!important}
+html[data-theme=light] .lux{background:linear-gradient(120deg,#08486f,#1593d4 62%,#4fb8ea) bottom/100% 0% no-repeat,linear-gradient(180deg,#fff,#f6fbff)!important}
 html:not([data-theme=light]) .lux{background:linear-gradient(135deg,#102340,#18345c 70%,#1d3f6e) bottom/100% 0% no-repeat,linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012))!important}
 .lux-lg{--sc:1.012}
-.lux:hover,.lux:active{transform:scale(var(--sc))!important;z-index:5;background-size:100% 100%,100% 100%!important;box-shadow:0 26px 50px -22px rgba(8,72,111,.2)!important;border-color:transparent!important}
+.lux:hover,.lux:active{transform:scale(var(--sc))!important;z-index:5;background-size:100% 100%,100% 100%!important;box-shadow:0 26px 50px -22px rgba(8,72,111,.38)!important;border-color:transparent!important}
 html:not([data-theme=light]) .lux:hover,html:not([data-theme=light]) .lux:active{--gold:#f1d98f;--mut:rgba(255,255,255,.72);border-color:rgba(212,178,92,.35)!important}
 html[data-theme=light] .lux:hover::before{opacity:0}
 .lux::before{transition:opacity .3s}
@@ -236,8 +236,6 @@ html[data-theme=light] .subh{color:#0b6fa4}
 a.card.lux{text-decoration:none}
 .subh.mt-10{margin-top:44px}
 /* v16: light glass-sky hover with dark readable text */
-html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active{border-color:rgba(11,111,164,.28)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-html[data-theme=light] .lux:hover::before{opacity:.55}
 html[data-theme=light] .skwrap{background:#fff!important;border:1px solid rgba(11,100,160,.16)!important;box-shadow:0 14px 36px -22px rgba(8,72,111,.3)!important}
 html[data-theme=light] .foot,html[data-theme=light] footer{background:#fff!important}
 
@@ -264,3 +262,19 @@ html[data-theme=light] .cdot{background:#fff;border-color:#1593d4;box-shadow:0 0
 html[data-theme=light] .ctags span{background:#eaf6fd;color:#0b6fa4;border-color:rgba(11,100,160,.2)}
 html[data-theme=light] .cta-hire{background:linear-gradient(120deg,#08486f,#1593d4);color:#fff}
 @media(max-width:640px){.cstats{grid-template-columns:repeat(2,1fr)}}
+
+/* v18: blue-gradient hover (button colour) on white */
+html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active{--tx:#fff;--mut:rgba(255,255,255,.72);--gold:#e8fbff;--gold2:#fff;color:#fff}
+html[data-theme=light] .lux:hover :is(h3,h2,li,td,b,span,p,a,strong):not(.xlogo *):not(.eyebrow):not(.pnum),html[data-theme=light] .lux:active :is(h3,h2,li,td,b,span,p,a,strong):not(.xlogo *):not(.eyebrow):not(.pnum){color:#fff}
+html[data-theme=light] .lux:hover [class*="text-white/"],html[data-theme=light] .lux:active [class*="text-white/"]{color:rgba(255,255,255,.72)!important}
+html[data-theme=light] .lux:hover .eyebrow,html[data-theme=light] .lux:active .eyebrow{background:none;color:#e8fbff!important;-webkit-text-fill-color:#e8fbff}
+html[data-theme=light] .lux:hover .text-\[color\:var\(--gold\)\],html[data-theme=light] .lux:hover a[class*="gold"]{color:#e8fbff!important}
+html[data-theme=light] .lux:hover .ctable tr+tr th,html[data-theme=light] .lux:hover .ctable tr+tr td{border-color:rgba(255,255,255,.12)}
+html[data-theme=light] .lux:hover .sk-chip,html[data-theme=light] .lux:hover .xbody li{color:#fff}
+html[data-theme=light] .lux:hover .skills-mini{color:#fff}
+html[data-theme=light] .lux:hover .more,html[data-theme=light] .lux:active .more{color:#fff;border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.12)}
+html[data-theme=light] .lux:hover [class*="text-white/"],html[data-theme=light] .lux:active [class*="text-white/"]{color:rgba(255,255,255,.92)!important}
+html[data-theme=light] .lux:hover .xhead .text-white\/40{color:rgba(255,255,255,.75)!important}
+html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active{border-color:transparent!important}
+html[data-theme=light] .lux:hover::before{opacity:0}html[data-theme=light] .lux:hover .ctags span,html[data-theme=light] .lux:active .ctags span{background:rgba(255,255,255,.16)!important;color:#fff!important;border-color:rgba(255,255,255,.45)!important}
+html[data-theme=light] .lux:hover .cdate,html[data-theme=light] .lux:active .cdate{color:#fff!important;border-color:rgba(255,255,255,.45)!important}
