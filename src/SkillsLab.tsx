@@ -40,8 +40,8 @@ const GL: Record<L, string[]> = {
   en: ['Frontend', 'Backend & data', 'Mobile', 'Tools & process'],
   ar: ['الواجهات', 'الخلفية والبيانات', 'الجوال', 'الأدوات والمنهجية'],
 };
-const COL_L = ['#0a8fcf', '#3b4fc9', '#178a5b', '#6d44b8'];
-const COL_D = ['#e2b94f', '#5fa8ff', '#4fd6a0', '#b794ff'];
+const COL_L = ['#0b6fa4', '#1593d4', '#22b5d8', '#3a86b8'];
+const COL_D = ['#e2b94f', '#c9a24a', '#f1d98f', '#b8944a'];
 const PAL = {
   light: { ink: '#14120d', on: '#fff', track: '#e9e2d0', line: '#e5dcc4', body: '#3a362b' },
   dark: { ink: '#f4eee0', on: '#0b0b10', track: 'rgba(255,255,255,.12)', line: 'rgba(226,185,79,.22)', body: 'rgba(244,238,224,.8)' },
@@ -54,7 +54,8 @@ export default function SkillsLab({ lang, dark }: { lang: L; dark: boolean }) {
   const [sel, setSel] = useState<number>(0);
   const [hov, setHov] = useState<number | null>(null);
   const [filter, setFilter] = useState<number | null>(null);
-  const [allSk, setAllSk] = useState(false);
+  const [allSk, setAllSk] = useState<boolean>(() => { try { return sessionStorage.getItem('sk_allSk') === '1'; } catch { return false; } });
+  useEffect(() => { try { sessionStorage.setItem('sk_allSk', allSk ? '1' : '0'); } catch {} }, [allSk]);
   const rot = useRef({ x: -0.25, y: 0, vx: 0.0016, vy: 0, drag: false, lx: 0, ly: 0 });
   const nodes = useRef<(HTMLButtonElement | null)[]>([]);
   const pts = useMemo(() => SK.map((_, i) => {

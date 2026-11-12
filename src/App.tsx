@@ -144,7 +144,12 @@ const T = {
   },
 };
 
-const fade = { initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-60px' }, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as any } };
+function useSticky<T>(k: string, d: T): [T, (v: T | ((o: T) => T)) => void] {
+  const [v, setV] = useState<T>(() => { try { const r = sessionStorage.getItem('sk_' + k); return r ? JSON.parse(r) : d; } catch { return d; } });
+  const set = (n: T | ((o: T) => T)) => setV(o => { const x = typeof n === 'function' ? (n as (o: T) => T)(o) : n; try { sessionStorage.setItem('sk_' + k, JSON.stringify(x)); } catch {} return x; });
+  return [v, set];
+}
+const fade = { initial: { opacity: 0, y: 8 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-60px' }, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as any } };
 
 const CT = {
   en: {
@@ -174,8 +179,8 @@ export default function App() {
   const [name, setName] = useState('');
   const [msg, setMsg] = useState('');
   const [ty, setTy] = useState<number | null>(null);
-  const [openRows, setOpenRows] = useState<number[]>([]);
-  const [allCerts, setAllCerts] = useState(false);
+  const [openRows, setOpenRows] = useSticky<number[]>('openRows', []);
+  const [allCerts, setAllCerts] = useSticky<boolean>('allCerts', false);
   const t = T[lang];
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -193,7 +198,7 @@ export default function App() {
   const mailto = `mailto:${MAIL}?subject=${encodeURIComponent(`${ty !== null ? c.types[ty] : c.head}${name ? ' — ' + name : ''}`)}&body=${encodeURIComponent(brief.replace(/\*/g, ''))}`;
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>('.xbody li, .xcert, .ctable tr, .xrow .xhead, .sech'));
-    els.forEach((el, i) => { el.classList.add('rv'); el.style.transitionDelay = `${(Array.from(el.parentElement?.children || []).indexOf(el) % 6) * 70}ms`; });
+    els.forEach((el, i) => { el.classList.add('rv'); el.style.transitionDelay = `${(Array.from(el.parentElement?.children || []).indexOf(el) % 4) * 30}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
@@ -285,10 +290,10 @@ export default function App() {
           <motion.h2 {...fade} className="sech">{t.pTitle}</motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {t.process.map(([h, d], i) => (
-              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} className="card p-5">
-                <div className="gold text-[26px] font-semibold leading-none">0{i + 1}</div>
-                <h3 className="mt-3 font-medium text-[15px]">{h}</h3>
-                <p className="mt-1 text-[13px] text-white/55">{d}</p>
+              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} className="pcard">
+                <div className="pnum">0{i + 1}</div>
+                <h3 className="ptit">{h}</h3>
+                <p className="pdes">{d}</p>
               </motion.div>
             ))}
           </div>
