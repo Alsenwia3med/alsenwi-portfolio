@@ -149,3 +149,8 @@ html[data-theme=light] .btn-gold{background:linear-gradient(120deg,#08486f,#1593
 html[data-theme=light] .hair{background:linear-gradient(90deg,transparent,#08486f,#2aa8e4,transparent);opacity:.5}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 html[data-theme=light] .eyebrow svg{color:#1593d4}
+
+/* chips fill with brand colour on hover */
+.chip{transition:background .25s,color .25s,border-color .25s,transform .25s,box-shadow .25s;cursor:default}
+.chip:hover{background:linear-gradient(120deg,var(--gold2),var(--gold));color:#14120d;border-color:transparent;transform:translateY(-2px);box-shadow:0 8px 20px -8px var(--gold)}
+html[data-theme=light] .chip:hover{background:linear-gradient(120deg,#08486f,#1593d4 60%,#5ec0f0);color:#fff;box-shadow:0 8px 20px -8px rgba(11,127,184,.7)}
