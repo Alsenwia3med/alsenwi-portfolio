@@ -218,13 +218,10 @@ html[data-theme=light] .sech{background:linear-gradient(90deg,#08486f,#1593d4 70
 html[data-theme=light] .lux{background:linear-gradient(120deg,#08486f,#1593d4 62%,#4fb8ea) bottom/100% 0% no-repeat,linear-gradient(180deg,#fff,#f6fbff)!important}
 html:not([data-theme=light]) .lux{background:linear-gradient(135deg,#102340,#18345c 70%,#1d3f6e) bottom/100% 0% no-repeat,linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012))!important}
 .lux-lg{--sc:1.012}
-.lux:hover,.lux:active{transform:scale(var(--sc))!important;z-index:5;background-size:100% 100%,100% 100%!important;box-shadow:0 26px 50px -22px rgba(8,72,111,.38)!important;border-color:transparent!important}
-html:not([data-theme=light]) .lux:hover,html:not([data-theme=light]) .lux:active{--gold:#f1d98f;--mut:rgba(255,255,255,.72);border-color:rgba(212,178,92,.35)!important}
-html[data-theme=light] .lux:hover::before{opacity:0}
+.lux:hover,.lux:active{transform:scale(var(--sc))!important;z-index:5;box-shadow:0 26px 50px -22px rgba(8,72,111,.38)!important;border-color:transparent!important}
 .lux::before{transition:opacity .3s}
 @media (prefers-reduced-motion:reduce){.lux:hover,.lux:active{transform:none!important}}
 @media(hover:none){.lux:hover{transform:none!important}.lux:active{transform:scale(var(--sc))!important}}
-html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active,html:not([data-theme=light]) .lux:hover,html:not([data-theme=light]) .lux:active{background-size:100% 100%,100% 100%!important}
 /* v15: separate boxes for experience / education / certs / languages */
 .subh{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gold);margin:0 0 14px}
 html[dir=rtl] .subh{letter-spacing:.04em}
@@ -264,17 +261,10 @@ html[data-theme=light] .cta-hire{background:linear-gradient(120deg,#08486f,#1593
 @media(max-width:640px){.cstats{grid-template-columns:repeat(2,1fr)}}
 
 /* v18: blue-gradient hover (button colour) on white */
-html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active{--tx:#fff;--mut:rgba(255,255,255,.72);--gold:#e8fbff;--gold2:#fff;color:#fff}
-html[data-theme=light] .lux:hover :is(h3,h2,li,td,b,span,p,a,strong):not(.xlogo *):not(.eyebrow):not(.pnum),html[data-theme=light] .lux:active :is(h3,h2,li,td,b,span,p,a,strong):not(.xlogo *):not(.eyebrow):not(.pnum){color:#fff}
-html[data-theme=light] .lux:hover [class*="text-white/"],html[data-theme=light] .lux:active [class*="text-white/"]{color:rgba(255,255,255,.72)!important}
-html[data-theme=light] .lux:hover .eyebrow,html[data-theme=light] .lux:active .eyebrow{background:none;color:#e8fbff!important;-webkit-text-fill-color:#e8fbff}
-html[data-theme=light] .lux:hover .text-\[color\:var\(--gold\)\],html[data-theme=light] .lux:hover a[class*="gold"]{color:#e8fbff!important}
-html[data-theme=light] .lux:hover .ctable tr+tr th,html[data-theme=light] .lux:hover .ctable tr+tr td{border-color:rgba(255,255,255,.12)}
-html[data-theme=light] .lux:hover .sk-chip,html[data-theme=light] .lux:hover .xbody li{color:#fff}
-html[data-theme=light] .lux:hover .skills-mini{color:#fff}
-html[data-theme=light] .lux:hover .more,html[data-theme=light] .lux:active .more{color:#fff;border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.12)}
-html[data-theme=light] .lux:hover [class*="text-white/"],html[data-theme=light] .lux:active [class*="text-white/"]{color:rgba(255,255,255,.92)!important}
-html[data-theme=light] .lux:hover .xhead .text-white\/40{color:rgba(255,255,255,.75)!important}
-html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active{border-color:transparent!important}
-html[data-theme=light] .lux:hover::before{opacity:0}html[data-theme=light] .lux:hover .ctags span,html[data-theme=light] .lux:active .ctags span{background:rgba(255,255,255,.16)!important;color:#fff!important;border-color:rgba(255,255,255,.45)!important}
-html[data-theme=light] .lux:hover .cdate,html[data-theme=light] .lux:active .cdate{color:#fff!important;border-color:rgba(255,255,255,.45)!important}
+
+/* v19: natural colours — box only grows slightly and lifts */
+.lux:hover,.lux:active{transform:scale(var(--sc))!important;z-index:5;box-shadow:0 22px 44px -24px rgba(8,72,111,.38)!important}
+html[data-theme=light] .lux:hover,html[data-theme=light] .lux:active{border-color:rgba(11,111,164,.38)!important}
+html:not([data-theme=light]) .lux:hover,html:not([data-theme=light]) .lux:active{border-color:rgba(212,178,92,.45)!important;box-shadow:0 22px 44px -24px rgba(0,0,0,.7)!important}
+.lux{--sc:1.02}.lux-lg{--sc:1.01}
+.crail .lux{--sc:1.015}

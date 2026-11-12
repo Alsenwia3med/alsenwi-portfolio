@@ -307,14 +307,15 @@ export default function App() {
         <div className="wrap">
           <motion.h2 {...fade} className="sech">{t.aTitle}</motion.h2>
           <motion.p {...fade} className="text-[14.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
-          <div className="grid lg:grid-cols-5 gap-4">
-            <div className="lg:col-span-3 cmap">
-              <div className="flex items-center gap-2 eyebrow mb-4"><Briefcase size={13} />{lang === 'ar' ? 'خريطة مسيرتي المهنية' : 'Career map'}</div>
+          <div className="flex items-center gap-2 subh"><Briefcase size={13} />{lang === 'ar' ? 'خريطة مسيرتي المهنية' : 'Career map'}</div>
               <div className="cstats">
                 {(lang === 'ar' ? [['4', 'أدوار مهنية'], ['450+', 'ساعة على منصة مالية حية'], ['~70%', 'من سير العمل تمت أتمتته'], ['3', 'قطاعات: صحة، مال، تعليم']] : [['4', 'Professional roles'], ['450+', 'Hours on a live fintech platform'], ['~70%', 'Of internal workflows automated'], ['3', 'Sectors: health, finance, education']]).map(([n, l]) => (
                   <div key={l} className="cstat"><b>{n}</b><span>{l}</span></div>
                 ))}
               </div>
+              
+          <div className="grid lg:grid-cols-5 gap-4 items-start">
+            <div className="lg:col-span-3 cmap">
               <div className="crail">
                 {t.exp.map(([r, c, d, pts]: any, i: number) => (
                   <motion.div key={r} {...fade} className="cnode">
