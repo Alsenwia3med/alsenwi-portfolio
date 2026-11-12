@@ -93,22 +93,7 @@ html[data-theme=light] a.xhead:hover{background:rgba(168,132,31,.09)}
 .ctable tr{display:grid;grid-template-columns:130px 1fr}
 .ctable tr+tr{border-top:0}
 
-/* ===== v8: sky-blue luxury, pure-white light / deep-black dark ===== */
-:root{--bg:#04070c;--panel:#0a1119;--line:rgba(130,200,255,.12);--tx:#e9f1f8;--mut:#93a5b6;--gold:#5cc8ff;--gold2:#c4ecff;--sky:#38bdf8;--skyd:#0b7fb8}
-body{background:radial-gradient(1100px 560px at 88% -8%,rgba(56,189,248,.16),transparent 60%),radial-gradient(900px 520px at -8% 20%,rgba(20,120,170,.20),transparent 60%),radial-gradient(800px 520px at 60% 75%,rgba(120,170,255,.10),transparent 60%),linear-gradient(180deg,#03060a,#08111a 50%,#03060a);background-attachment:fixed}
-.gold{background:linear-gradient(120deg,#e3f6ff,#5cc8ff 45%,#9fdcff 70%,#3aa6e0);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
-.btn-gold{background:linear-gradient(120deg,#d6f2ff,#5cc8ff 60%,#38a8e6);color:#03121c;box-shadow:0 8px 28px -8px rgba(56,189,248,.6)}
-.hair{background:linear-gradient(90deg,transparent,rgba(92,200,255,.45),transparent)}
-.card{background:linear-gradient(180deg,rgba(18,30,44,.72),rgba(8,14,22,.72));border-color:rgba(130,200,255,.14);box-shadow:inset 0 1px 0 rgba(200,235,255,.08),0 18px 40px -24px rgba(0,0,0,.9)}
-.card::after{background:linear-gradient(110deg,transparent 35%,rgba(160,225,255,.13) 50%,transparent 65%)}
-.card:hover{border-color:rgba(92,200,255,.4)}
-.bg-\[\#d4b25c\]{background:#38bdf8!important}
-.skwrap{background:radial-gradient(900px 420px at 15% -10%,rgba(56,189,248,.15),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(100,140,255,.14),transparent 60%),linear-gradient(145deg,#091018,#05080d)}
-.skwrap::before{background:linear-gradient(135deg,rgba(160,225,255,.75),transparent 35%,transparent 65%,rgba(120,160,255,.5))}
-.sk-gold{color:#7fd4ff}.sk-card{border-color:rgba(92,200,255,.3)}
-.cchip[data-on=true],.cchip[data-on=true]:hover{background:linear-gradient(135deg,#d6f2ff,#5cc8ff)!important;color:#03121c!important}
-html[data-theme=dark] header.fixed{background:rgba(4,8,13,.72)}
-
+/* ===== v8: light theme = white + sky gradients ===== */
 /* light: pure white, sky + silver gloss */
 html[data-theme=light]{--bg:#fff;--panel:#fff;--line:rgba(11,80,130,.12);--tx:#0b1622;--mut:#526477;--gold:#0b7fb8;--gold2:#2aa8e4}
 html[data-theme=light] body{background:radial-gradient(900px 420px at 95% -10%,rgba(56,189,248,.10),transparent 60%),#fff;background-attachment:fixed}
@@ -134,3 +119,33 @@ html[data-theme=light] .cchip[data-on=true],html[data-theme=light] .cchip[data-o
 html[data-theme=light] .cchip{background:#fff}
 html[data-theme=light] .xlogo{border-color:rgba(11,100,160,.14)}
 html[data-theme=light] .glow{display:none}
+
+/* v9: reading animations + multi-colour accents */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+.xrow{--ac:var(--gold)}
+.explist>.xrow:nth-child(1){--ac:#14b8a6}.explist>.xrow:nth-child(2){--ac:#f59e0b}.explist>.xrow:nth-child(3){--ac:#8b5cf6}.explist>.xrow:nth-child(4){--ac:#f43f5e}
+.xrow>span.absolute{background:var(--ac)!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 22%,transparent)}
+a.xhead:hover,html[data-theme=light] a.xhead:hover{background:color-mix(in srgb,var(--ac) 10%,transparent)}
+.xrow .xhead h3{transition:color .25s}
+.xrow:hover .xhead h3{color:var(--ac)}
+.xbody li{transition:transform .25s,background .25s,color .25s;border-radius:6px;padding-inline-end:6px}
+.xbody li::marker{color:var(--ac)}
+.xbody li:hover{transform:translateX(6px);background:color-mix(in srgb,var(--ac) 11%,transparent);color:var(--tx)}
+html[data-theme=light] .xbody li:hover{color:#0b1622}
+.xcert{transition:transform .25s,background .25s}
+.xcert:hover{transform:translateX(5px);background:rgba(120,180,230,.12)}
+.ctable tr{transition:background .25s}.ctable tr:hover{background:rgba(120,180,230,.1)}
+#services .card{transition:transform .3s,border-color .3s,box-shadow .3s}
+#services .card:hover{transform:translateY(-5px)}
+#services .card svg{transition:transform .3s}#services .card:hover svg{transform:scale(1.18) rotate(-4deg)}
+#services .card:nth-child(1) svg{color:#14b8a6}#services .card:nth-child(2) svg{color:#8b5cf6}#services .card:nth-child(3) svg{color:#f59e0b}#services .card:nth-child(4) svg{color:#f43f5e}
+#services .card:nth-child(1):hover{border-color:#14b8a6}#services .card:nth-child(2):hover{border-color:#8b5cf6}#services .card:nth-child(3):hover{border-color:#f59e0b}#services .card:nth-child(4):hover{border-color:#f43f5e}
+/* light: dark→light blue gradients */
+html[data-theme=light] section h2{background:linear-gradient(90deg,#08486f,#1593d4 60%,#6cc4f2);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme=light] .card:not(:has(img))::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#08486f,#1593d4 55%,#9fdcff)}
+html[data-theme=light] .eyebrow{background:linear-gradient(90deg,#08486f,#2aa8e4);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme=light] .btn-gold{background:linear-gradient(120deg,#08486f,#1593d4 55%,#5ec0f0)}
+html[data-theme=light] .hair{background:linear-gradient(90deg,transparent,#08486f,#2aa8e4,transparent);opacity:.5}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+html[data-theme=light] .eyebrow svg{color:#1593d4}

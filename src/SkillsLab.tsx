@@ -41,10 +41,10 @@ const GL: Record<L, string[]> = {
   ar: ['الواجهات', 'الخلفية والبيانات', 'الجوال', 'الأدوات والمنهجية'],
 };
 const COL_L = ['#0a8fcf', '#3b4fc9', '#178a5b', '#6d44b8'];
-const COL_D = ['#5cc8ff', '#8a9dff', '#4fd6a0', '#b794ff'];
+const COL_D = ['#e2b94f', '#5fa8ff', '#4fd6a0', '#b794ff'];
 const PAL = {
   light: { ink: '#14120d', on: '#fff', track: '#e9e2d0', line: '#e5dcc4', body: '#3a362b' },
-  dark: { ink: '#f4eee0', on: '#0b0b10', track: 'rgba(255,255,255,.12)', line: 'rgba(92,200,255,.25)', body: 'rgba(244,238,224,.8)' },
+  dark: { ink: '#f4eee0', on: '#0b0b10', track: 'rgba(255,255,255,.12)', line: 'rgba(226,185,79,.22)', body: 'rgba(244,238,224,.8)' },
 };
 
 export default function SkillsLab({ lang, dark }: { lang: L; dark: boolean }) {
@@ -102,7 +102,7 @@ export default function SkillsLab({ lang, dark }: { lang: L; dark: boolean }) {
         </div>
         <div ref={wrap} className="relative mx-auto select-none touch-none" style={{ height: 'min(108vw,540px)', marginTop: 22, marginBottom: 22, perspective: 900, cursor: 'grab' }} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} dir="ltr">
           <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
-            <div className="absolute left-1/2 top-1/2 w-[70%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(92,200,255,.16),transparent 68%)', border: '1px dashed rgba(11,127,184,.18)' }} />
+            <div className="absolute left-1/2 top-1/2 w-[70%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(226,185,79,.14),transparent 68%)', border: '1px dashed rgba(11,127,184,.18)' }} />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
               <div className="text-[11px] tracking-[.3em] sk-mut">SOFTWARE</div><div className="text-[14px] font-semibold tracking-[.22em]" style={{ color: COL[0] }}>ENGINEER</div>
             </div>

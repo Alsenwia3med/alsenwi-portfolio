@@ -183,12 +183,19 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try { localStorage.setItem('theme', theme); } catch {}
-    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#04070c' : '#ffffff');
+    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#07070a' : '#ffffff');
   }, [theme]);
   const c = CT[lang];
   const brief = [`*${c.head}*`, `• ${c.f[0]}: ${name || c.dash}`, `• ${c.f[1]}: ${ty !== null ? c.types[ty] : c.dash}`, `• ${c.f[2]}: ${msg || c.dash}`].join('\n');
   const wa = `https://wa.me/${WA}?text=${encodeURIComponent(brief)}`;
   const mailto = `mailto:${MAIL}?subject=${encodeURIComponent(`${ty !== null ? c.types[ty] : c.head}${name ? ' — ' + name : ''}`)}&body=${encodeURIComponent(brief.replace(/\*/g, ''))}`;
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>('.xbody li, .xcert, .ctable tr, .xrow .xhead'));
+    els.forEach((el, i) => { el.classList.add('rv'); el.style.transitionDelay = `${(Array.from(el.parentElement?.children || []).indexOf(el) % 6) * 70}ms`; });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [lang]);
   const ids = ['services', 'work', 'about', 'contact'];
 
   return (
@@ -294,7 +301,7 @@ export default function App() {
           <div className="grid lg:grid-cols-5 gap-4">
             <motion.div {...fade} className="card p-5 lg:col-span-3 flex flex-col">
               <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
-              <div className="mt-4 flex-1 flex flex-col justify-between gap-6 border-s border-white/10 ps-5">
+              <div className="explist mt-4 flex-1 flex flex-col justify-between gap-6 border-s border-white/10 ps-5">
                 {t.exp.map(([r, c, d, pts]: any, i: number) => (
                   <div key={r} className="relative xrow">
                     <span className="absolute -start-[25px] top-3 w-2 h-2 rounded-full bg-[color:var(--gold)]" />
