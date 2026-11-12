@@ -217,7 +217,7 @@ export default function App() {
       </header>
 
       <section id="top" className="relative pt-28 pb-16 md:pt-36 md:pb-20">
-        <div className="glow drift bg-[#d4b25c] w-72 h-72 -top-10 start-[8%]" />
+        <div className="glow drift bg-[#c8203a] w-72 h-72 -top-10 start-[8%]" />
         <div className="glow bg-[#3b2a7a] w-80 h-80 top-20 end-[2%]" />
         <div className="wrap relative">
           <motion.div {...fade} className="max-w-[720px]">
@@ -356,7 +356,7 @@ export default function App() {
       <div className="hair" />
 
       <section id="contact" className="py-16 scroll-mt-14 relative">
-        <div className="glow bg-[#d4b25c] w-64 h-64 bottom-0 end-[10%] opacity-20" />
+        <div className="glow bg-[#c8203a] w-64 h-64 bottom-0 end-[10%] opacity-20" />
         <div className="wrap relative grid lg:grid-cols-5 gap-8 items-start">
           <motion.div {...fade} className="lg:col-span-2 flex flex-col gap-5">
             <div>
