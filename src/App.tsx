@@ -148,22 +148,18 @@ const fade = { initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }
 
 const CT = {
   en: {
-    title: 'Let’s build your system', sub: 'Tell me what you need — it lands on my WhatsApp as a clear brief, and I reply fast.',
-    loc: 'Kuala Lumpur, Malaysia', locSub: 'Based in Malaysia · UTC+8 · working with teams worldwide', reply: 'Usually replies within a few hours',
-    name: 'Your name', contact: 'Your WhatsApp / email (optional)', msg: 'Tell me briefly what you need', send: 'Send on WhatsApp', mail: 'Send by email',
-    typeT: 'What do you need?', types: ['Website', 'Dashboard', 'Business system', 'QR menu / e-commerce', 'Hire me (team role)', 'Something else'],
-    budT: 'Budget', buds: ['Under RM 3k', 'RM 3k – 10k', 'RM 10k+', 'Not sure yet'],
-    timeT: 'Timeline', times: ['ASAP', 'Within a month', 'Flexible'],
-    head: 'New enquiry from your portfolio', f: ['Name', 'Type', 'Budget', 'Timeline', 'Contact', 'Details'], dash: 'Not specified', subj: 'Project enquiry',
+    title: 'Get in touch', sub: 'Hiring, a project or a quick question — pick a topic and send. It reaches me directly on WhatsApp.',
+    loc: 'Kuala Lumpur, Malaysia', locSub: 'Based in Malaysia · UTC+8 · open to remote and on-site roles', map: 'Open in Google Maps', reply: 'Usually replies within a few hours',
+    name: 'Your name', msg: 'Your message', send: 'Send on WhatsApp',
+    typeT: 'Topic', types: ['Interview request', 'Job opportunity', 'Project enquiry', 'Collaboration', 'General question'],
+    head: 'New message from your portfolio', f: ['Name', 'Topic', 'Message'], dash: 'Not specified',
   },
   ar: {
-    title: 'لنبنِ نظامك', sub: 'أخبرني بما تحتاجه — يصلني على واتساب كملخص واضح، وأرد بسرعة.',
-    loc: 'كوالالمبور، ماليزيا', locSub: 'أقيم في ماليزيا · توقيت UTC+8 · أعمل مع فرق حول العالم', reply: 'أرد عادةً خلال ساعات',
-    name: 'اسمك', contact: 'واتساب / بريدك (اختياري)', msg: 'اكتب باختصار ما تحتاجه', send: 'أرسل عبر واتساب', mail: 'أرسل بالبريد',
-    typeT: 'ماذا تحتاج؟', types: ['موقع', 'لوحة تحكم', 'نظام شركة', 'منيو QR / متجر', 'توظيفي (دور في فريق)', 'شيء آخر'],
-    budT: 'الميزانية', buds: ['أقل من 3 آلاف رينجت', '3 – 10 آلاف رينجت', 'أكثر من 10 آلاف', 'لم أحدد بعد'],
-    timeT: 'الموعد', times: ['بأسرع وقت', 'خلال شهر', 'مرن'],
-    head: 'استفسار جديد من البورتفوليو', f: ['الاسم', 'النوع', 'الميزانية', 'الموعد', 'التواصل', 'التفاصيل'], dash: 'غير محدد', subj: 'استفسار مشروع',
+    title: 'تواصل معي', sub: 'توظيف أو مشروع أو سؤال سريع — اختر الموضوع وأرسل. تصلني مباشرة على واتساب.',
+    loc: 'كوالالمبور، ماليزيا', locSub: 'أقيم في ماليزيا · UTC+8 · متاح للعمل عن بعد أو حضورياً', map: 'افتح في خرائط جوجل', reply: 'أرد عادةً خلال ساعات',
+    name: 'اسمك', msg: 'رسالتك', send: 'أرسل عبر واتساب',
+    typeT: 'الموضوع', types: ['طلب مقابلة', 'فرصة عمل', 'استفسار عن مشروع', 'تعاون', 'سؤال عام'],
+    head: 'رسالة جديدة من البورتفوليو', f: ['الاسم', 'الموضوع', 'الرسالة'], dash: 'غير محدد',
   },
 };
 function Chips({ items, v, set }: { items: string[]; v: number | null; set: (i: number | null) => void }) {
@@ -177,10 +173,7 @@ export default function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('theme') as any) || 'dark');
   const [name, setName] = useState('');
   const [msg, setMsg] = useState('');
-  const [contact, setContact] = useState('');
   const [ty, setTy] = useState<number | null>(null);
-  const [bu, setBu] = useState<number | null>(null);
-  const [ti, setTi] = useState<number | null>(null);
   const t = T[lang];
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -193,9 +186,8 @@ export default function App() {
     document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === 'dark' ? '#07070a' : '#f6f2ea');
   }, [theme]);
   const c = CT[lang];
-  const brief = [`*${c.head}*`, `• ${c.f[0]}: ${name || c.dash}`, `• ${c.f[1]}: ${ty !== null ? c.types[ty] : c.dash}`, `• ${c.f[2]}: ${bu !== null ? c.buds[bu] : c.dash}`, `• ${c.f[3]}: ${ti !== null ? c.times[ti] : c.dash}`, `• ${c.f[4]}: ${contact || c.dash}`, `• ${c.f[5]}: ${msg || c.dash}`].join('\n');
+  const brief = [`*${c.head}*`, `• ${c.f[0]}: ${name || c.dash}`, `• ${c.f[1]}: ${ty !== null ? c.types[ty] : c.dash}`, `• ${c.f[2]}: ${msg || c.dash}`].join('\n');
   const wa = `https://wa.me/${WA}?text=${encodeURIComponent(brief)}`;
-  const mailto = `mailto:${MAIL}?subject=${encodeURIComponent(`${c.subj}${ty !== null ? ' — ' + c.types[ty] : ''}`)}&body=${encodeURIComponent(brief.replace(/\*/g, ''))}`;
   const ids = ['services', 'work', 'about', 'contact'];
 
   return (
@@ -353,20 +345,18 @@ export default function App() {
 
       <section id="contact" className="py-16 scroll-mt-14 relative">
         <div className="glow bg-[#d4b25c] w-64 h-64 bottom-0 end-[10%] opacity-20" />
-        <div className="wrap relative grid lg:grid-cols-5 gap-6 items-stretch">
-          <motion.div {...fade} className="lg:col-span-2 flex flex-col gap-4">
+        <div className="wrap relative grid lg:grid-cols-5 gap-8 items-start">
+          <motion.div {...fade} className="lg:col-span-2 flex flex-col gap-5">
             <div>
               <h2 className="text-[28px] font-semibold leading-tight">{c.title}</h2>
               <p className="mt-2 text-white/60 text-[14.5px]">{c.sub}</p>
             </div>
-            <div className="card overflow-hidden">
-              <iframe title="Kuala Lumpur" loading="lazy" src="https://maps.google.com/maps?q=Kuala%20Lumpur&z=11&output=embed" className="w-full h-[170px] border-0 block" style={{ filter: theme === 'dark' ? 'invert(.92) hue-rotate(180deg) saturate(.7) brightness(.9)' : 'none' }} />
-              <div className="p-4 flex flex-col gap-1.5">
-                <div className="flex items-center gap-2 text-[14.5px] font-medium"><MapPin size={15} className="text-[color:var(--gold)]" />{c.loc}</div>
-                <div className="text-[12.5px] text-white/55">{c.locSub}</div>
-                <div className="flex items-center gap-2 text-[12.5px] text-white/55"><Clock size={13} className="text-[color:var(--gold)]" />{c.reply}</div>
-              </div>
-            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Kuala+Lumpur+Malaysia" target="_blank" rel="noreferrer" className="card p-4 flex flex-col gap-1.5 hover:border-[color:var(--gold)] transition">
+              <span className="flex items-center gap-2 text-[15px] font-medium"><MapPin size={16} className="text-[color:var(--gold)]" />{c.loc}<ArrowUpRight size={13} className="opacity-60" /></span>
+              <span className="text-[12.5px] text-white/55">{c.locSub}</span>
+              <span className="flex items-center gap-2 text-[12.5px] text-white/55"><Clock size={13} className="text-[color:var(--gold)]" />{c.reply}</span>
+              <span className="text-[12px] text-[color:var(--gold)]">{c.map}</span>
+            </a>
             <div className="flex flex-col gap-2.5 text-[14px]">
               <a className="flex items-center gap-3 text-white/75 hover:text-white" href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer"><MessageCircle size={16} className="text-[color:var(--gold)]" /><span dir="ltr">{WA_SHOW}</span></a>
               <a className="flex items-center gap-3 text-white/75 hover:text-white" href={`mailto:${MAIL}`}><Mail size={16} className="text-[color:var(--gold)]" />{MAIL}</a>
@@ -375,20 +365,10 @@ export default function App() {
             </div>
           </motion.div>
           <motion.form {...fade} onSubmit={e => { e.preventDefault(); window.open(wa, '_blank'); }} className="card p-5 sm:p-6 flex flex-col gap-4 lg:col-span-3">
-            <div className="grid sm:grid-cols-2 gap-3">
-              <input required value={name} onChange={e => setName(e.target.value)} placeholder={c.name} />
-              <input value={contact} onChange={e => setContact(e.target.value)} placeholder={c.contact} />
-            </div>
             <div><div className="eyebrow mb-2">{c.typeT}</div><Chips items={c.types} v={ty} set={setTy} /></div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div><div className="eyebrow mb-2">{c.budT}</div><Chips items={c.buds} v={bu} set={setBu} /></div>
-              <div><div className="eyebrow mb-2">{c.timeT}</div><Chips items={c.times} v={ti} set={setTi} /></div>
-            </div>
-            <textarea rows={4} value={msg} onChange={e => setMsg(e.target.value)} placeholder={c.msg} />
-            <div className="flex flex-col sm:flex-row gap-2.5">
-              <button className="btn btn-gold justify-center flex-1"><MessageCircle size={15} />{c.send}</button>
-              <a href={mailto} className="btn justify-center sm:w-auto" style={{ border: '1px solid var(--line)' }}><Mail size={15} />{c.mail}</a>
-            </div>
+            <input required value={name} onChange={e => setName(e.target.value)} placeholder={c.name} />
+            <textarea required rows={5} value={msg} onChange={e => setMsg(e.target.value)} placeholder={c.msg} />
+            <button className="btn btn-gold justify-center"><MessageCircle size={15} />{c.send}</button>
           </motion.form>
         </div>
       </section>
