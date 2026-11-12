@@ -15,8 +15,8 @@ const U = {
 const SK: Sk[] = [
   { n: 'React', g: 0, lv: 92, use: [U.roots, U.sdc, U.portfolio], en: 'Component architecture, state, performance, real-time dashboards.', ar: 'بنية المكوّنات والحالة والأداء ولوحات لحظية.' },
   { n: 'Next.js', g: 0, lv: 88, use: [U.roots], en: 'App Router, SSR/SSG, SEO-ready marketing sites.', ar: 'App Router وتوليد الصفحات وSEO.' },
-  { n: 'Tailwind CSS', g: 0, lv: 94, use: [U.roots, U.portfolio], en: 'Design-system styling, responsive and RTL-first UI.', ar: 'تصميم نظام ألوان واستجابة ودعم RTL.' },
-  { n: 'JavaScript', g: 0, lv: 90, use: [U.sdc, U.insp], en: 'ES2024+, async flows, DOM and browser APIs.', ar: 'جافاسكربت حديثة وتدفقات غير متزامنة.' },
+  { n: 'Tailwind CSS', g: 0, lv: 94, use: [U.roots, U.ycim, U.portfolio], en: 'Design-system styling, responsive and RTL-first UI.', ar: 'تصميم نظام ألوان واستجابة ودعم RTL.' },
+  { n: 'JavaScript', g: 0, lv: 90, use: [U.sdc, U.insp, U.ycim], en: 'ES2024+, async flows, DOM and browser APIs.', ar: 'جافاسكربت حديثة وتدفقات غير متزامنة.' },
   { n: 'Motion', g: 0, lv: 80, use: [U.roots, U.portfolio], en: 'Scroll reveals, count-ups, cinematic micro-interactions.', ar: 'حركات الظهور والعدّادات والتفاعلات الدقيقة.' },
   { n: 'Figma UI/UX', g: 0, lv: 88, use: [U.sdc, U.insp], en: 'Redesigned 60+ pages, design tokens, handoff.', ar: 'إعادة تصميم 60+ صفحة وتسليم للمطورين.' },
   { n: 'PHP', g: 1, lv: 90, use: [U.insp, U.sdc], en: 'REST APIs, auth middleware, payments, referral logic.', ar: 'واجهات REST وطبقة المصادقة والدفع والإحالات.' },
