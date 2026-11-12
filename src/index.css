@@ -195,3 +195,13 @@ html[data-theme=light] .sech::before{background:linear-gradient(180deg,#22b5d8,#
 .card:hover{transform:translateY(-3px)}
 html[data-theme=light] .card{box-shadow:0 10px 30px -18px rgba(8,72,111,.35)}
 @media (prefers-reduced-motion:reduce){.sech::before{transform:none}.sech.in::after{animation:none}}
+/* v12: elegant boxless section titles */
+.sech,html[data-theme=light] .sech{display:block;width:fit-content;padding:0 0 12px;margin:0 0 26px;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;font-size:30px;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.sech::before{content:"";position:absolute;inset-inline:0;bottom:0;width:auto;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold2),transparent);transform:scaleX(0);transform-origin:left;transition:transform .9s .2s cubic-bezier(.22,1,.36,1)}
+html[dir=rtl] .sech::before{transform-origin:right;background:linear-gradient(270deg,var(--gold),var(--gold2),transparent)}
+.sech.in::before{transform:scaleX(1)}
+.sech::after{display:none}
+html[data-theme=light] .sech::before{background:linear-gradient(90deg,#08486f,#1593d4,#22b5d8,transparent)}
+html[data-theme=light] .sech{background:linear-gradient(90deg,#08486f,#1593d4 70%,#22b5d8);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(max-width:640px){.sech,html[data-theme=light] .sech{font-size:25px}}
+@media (prefers-reduced-motion:reduce){.sech::before{transform:none}}
