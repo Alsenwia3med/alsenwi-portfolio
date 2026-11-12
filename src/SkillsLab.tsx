@@ -40,14 +40,14 @@ const GL: Record<L, string[]> = {
   en: ['Frontend', 'Backend & data', 'Mobile', 'Tools & process'],
   ar: ['الواجهات', 'الخلفية والبيانات', 'الجوال', 'الأدوات والمنهجية'],
 };
-const COL = ['#d4b25c', '#6fb7ff', '#7ee0b0', '#c59bff'];
+const COL = ['#a8841f', '#2563a8', '#178a5b', '#6d44b8'];
 
 export default function SkillsLab({ lang }: { lang: L }) {
   const wrap = useRef<HTMLDivElement>(null);
   const [sel, setSel] = useState<number>(0);
   const [hov, setHov] = useState<number | null>(null);
   const [filter, setFilter] = useState<number | null>(null);
-  const rot = useRef({ x: -0.25, y: 0, vx: 0.0035, vy: 0, drag: false, lx: 0, ly: 0 });
+  const rot = useRef({ x: -0.25, y: 0, vx: 0.0016, vy: 0, drag: false, lx: 0, ly: 0 });
   const nodes = useRef<(HTMLButtonElement | null)[]>([]);
   const pts = useMemo(() => SK.map((_, i) => {
     const k = SK.length, y = 1 - (i / (k - 1)) * 2, r = Math.sqrt(1 - y * y), th = i * 2.399963;
@@ -90,35 +90,50 @@ export default function SkillsLab({ lang }: { lang: L }) {
     <div className="mt-3 grid lg:grid-cols-5 gap-4 items-center">
       <div className="lg:col-span-3">
         <div className="flex flex-wrap gap-1.5 mb-2">
-          <button className="chip" style={filter === null ? { borderColor: 'var(--gold)', color: 'var(--gold)' } : {}} onClick={() => setFilter(null)}>{lang === 'ar' ? 'الكل' : 'All'}</button>
-          {gl.map((g, i) => <button key={g} className="chip" style={filter === i ? { borderColor: COL[i], color: COL[i] } : {}} onClick={() => setFilter(filter === i ? null : i)}><span style={{ background: COL[i] }} className="w-1.5 h-1.5 rounded-full" />{g}</button>)}
+          <button className="sk-chip" style={filter === null ? { borderColor: '#14120d', background: '#14120d', color: '#fff' } : {}} onClick={() => setFilter(null)}>{lang === 'ar' ? 'الكل' : 'All'}</button>
+          {gl.map((g, i) => <button key={g} className="sk-chip" style={filter === i ? { borderColor: COL[i], background: COL[i], color: '#fff' } : {}} onClick={() => setFilter(filter === i ? null : i)}><span style={{ background: filter === i ? '#fff' : COL[i] }} className="w-1.5 h-1.5 rounded-full" />{g}</button>)}
         </div>
         <div ref={wrap} className="relative mx-auto select-none touch-none" style={{ height: 'min(78vw,420px)', perspective: 900, cursor: 'grab' }} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} dir="ltr">
           <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
-            <div className="absolute left-1/2 top-1/2 w-[62%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(212,178,92,.14),transparent 68%)' }} />
+            <div className="absolute left-1/2 top-1/2 w-[70%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(168,132,31,.16),transparent 68%)', border: '1px dashed rgba(168,132,31,.25)' }} />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
-              <div className="text-[11px] tracking-[.28em] text-white/40">SOFTWARE</div><div className="text-[13px] gold tracking-[.2em]">ENGINEER</div>
+              <div className="text-[11px] tracking-[.3em] sk-mut">SOFTWARE</div><div className="text-[14px] font-semibold tracking-[.22em]" style={{ color: '#a8841f' }}>ENGINEER</div>
             </div>
             {SK.map((k, i) => (
               <button key={k.n} ref={el => { nodes.current[i] = el; }} onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)} onFocus={() => setHov(i)} onBlur={() => setHov(null)} onClick={() => setSel(i)}
-                className="absolute left-1/2 top-1/2 whitespace-nowrap rounded-full px-3 py-1 text-[12px] backdrop-blur-sm"
-                style={{ border: `1px solid ${COL[k.g]}66`, background: `${COL[k.g]}1f`, color: act === i ? '#fff' : 'var(--tx)', boxShadow: act === i ? `0 0 0 1px ${COL[k.g]}, 0 0 24px ${COL[k.g]}66` : 'none', willChange: 'transform' }}>{k.n}</button>
+                className="absolute left-1/2 top-1/2 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[12.5px] font-medium"
+                style={{ border: `1px solid ${COL[k.g]}`, background: act === i ? COL[k.g] : '#fff', color: act === i ? '#fff' : '#14120d', boxShadow: act === i ? `0 8px 26px ${COL[k.g]}66` : '0 2px 10px rgba(60,45,10,.12)', willChange: 'transform' }}>{k.n}</button>
             ))}
           </div>
         </div>
-        <div className="text-center text-[11.5px] text-white/40 -mt-1">{sw}</div>
+        <div className="text-center text-[11.5px] sk-mut -mt-1">{sw}</div>
       </div>
 
-      <div className="lg:col-span-2 card p-5" style={{ borderColor: `${COL[s.g]}55` }}>
+      <div className="lg:col-span-2 sk-card p-5" style={{ borderColor: COL[s.g] }}>
         <div className="flex items-center gap-2 text-[11px] tracking-[.18em] uppercase" style={{ color: COL[s.g] }}><span className="w-2 h-2 rounded-full" style={{ background: COL[s.g] }} />{gl[s.g]}</div>
-        <h3 className="mt-2 text-[22px] font-semibold">{s.n}</h3>
-        <div className="mt-3 flex items-center gap-3 text-[11.5px] text-white/50"><span>{lang === 'ar' ? 'الإتقان' : 'Proficiency'}</span>
-          <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden"><div className="h-full rounded-full transition-all duration-500" style={{ width: s.lv + '%', background: COL[s.g] }} /></div><span>{s.lv}%</span></div>
-        <p className="mt-3 text-[13px] text-white/65 leading-relaxed">{lang === 'ar' ? s.ar : s.en}</p>
-        <div className="mt-4 text-[11px] tracking-[.14em] uppercase text-white/40">{lang === 'ar' ? 'استُخدمت في' : 'Used in'}</div>
+        <h3 className="mt-2 text-[24px] font-semibold" style={{ color: '#14120d' }}>{s.n}</h3>
+        <div className="mt-3 flex items-center gap-3 text-[11.5px] sk-mut"><span>{lang === 'ar' ? 'الإتقان' : 'Proficiency'}</span>
+          <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: '#e9e2d0' }}><div className="h-full rounded-full transition-all duration-500" style={{ width: s.lv + '%', background: COL[s.g] }} /></div><span>{s.lv}%</span></div>
+        <p className="mt-3 text-[13.5px] leading-relaxed" style={{ color: '#3a362b' }}>{lang === 'ar' ? s.ar : s.en}</p>
+        <div className="mt-4 text-[11px] tracking-[.14em] uppercase sk-mut">{lang === 'ar' ? 'استُخدمت في' : 'Used in'}</div>
         <div className="mt-2 flex flex-wrap gap-1.5">
-          {s.use.length ? s.use.map(([n, h]) => <a key={n} href={h} target={h.startsWith('#') ? undefined : '_blank'} rel="noreferrer" className="chip hover:text-white" style={{ borderColor: `${COL[s.g]}66` }}>{n} ↗</a>) : <span className="chip">{lang === 'ar' ? 'مشاريع وتعلم' : 'Projects & coursework'}</span>}
+          {s.use.length ? s.use.map(([n, h]) => <a key={n} href={h} target={h.startsWith('#') ? undefined : '_blank'} rel="noreferrer" className="sk-chip" style={{ borderColor: COL[s.g], color: COL[s.g] }}>{n} ↗</a>) : <span className="sk-chip">{lang === 'ar' ? 'مشاريع وتعلم' : 'Projects & coursework'}</span>}
         </div>
+      </div>
+      <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4" style={{ borderTop: '1px solid #e5dcc4' }}>
+        {gl.map((g, gi) => (
+          <div key={g}>
+            <div className="flex items-center gap-2 text-[12px] font-semibold tracking-wide mb-2" style={{ color: COL[gi] }}><span className="w-2 h-2 rounded-full" style={{ background: COL[gi] }} />{g}</div>
+            <div className="flex flex-col gap-1.5">
+              {SK.map((k, i) => k.g === gi && (
+                <button key={k.n} onClick={() => setSel(i)} onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)} className="text-start group">
+                  <div className="flex justify-between text-[12.5px]" style={{ color: act === i ? COL[gi] : '#14120d', fontWeight: act === i ? 600 : 500 }}><span>{k.n}</span><span className="sk-mut">{k.lv}%</span></div>
+                  <div className="h-1 rounded-full overflow-hidden" style={{ background: '#ece5d2' }}><div className="h-full rounded-full" style={{ width: k.lv + '%', background: `linear-gradient(90deg,${COL[gi]}99,${COL[gi]})` }} /></div>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

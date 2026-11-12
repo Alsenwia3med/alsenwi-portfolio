@@ -44,3 +44,19 @@ html[data-theme=light] input,html[data-theme=light] textarea{background:#fff}
 html[data-theme=light] .from-\[\#1b1710\]{--tw-gradient-from:#efe6d2!important;--tw-gradient-via:#f6f2ea!important;--tw-gradient-to:#e7e1f1!important}
 html[data-theme=light] ::selection{background:#c79a2e;color:#fff}
 html[data-theme=light] .hover\:text-white:hover{color:#1c1912!important}
+
+/* ===== v6 luxury ===== */
+body{background:radial-gradient(1100px 560px at 85% -8%,rgba(212,178,92,.11),transparent 60%),radial-gradient(900px 520px at -8% 18%,rgba(18,84,74,.20),transparent 60%),radial-gradient(800px 500px at 60% 70%,rgba(70,40,120,.12),transparent 60%),linear-gradient(180deg,#06060a,#0b0b11 50%,#06060a);background-attachment:fixed}
+html[data-theme=light] body{background:radial-gradient(1000px 500px at 90% -8%,rgba(199,154,46,.14),transparent 60%),radial-gradient(800px 500px at -8% 25%,rgba(190,170,220,.16),transparent 60%),linear-gradient(180deg,#ffffff,#f9f4e8 45%,#ffffff);background-attachment:fixed}
+.gold{background-size:220% 100%;animation:sheen 7s ease-in-out infinite}
+@keyframes sheen{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.card{position:relative;overflow:hidden}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(241,217,143,.10) 50%,transparent 65%);transform:translateX(-120%);transition:transform .9s}
+.card:hover::after{transform:translateX(120%)}
+.skwrap{background:linear-gradient(135deg,#ffffff 0%,#fbf7ec 55%,#f1e8d2 100%);border:1px solid rgba(168,132,31,.35);border-radius:24px;box-shadow:0 30px 70px -30px rgba(0,0,0,.55),0 0 0 6px rgba(255,255,255,.03);color:#14120d}
+.sk-mut{color:#6b665a}
+.sk-card{background:#fff;border:1.5px solid #e5dcc4;border-radius:18px;box-shadow:0 14px 34px -18px rgba(60,45,10,.35)}
+.sk-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid #d9cfb4;border-radius:999px;padding:4px 12px;font-size:12px;color:#14120d;background:#fff;transition:.2s}
+.sk-chip:hover{transform:translateY(-1px);box-shadow:0 6px 14px -8px rgba(60,45,10,.4)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.drift{animation:drift 14s ease-in-out infinite}
