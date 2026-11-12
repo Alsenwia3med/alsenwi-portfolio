@@ -149,14 +149,14 @@ const fade = { initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }
 const CT = {
   en: {
     title: 'Get in touch', sub: 'Hiring, a project or a quick question — pick a topic and send. It reaches me directly on WhatsApp.',
-    loc: 'Kuala Lumpur, Malaysia', locSub: 'Based in Malaysia · UTC+8 · open to remote and on-site roles', map: 'Open in Google Maps', reply: 'Usually replies within a few hours',
+    loc: 'Kuala Lumpur, Malaysia', locSub: 'Based in Malaysia · open to remote and on-site roles', mail: 'Send by email',
     name: 'Your name', msg: 'Your message', send: 'Send on WhatsApp',
     typeT: 'Topic', types: ['Interview request', 'Job opportunity', 'Project enquiry', 'Collaboration', 'General question'],
     head: 'New message from your portfolio', f: ['Name', 'Topic', 'Message'], dash: 'Not specified',
   },
   ar: {
     title: 'تواصل معي', sub: 'توظيف أو مشروع أو سؤال سريع — اختر الموضوع وأرسل. تصلني مباشرة على واتساب.',
-    loc: 'كوالالمبور، ماليزيا', locSub: 'أقيم في ماليزيا · UTC+8 · متاح للعمل عن بعد أو حضورياً', map: 'افتح في خرائط جوجل', reply: 'أرد عادةً خلال ساعات',
+    loc: 'كوالالمبور، ماليزيا', locSub: 'أقيم في ماليزيا · متاح للعمل عن بعد أو حضورياً', mail: 'أرسل بالبريد',
     name: 'اسمك', msg: 'رسالتك', send: 'أرسل عبر واتساب',
     typeT: 'الموضوع', types: ['طلب مقابلة', 'فرصة عمل', 'استفسار عن مشروع', 'تعاون', 'سؤال عام'],
     head: 'رسالة جديدة من البورتفوليو', f: ['الاسم', 'الموضوع', 'الرسالة'], dash: 'غير محدد',
@@ -188,6 +188,7 @@ export default function App() {
   const c = CT[lang];
   const brief = [`*${c.head}*`, `• ${c.f[0]}: ${name || c.dash}`, `• ${c.f[1]}: ${ty !== null ? c.types[ty] : c.dash}`, `• ${c.f[2]}: ${msg || c.dash}`].join('\n');
   const wa = `https://wa.me/${WA}?text=${encodeURIComponent(brief)}`;
+  const mailto = `mailto:${MAIL}?subject=${encodeURIComponent(`${ty !== null ? c.types[ty] : c.head}${name ? ' — ' + name : ''}`)}&body=${encodeURIComponent(brief.replace(/\*/g, ''))}`;
   const ids = ['services', 'work', 'about', 'contact'];
 
   return (
@@ -351,12 +352,10 @@ export default function App() {
               <h2 className="text-[28px] font-semibold leading-tight">{c.title}</h2>
               <p className="mt-2 text-white/60 text-[14.5px]">{c.sub}</p>
             </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Kuala+Lumpur+Malaysia" target="_blank" rel="noreferrer" className="card p-4 flex flex-col gap-1.5 hover:border-[color:var(--gold)] transition">
-              <span className="flex items-center gap-2 text-[15px] font-medium"><MapPin size={16} className="text-[color:var(--gold)]" />{c.loc}<ArrowUpRight size={13} className="opacity-60" /></span>
-              <span className="text-[12.5px] text-white/55">{c.locSub}</span>
-              <span className="flex items-center gap-2 text-[12.5px] text-white/55"><Clock size={13} className="text-[color:var(--gold)]" />{c.reply}</span>
-              <span className="text-[12px] text-[color:var(--gold)]">{c.map}</span>
-            </a>
+            <div className="flex flex-col gap-1.5 text-[14.5px]">
+              <span className="flex items-center gap-2 font-medium"><MapPin size={16} className="text-[color:var(--gold)]" />{c.loc}</span>
+              <span className="text-[13px] text-white/55 ps-6">{c.locSub}</span>
+            </div>
             <div className="flex flex-col gap-2.5 text-[14px]">
               <a className="flex items-center gap-3 text-white/75 hover:text-white" href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer"><MessageCircle size={16} className="text-[color:var(--gold)]" /><span dir="ltr">{WA_SHOW}</span></a>
               <a className="flex items-center gap-3 text-white/75 hover:text-white" href={`mailto:${MAIL}`}><Mail size={16} className="text-[color:var(--gold)]" />{MAIL}</a>
@@ -368,7 +367,10 @@ export default function App() {
             <div><div className="eyebrow mb-2">{c.typeT}</div><Chips items={c.types} v={ty} set={setTy} /></div>
             <input required value={name} onChange={e => setName(e.target.value)} placeholder={c.name} />
             <textarea required rows={5} value={msg} onChange={e => setMsg(e.target.value)} placeholder={c.msg} />
-            <button className="btn btn-gold justify-center"><MessageCircle size={15} />{c.send}</button>
+            <div className="flex flex-col sm:flex-row gap-2.5">
+              <button className="btn btn-gold justify-center flex-1"><MessageCircle size={15} />{c.send}</button>
+              <a href={mailto} className="btn justify-center flex-1" style={{ border: '1px solid var(--line)' }}><Mail size={15} />{c.mail}</a>
+            </div>
           </motion.form>
         </div>
       </section>
