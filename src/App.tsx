@@ -192,7 +192,7 @@ export default function App() {
   const wa = `https://wa.me/${WA}?text=${encodeURIComponent(brief)}`;
   const mailto = `mailto:${MAIL}?subject=${encodeURIComponent(`${ty !== null ? c.types[ty] : c.head}${name ? ' — ' + name : ''}`)}&body=${encodeURIComponent(brief.replace(/\*/g, ''))}`;
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>('.xbody li, .xcert, .ctable tr, .xrow .xhead'));
+    const els = Array.from(document.querySelectorAll<HTMLElement>('.xbody li, .xcert, .ctable tr, .xrow .xhead, .sech'));
     els.forEach((el, i) => { el.classList.add('rv'); el.style.transitionDelay = `${(Array.from(el.parentElement?.children || []).indexOf(el) % 6) * 70}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
     els.forEach(el => io.observe(el));
@@ -239,7 +239,7 @@ export default function App() {
 
       <section id="services" className="py-14 scroll-mt-14">
         <div className="wrap">
-          <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.sTitle}</motion.h2>
+          <motion.h2 {...fade} className="sech">{t.sTitle}</motion.h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {t.services.map(([h, d, Icon]: any, i: number) => (
               <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.07 }} className="card p-5">
@@ -254,7 +254,7 @@ export default function App() {
 
       <section id="work" className="py-14 scroll-mt-14">
         <div className="wrap">
-          <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.wTitle}</motion.h2>
+          <motion.h2 {...fade} className="sech">{t.wTitle}</motion.h2>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
             {t.work.map(([h, k, d, im, href]: string[], i: number) => {
               const Wrap: any = href ? 'a' : 'div';
@@ -282,7 +282,7 @@ export default function App() {
 
             <section id="process" className="py-10 scroll-mt-14">
         <div className="wrap">
-          <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.pTitle}</motion.h2>
+          <motion.h2 {...fade} className="sech">{t.pTitle}</motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {t.process.map(([h, d], i) => (
               <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} className="card p-5">
@@ -298,7 +298,7 @@ export default function App() {
 
       <section id="about" className="py-14 scroll-mt-14">
         <div className="wrap">
-          <motion.h2 {...fade} className="text-[22px] font-semibold mb-2">{t.aTitle}</motion.h2>
+          <motion.h2 {...fade} className="sech">{t.aTitle}</motion.h2>
           <motion.p {...fade} className="text-[14.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
           <div className="grid lg:grid-cols-5 gap-4">
             <motion.div {...fade} className="card p-5 lg:col-span-3 flex flex-col">

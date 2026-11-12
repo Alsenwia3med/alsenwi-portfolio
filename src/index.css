@@ -170,8 +170,6 @@ html[data-theme=light] .skwrap .more:hover{color:#fff}
 /* section bands */
 #services,#about{background:rgba(255,255,255,.028);border-block:1px solid rgba(255,255,255,.05)}
 html[data-theme=light] #top,html[data-theme=light] #work,html[data-theme=light] #contact{background:#fff}
-html[data-theme=light] #services,html[data-theme=light] #about{background:linear-gradient(180deg,#e9f5fd,#f4faff);border-block:1px solid rgba(11,100,160,.12)}
-html[data-theme=light] #services .card,html[data-theme=light] #about .card{background:#fff}
 /* footer */
 .foot{border-top:1px solid var(--line);padding:16px 0;background:rgba(255,255,255,.02)}
 html[data-theme=light] .foot{background:#f4faff;border-color:rgba(11,100,160,.14)}
@@ -180,3 +178,20 @@ html[data-theme=light] .foot{background:#f4faff;border-color:rgba(11,100,160,.14
 /* brand-coloured contact icons */
 .ctable tr:nth-child(1) th svg{color:#ef4444}.ctable tr:nth-child(2) th svg{color:#25D366}.ctable tr:nth-child(3) th svg{color:#ea4335}.ctable tr:nth-child(4) th svg{color:#3b8ee0}.ctable tr:nth-child(5) th svg{color:var(--tx)}
 .ctable th svg{width:18px;height:18px}
+/* v11: white always in light, boxed section titles, reveal motion */
+html[data-theme=light] #services,html[data-theme=light] #about,html[data-theme=light] #work,html[data-theme=light] #contact,html[data-theme=light] #top{background:#fff;border-block:0}
+.sech{display:inline-flex;align-items:center;gap:12px;font-size:24px;font-weight:700;margin:0 0 22px;padding:10px 20px 10px 14px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(90deg,rgba(255,255,255,.06),transparent);position:relative;overflow:hidden}
+.sech::before{content:"";width:6px;height:28px;border-radius:6px;background:linear-gradient(180deg,var(--gold2),var(--gold));flex:none;transform:scaleY(0);transform-origin:top;transition:transform .7s .25s cubic-bezier(.22,1,.36,1)}
+.sech.in::before{transform:scaleY(1)}
+.sech::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);transform:translateX(-120%)}
+.sech.in::after{animation:shine 1.3s .35s ease-out 1}
+@keyframes shine{to{transform:translateX(120%)}}
+html[dir=rtl] .sech::after{transform:translateX(120%)}
+html[dir=rtl] .sech.in::after{animation-name:shineR}
+@keyframes shineR{to{transform:translateX(-120%)}}
+html[data-theme=light] .sech{background:linear-gradient(90deg,#eaf7fb,#fff);border-color:rgba(11,100,160,.18);color:#0b1622;box-shadow:0 6px 20px -12px rgba(8,72,111,.35)}
+html[data-theme=light] .sech::before{background:linear-gradient(180deg,#22b5d8,#08486f)}
+.card{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s}
+.card:hover{transform:translateY(-3px)}
+html[data-theme=light] .card{box-shadow:0 10px 30px -18px rgba(8,72,111,.35)}
+@media (prefers-reduced-motion:reduce){.sech::before{transform:none}.sech.in::after{animation:none}}
