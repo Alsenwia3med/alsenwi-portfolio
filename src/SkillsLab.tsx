@@ -58,7 +58,7 @@ export default function SkillsLab({ lang }: { lang: L }) {
 
   useEffect(() => {
     let raf = 0;
-    const R = () => (wrap.current ? Math.min(wrap.current.clientWidth, 680) * 0.455 : 150);
+    const R = () => (wrap.current ? Math.min(wrap.current.clientWidth * 0.4, (wrap.current.clientHeight - 120) / 2) : 150);
     const tick = () => {
       const s = rot.current;
       if (!s.drag && !hold.current) { s.y += s.vx; s.x += (-0.25 - s.x) * 0.01; }
@@ -69,7 +69,7 @@ export default function SkillsLab({ lang }: { lang: L }) {
         const y2 = p[1] * cx - z1 * sx, z2 = p[1] * sx + z1 * cx;
         const sc = 0.5 + (z2 + 1) * 0.27, dim = filter !== null && SK[i].g !== filter;
         el.style.transform = `translate3d(${x1 * r}px,${y2 * r}px,${z2 * 60}px) translate(-50%,-50%) scale(${sc})`;
-        el.style.opacity = String(dim ? 0.1 : 0.22 + (z2 + 1) * 0.39);
+        el.style.opacity = String(dim ? 0.1 : 0.32 + (z2 + 1) * 0.34);
         el.style.zIndex = String(Math.round((z2 + 1) * 50) + (i === sel ? 100 : 0));
       });
       raf = requestAnimationFrame(tick);
@@ -89,11 +89,11 @@ export default function SkillsLab({ lang }: { lang: L }) {
   return (
     <div className="mt-3 grid lg:grid-cols-5 gap-4 items-center">
       <div className="lg:col-span-3">
-        <div className="flex flex-wrap gap-1.5 mb-2">
+        <div className="flex flex-wrap gap-2 mb-3">
           <button className="sk-chip" style={filter === null ? { borderColor: '#14120d', background: '#14120d', color: '#fff' } : {}} onClick={() => setFilter(null)}>{lang === 'ar' ? 'الكل' : 'All'}</button>
           {gl.map((g, i) => <button key={g} className="sk-chip" style={filter === i ? { borderColor: COL[i], background: COL[i], color: '#fff' } : {}} onClick={() => setFilter(filter === i ? null : i)}><span style={{ background: filter === i ? '#fff' : COL[i] }} className="w-1.5 h-1.5 rounded-full" />{g}</button>)}
         </div>
-        <div ref={wrap} className="relative mx-auto select-none touch-none" style={{ height: 'min(100vw,500px)', marginBottom: 14, perspective: 900, cursor: 'grab' }} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} dir="ltr">
+        <div ref={wrap} className="relative mx-auto select-none touch-none" style={{ height: 'min(108vw,540px)', marginTop: 22, marginBottom: 22, perspective: 900, cursor: 'grab' }} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} dir="ltr">
           <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
             <div className="absolute left-1/2 top-1/2 w-[70%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(168,132,31,.16),transparent 68%)', border: '1px dashed rgba(168,132,31,.25)' }} />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
@@ -102,11 +102,11 @@ export default function SkillsLab({ lang }: { lang: L }) {
             {SK.map((k, i) => (
               <button key={k.n} ref={el => { nodes.current[i] = el; }} onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)} onFocus={() => setHov(i)} onBlur={() => setHov(null)} onClick={() => setSel(i)}
                 className="absolute left-1/2 top-1/2 whitespace-nowrap rounded-full px-3 py-1 text-[12px] font-medium"
-                style={{ border: `1px solid ${COL[k.g]}`, background: act === i ? COL[k.g] : '#fff', color: act === i ? '#fff' : '#14120d', boxShadow: act === i ? `0 8px 26px ${COL[k.g]}66` : '0 2px 10px rgba(60,45,10,.12)', willChange: 'transform' }}>{k.n}</button>
+                style={{ border: `2px solid ${act === i ? '#14120d' : COL[k.g]}`, background: COL[k.g], color: '#fff', boxShadow: act === i ? `0 10px 28px ${COL[k.g]}77` : `0 4px 12px ${COL[k.g]}44`, willChange: 'transform' }}>{k.n}</button>
             ))}
           </div>
         </div>
-        <div className="text-center text-[11.5px] sk-mut mt-2">{sw}</div>
+        <div className="text-center text-[11.5px] sk-mut mt-4 pb-1">{sw}</div>
       </div>
 
       <div className="lg:col-span-2 sk-card p-5" style={{ borderColor: COL[s.g] }}>
