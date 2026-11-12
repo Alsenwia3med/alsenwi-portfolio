@@ -1,1400 +1,222 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
+import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, QrCode, Sparkles, ChevronRight } from 'lucide-react';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { 
-  Globe, 
-  ArrowRight, 
-  Mail, 
-  Linkedin, 
-  Github, 
-  Instagram,
-  ExternalLink,
-  ChevronDown,
-  Menu,
-  X,
-  MapPin,
-  Phone,
-  Code2,
-  Terminal,
-  Cpu,
-  Layers,
-  GraduationCap,
-  Briefcase,
-  Sun,
-  Moon,
-  User,
-  Layout,
-  MessageSquare,
-  Award
-} from 'lucide-react';
+type L = 'en' | 'ar';
+const WA = '601162206173';
+const MAIL = 'alsanwi2019@gmail.com';
+const LI = 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/';
+const GH = 'https://github.com/Alsenwia3med';
+const img = (p: string) => `${import.meta.env.BASE_URL}images/${p}`;
 
-// --- Types & Content ---
-
-type Language = 'en' | 'ar';
-
-interface Content {
-  nav: {
-    hero: string;
-    about: string;
-    experience: string;
-    projects: string;
-    education: string;
-    contact: string;
-  };
-  hero: {
-    name: string;
-    role: string;
-    summary: string;
-    cta: string;
-    hireMe: string;
-  };
-  about: {
-    title: string;
-    bio: string;
-    skillsTitle: string;
-    skills: string[];
-  };
-  experience: {
-    title: string;
-    items: {
-      role: string;
-      company: string;
-      location: string;
-      country: string;
-      period: string;
-      desc: string;
-      image: string;
-      achievements: string[];
-    }[];
-  };
-  education: {
-    title: string;
-    items: {
-      degree: string;
-      school: string;
-      location: string;
-      country: string;
-      period: string;
-      details: string[];
-      image: string;
-      link?: string;
-    }[];
-  };
-  certifications: {
-    title: string;
-    items: string[];
-  };
-  languages: {
-    title: string;
-    items: {
-      name: string;
-      level: string;
-    }[];
-  };
-  projects: {
-    title: string;
-    subtitle: string;
-    filters: {
-      all: string;
-      fintech: string;
-      edtech: string;
-      mobile: string;
-      travel: string;
-    };
-    items: {
-      title: string;
-      category: string;
-      desc: string;
-      link?: string;
-      image: string;
-      tags: string[];
-    }[];
-  };
-  contact: {
-    title: string;
-    subtitle: string;
-    email: string;
-    phone: string;
-    location: string;
-  };
-}
-
-const resolvePublicPath = (path: string) => {
-  if (path.startsWith('/')) {
-    return `${import.meta.env.BASE_URL}${path.slice(1)}`;
-  }
-  return path;
-};
-
-const translations: Record<Language, Content> = {
+const T = {
   en: {
-    nav: { hero: 'Home', about: 'About', experience: 'Experience', projects: 'Portfolio', education: 'Education', contact: 'Contact' },
-    hero: {
-      name: 'Ahmed Abdulkareem Al-Senwi',
-      role: 'Software Developer',
-      summary: 'I am a dedicated Software Developer with a passion for building high-performance web and mobile applications. I focus on creating impactful digital solutions with timeless design and robust architecture.',
-      cta: 'View Portfolio',
-      hireMe: 'Hire Me'
-    },
-    about: {
-      title: 'The Developer',
-      bio: 'I am a passionate software developer dedicated to building high-performance applications that solve real-world problems. My expertise spans across the full stack, from crafting intuitive UI/UX in Figma to architecting robust backends in Python and Node.js. I thrive on creating digital solutions that are both functional and visually stunning.',
-      skillsTitle: 'Skills',
-      skills: ['Python', 'JavaScript', 'PHP', 'React', 'MySQL', 'Flutter', 'Dart', 'C++', 'REST APIs', 'Node.js', 'Figma UI/UX', 'Chart.js', 'Brevo APIs', 'Git/GitHub', 'Agile/Scrum', 'CI/CD']
-    },
-    experience: {
-      title: 'Professional Journey',
-      items: [
-        { 
-          role: 'Full-Stack Developer Intern', 
-          company: 'Six Digit Club Sdn Bhd', 
-          location: 'Batu Caves, Selangor',
-          country: 'Malaysia',
-          period: 'Oct 2025 — Mar 2026', 
-          desc: 'Completed 450+ hours of intensive development focused on fintech and automation.',
-          image: '/images/six%20digit%20club.png',
-          achievements: [
-            'Python trading bots APIs (65% win rate)',
-            'React/Chart.js real-time dashboard (5 KPIs, 30s refresh)',
-            'Brevo email automation (300+ lists, 40% efficiency gain)',
-            'Figma UI/UX redesign (60+ pages, 50% page speed boost)'
-          ]
-        },
-        { 
-          role: 'UI/UX & Full-Stack Developer', 
-          company: 'Inspire-U Edtech', 
-          location: 'Melaka',
-          country: 'Malaysia',
-          period: 'Aug 2025 — Present', 
-          desc: 'Leading the technical evolution of a modern educational platform.',
-          image: '/images/inspire-logo.png',
-          achievements: [
-            'Full platform architecture (PHP/MySQL REST APIs)',
-            'Automated 70% of internal workflows',
-            'Modernized student management system'
-          ]
-        },
-        { 
-          role: 'Freelance Web Developer', 
-          company: 'Self-Employed', 
-          location: 'Remote',
-          country: 'Global',
-          period: 'Aug 2024 — Jun 2025', 
-          desc: 'Delivered custom web solutions for local businesses and startups.',
-          image: '/images/free.png',
-          achievements: [
-            'Specialized in modern landing pages and automation',
-            'Integrated complex third-party APIs',
-            'Optimized SEO and performance for client sites'
-          ]
-        }
-      ]
-    },
-    education: {
-      title: 'Academic Foundation',
-      items: [
-        { 
-          degree: 'Bachelor of Computer Science (Software Development)', 
-          school: 'Universiti Teknikal Malaysia Melaka (UTeM)', 
-          location: 'Melaka',
-          country: 'Malaysia',
-          period: '2022 — 2026 (Graduation: March 2026)',
-          image: '/images/utem.png',
-          link: 'https://ftmk.utem.edu.my/web/index.php/academics/undergraduate/bachelor-of-computer-science-software-development/',
-          details: [
-            'Focus: Full-Stack Development, Software Engineering',
-            'Key Projects: Smart Attendance System (C++/PHP QR codes)',
-            'Student Performance Dashboard & Melaka Tourist Guide'
-          ]
-        }
-      ]
-    },
-    certifications: {
-      title: 'Certifications',
-      items: [
-        'IEEE Associate Software Developer Workshop (2024)',
-        'LinkedIn Learning: Time Management (2018)',
-        'Introduction to Dart',
-        'Basics of Software Testing'
-      ]
-    },
-    languages: {
-      title: 'Languages',
-      items: [
-        { name: 'Arabic', level: 'Native' },
-        { name: 'English', level: 'Fluent' },
-        { name: 'Bahasa Malaysia', level: 'Conversational' },
-        { name: 'German', level: 'Basic (A2)' }
-      ]
-    },
-    projects: {
-      title: 'Featured Projects',
-      subtitle: 'A collection of my most impactful works, blending technical precision with creative design.',
-      filters: {
-        all: 'All',
-        fintech: 'Fintech',
-        edtech: 'Edtech',
-        mobile: 'Mobile',
-        travel: 'Travel'
-      },
-      items: [
-        { title: 'Astra Bot', category: 'Fintech / Automation', desc: 'A sophisticated Python-based trading bot for automated financial strategies.', link: 'https://astra-bot.tech/', image: '/images/astra.png', tags: ['Python', 'Automation', 'Trading'] },
-        { title: 'SDC Dashboard', category: 'Fintech / Analytics', desc: 'A real-time financial monitoring dashboard built with React and Chart.js.', link: 'https://sdc.cx/', image: '/images/SDC%20Dashboard.png', tags: ['React', 'Chart.js', 'Real-time'] },
-        { title: 'Inspire-U', category: 'Edtech / Platform', desc: 'A full-scale educational platform managing student workflows and content.', link: 'https://inspire-u.net/', image: '/images/Inspire-U.png', tags: ['Web', 'Education', 'Management'] },
-        { title: 'Melaka Tourist Guide', category: 'Travel / Web', desc: 'Interactive guide for Melaka attractions featuring maps and local insights.', image: '/images/melaka.jpeg', tags: ['Maps', 'Tourism', 'Interactive'] },
-        { title: 'Scooter Rent App', category: 'Mobile / Booking', desc: 'A Flutter-based mobile application for seamless scooter rental management.', image: '/images/scooter.jpg', tags: ['Flutter', 'Mobile', 'Booking'] },
-        { title: 'Campus Marketplace', category: 'Mobile / E-commerce', desc: 'Student-to-student marketplace for buying and selling campus essentials.', image: '/images/marketplace.png', tags: ['Mobile', 'E-commerce', 'Social'] },
-        { title: 'Smart Attendance System', category: 'Automation / Web', desc: 'Advanced QR-based attendance tracking system using C++ and PHP.', image: '/images/smart.jpg', tags: ['C++', 'PHP', 'QR Code'] },
-        { title: 'Flutter Recipe App', category: 'Mobile / Lifestyle', desc: 'Cross-platform mobile application for discovering and managing culinary recipes.', image: '/images/flutter-recipe-app.jpg', tags: ['Flutter', 'Mobile', 'Lifestyle'] }
-      ]
-    },
-    contact: {
-      title: 'Get In Touch',
-      subtitle: 'I am currently available for new opportunities and collaborations.',
-      email: 'alsanwi2019@gmail.com',
-      phone: '+60 14-364-6834',
-      location: 'Seri Kembangan, Selangor, Malaysia'
-    }
+    nav: ['Services', 'Work', 'Process', 'Contact'],
+    cta: 'Start a project',
+    eyebrow: 'Full-stack developer · UI/UX designer · Malaysia',
+    h1a: 'Websites and systems',
+    h1b: 'that make companies look — and run — like leaders.',
+    sub: 'I design and build luxury websites, dashboards and business systems for Arab and Malaysian companies. One person accountable from design to launch.',
+    see: 'See the work',
+    chips: ['Arabic · English · Bahasa', 'Malaysia · Gulf · Worldwide', 'RTL-first design'],
+    sTitle: 'What I build',
+    services: [
+      ['Luxury websites', 'Fast, bilingual (Arabic/English) sites that turn visitors into enquiries.', Globe],
+      ['Dashboards', 'Live control panels for sales, finance and operations — on phone and desktop.', LayoutDashboard],
+      ['Company systems', 'Registration, bookings, CRM and workflow automation built around how you work.', Building2],
+      ['QR menus & e-commerce', 'Menus, ordering and online stores that are simple to manage.', QrCode],
+    ],
+    wTitle: 'Selected work',
+    work: [
+      ['Inspire U', 'Education platform', 'Student registration platform with bilingual site and lead flow.', 'Inspire-U.png', 'https://inspire-u.net/'],
+      ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
+      ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.png', 'https://astra-bot.tech/'],
+      ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', '', 'https://ycim.org/'],
+      ['Safar Easy', 'Tourism', 'Arabic/RTL luxury redesign for a Malaysia tourism company.', '', ''],
+      ['Melaka Tourist Guide', 'Travel', 'Interactive guide with maps and local insights.', 'melaka.jpeg', ''],
+    ],
+    pTitle: 'How we work',
+    process: [['Discover', 'A short call: goals, audience, timeline.'], ['Design', 'You see the look first — approve before any build.'], ['Build & launch', 'Clean code, fast load, handover and support.']],
+    aTitle: 'About',
+    about: 'Computer Science graduate (UTeM, 2026) with hands-on work across fintech, education and tourism. I pair a designer’s eye with full-stack engineering, so what looks premium also performs.',
+    skills: ['React', 'Next.js', 'Tailwind', 'PHP', 'Python', 'SQL', 'Node.js', 'Figma', 'REST APIs', 'WordPress'],
+    cTitle: 'Let’s talk about your project',
+    cSub: 'Message me on WhatsApp — I reply fast.',
+    name: 'Your name', msg: 'Tell me briefly what you need', send: 'Send on WhatsApp',
+    rights: 'Ahmed Al-Senwi · Malaysia',
   },
   ar: {
-    nav: { hero: 'الرئيسية', about: 'عني', experience: 'الخبرة', projects: 'أعمالي', education: 'التعليم', contact: 'اتصل بي' },
-    hero: {
-      name: 'أحمد عبدالكريم الصنوي',
-      role: 'مطور برمجيات | Software Developer',
-      summary: 'أنا مطور برمجيات شغوف ببناء تطبيقات ويب وجوال عالية الأداء. أركز على ابتكار حلول رقمية مؤثرة تجمع بين التصميم الخالد والهندسة البرمجية القوية.',
-      cta: 'عرض الأعمال',
-      hireMe: 'وظفني'
-    },
-    about: {
-      title: 'المطور',
-      bio: 'أنا مطور برمجيات شغوف، مكرس لبناء تطبيقات عالية الأداء تحل مشاكل العالم الحقيقي. تمتد خبرتي عبر الواجهات الكاملة، من صياغة واجهات المستخدم البديهية في فيجما إلى هندسة خلفيات قوية في بايثون ونود جيه إس. أسعى دائماً لابتكار حلول رقمية تجمع بين الكفاءة والجمال البصري.',
-      skillsTitle: 'الترسانة التقنية',
-      skills: ['بايثون', 'جاوا سكريبت', 'PHP', 'ريأكت', 'MySQL', 'فلاتر', 'دارت', 'C++', 'REST APIs', 'نود جيه إس', 'فيجما UI/UX', 'Chart.js', 'Brevo APIs', 'جيت/جيت هاب', 'أجايل/سكروم', 'CI/CD']
-    },
-    experience: {
-      title: 'المسيرة المهنية',
-      items: [
-        { 
-          role: 'متدرب مطور واجهات كاملة', 
-          company: 'Six Digit Club Sdn Bhd', 
-          location: 'باتو كيفس، سيلانجور',
-          country: 'ماليزيا',
-          period: 'أكتوبر ٢٠٢٥ — مارس ٢٠٢٦', 
-          desc: 'أكملت أكثر من ٤٥٠ ساعة من التطوير المكثف الذي ركز على التكنولوجيا المالية والأتمتة.',
-          image: '/images/six%20digit%20club.png',
-          achievements: [
-            'بوتات تداول بايثون (معدل فوز ٦٥٪)',
-            'لوحة تحكم React/Chart.js (٥ مؤشرات أداء، تحديث كل ٣٠ ثانية)',
-            'أتمتة بريد بريفو (أكثر من ٣٠٠ قائمة، زيادة كفاءة ٤٠٪)',
-            'إعادة تصميم Figma UI/UX (أكثر من ٦٠ صفحة، زيادة سرعة ٥٠٪)'
-          ]
-        },
-        { 
-          role: 'مطور UI/UX وواجهات كاملة', 
-          company: 'Inspire-U Edtech', 
-          location: 'ملقا',
-          country: 'ماليزيا',
-          period: 'أغسطس ٢٠٢٥ — الآن', 
-          desc: 'قيادة التطور التقني لمنصة تعليمية حديثة.',
-          image: '/images/inspire-logo.png',
-          achievements: [
-            'هندسة المنصة الكاملة (PHP/MySQL REST APIs)',
-            'أتمتة ٧٠٪ من سير العمل الداخلي',
-            'تحديث نظام إدارة الطلاب'
-          ]
-        },
-        { 
-          role: 'مطور ويب مستقل', 
-          company: 'عمل حر', 
-          location: 'عن بعد',
-          country: 'عالمي',
-          period: 'أغسطس ٢٠٢٤ — يونيو ٢٠٢٥', 
-          desc: 'تقديم حلول ويب مخصصة للشركات المحلية والناشئة.',
-          image: '/images/free.png',
-          achievements: [
-            'متخصص في صفحات الهبوط الحديثة والأتمتة',
-            'دمج واجهات برمجة تطبيقات خارجية معقدة',
-            'تحسين محركات البحث والأداء لمواقع العملاء'
-          ]
-        }
-      ]
-    },
-    education: {
-      title: 'الأساس الأكاديمي',
-      items: [
-        { 
-          degree: 'بكالوريوس علوم الحاسب (تطوير البرمجيات)', 
-          school: 'جامعة ملقا التقنية الماليزية (UTeM)', 
-          location: 'ملقا',
-          country: 'ماليزيا',
-          period: '٢٠٢٢ — ٢٠٢٦ (التخرج: مارس ٢٠٢٦)',
-          image: '/images/utem.png',
-          link: 'https://ftmk.utem.edu.my/web/index.php/academics/undergraduate/bachelor-of-computer-science-software-development/',
-          details: [
-            'التركيز: تطوير الواجهات الكاملة، هندسة البرمجيات',
-            'المشاريع الرئيسية: نظام الحضور الذكي (C++/PHP QR codes)',
-            'لوحة تحكم أداء الطلاب ودليل ملقا السياحي'
-          ]
-        }
-      ]
-    },
-    certifications: {
-      title: 'الشهادات',
-      items: [
-        'ورشة عمل مطور برمجيات مشارك من IEEE (٢٠٢٤)',
-        'LinkedIn Learning: إدارة الوقت (٢٠١٨)',
-        'مقدمة في لغة دارت',
-        'أساسيات اختبار البرمجيات'
-      ]
-    },
-    languages: {
-      title: 'اللغات',
-      items: [
-        { name: 'العربية', level: 'اللغة الأم' },
-        { name: 'الإنجليزية', level: 'طلاقة' },
-        { name: 'لغة الملايو', level: 'محادثة' },
-        { name: 'الألمانية', level: 'أساسي (A2)' }
-      ]
-    },
-    projects: {
-      title: 'أعمال مختارة',
-      subtitle: 'مجموعة من أبرز أعمالي، تجمع بين الدقة التقنية والتصميم الإبداعي.',
-      filters: {
-        all: 'الكل',
-        fintech: 'تكنولوجيا مالية',
-        edtech: 'تكنولوجيا تعليمية',
-        mobile: 'جوال',
-        travel: 'سفر'
-      },
-      items: [
-        { title: 'أسترا بوت', category: 'تكنولوجيا مالية / أتمتة', desc: 'بوت تداول متطور يعتمد على بايثون للاستراتيجيات المالية الآلية.', link: 'https://astra-bot.tech/', image: '/images/astra.png', tags: ['بايثون', 'أتمتة', 'تداول'] },
-        { title: 'لوحة SDC', category: 'تكنولوجيا مالية / تحليلات', desc: 'لوحة مراقبة مالية في الوقت الفعلي مبنية باستخدام ريأكت و Chart.js.', link: 'https://sdc.cx/', image: '/images/SDC%20Dashboard.png', tags: ['ريأكت', 'تحليلات', 'وقت حقيقي'] },
-        { title: 'Inspire-U', category: 'تكنولوجيا تعليمية / منصة', desc: 'منصة تعليمية واسعة النطاق تدير سير عمل الطلاب والمحتوى.', link: 'https://inspire-u.net/', image: '/images/Inspire-U.png', tags: ['ويب', 'تعليم', 'إدارة'] },
-        { title: 'دليل ملقا السياحي', category: 'سفر / ويب', desc: 'دليل تفاعلي لمعالم ملقا يتميز بالخرائط والرؤى المحلية.', image: '/images/melaka.jpeg', tags: ['خرائط', 'سياحة', 'تفاعلي'] },
-        { title: 'تطبيق تأجير سكوتر', category: 'جوال / حجز', desc: 'تطبيق جوال يعتمد على فلاتر لإدارة تأجير السكوتر بسلاسة.', image: '/images/scooter.jpg', tags: ['فلاتر', 'جوال', 'حجز'] },
-        { title: 'سوق الحرم الجامعي', category: 'جوال / تجارة إلكترونية', desc: 'سوق من طالب لطالب لبيع وشراء أساسيات الحرم الجامعي.', image: '/images/marketplace.png', tags: ['جوال', 'تجارة إلكترونية', 'اجتماعي'] },
-        { title: 'نظام الحضور الذكي', category: 'أتمتة / ويب', desc: 'نظام متطور لتتبع الحضور يعتمد على رموز QR باستخدام C++ و PHP.', image: '/images/smart.jpg', tags: ['C++', 'PHP', 'رمز QR'] },
-        { title: 'تطبيق وصفات فلاتر', category: 'جوال / نمط حياة', desc: 'تطبيق جوال متعدد المنصات لاكتشاف وإدارة وصفات الطهي.', image: '/images/flutter-recipe-app.jpg', tags: ['فلاتر', 'جوال', 'نمط حياة'] }
-      ]
-    },
-    contact: {
-      title: 'تواصل معي',
-      subtitle: 'أنا متاح حالياً للفرص الجديدة والتعاون.',
-      email: 'alsanwi2019@gmail.com',
-      phone: '+60 14-364-6834',
-      location: 'سيري كيمبانغان، سيلانجور، ماليزيا'
-    }
-  }
+    nav: ['الخدمات', 'أعمالي', 'طريقة العمل', 'تواصل'],
+    cta: 'ابدأ مشروعك',
+    eyebrow: 'مطوّر ومصمم واجهات · ماليزيا',
+    h1a: 'مواقع وأنظمة',
+    h1b: 'تجعل شركتك تبدو — وتعمل — كالكبار.',
+    sub: 'أصمّم وأبني مواقع فخمة ولوحات تحكم وأنظمة أعمال للشركات العربية والماليزية. مسؤول واحد من التصميم حتى الإطلاق.',
+    see: 'شاهد الأعمال',
+    chips: ['عربي · English · Bahasa', 'ماليزيا · الخليج · العالم', 'تصميم يبدأ من RTL'],
+    sTitle: 'ماذا أبني',
+    services: [
+      ['مواقع فاخرة', 'مواقع سريعة بلغتين (عربي/إنجليزي) تحوّل الزائر إلى استفسار.', Globe],
+      ['لوحات تحكم', 'لوحات حيّة للمبيعات والمالية والعمليات — على الجوال والكمبيوتر.', LayoutDashboard],
+      ['أنظمة شركات', 'تسجيل وحجوزات وCRM وأتمتة مبنية على طريقة عملك.', Building2],
+      ['منيو QR ومتاجر', 'قوائم وطلبات ومتاجر إلكترونية سهلة الإدارة.', QrCode],
+    ],
+    wTitle: 'أعمال مختارة',
+    work: [
+      ['Inspire U', 'منصة تعليمية', 'منصة تسجيل طلاب بموقع ثنائي اللغة ومسار استقبال العملاء.', 'Inspire-U.png', 'https://inspire-u.net/'],
+      ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
+      ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.png', 'https://astra-bot.tech/'],
+      ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', '', 'https://ycim.org/'],
+      ['سفر إيز', 'سياحة', 'إعادة تصميم عربية فاخرة لشركة سياحة في ماليزيا.', '', ''],
+      ['دليل ملقا السياحي', 'سفر', 'دليل تفاعلي بخرائط ومعلومات محلية.', 'melaka.jpeg', ''],
+    ],
+    pTitle: 'طريقة العمل',
+    process: [['الاستكشاف', 'مكالمة قصيرة: الهدف والجمهور والموعد.'], ['التصميم', 'ترى الشكل أولاً — وتعتمد قبل أي بناء.'], ['البناء والإطلاق', 'كود نظيف وسرعة تحميل وتسليم ودعم.']],
+    aTitle: 'نبذة',
+    about: 'خريج علوم حاسب (UTeM، 2026) بخبرة عملية في التقنية المالية والتعليم والسياحة. أجمع عين المصمم مع هندسة الواجهات الكاملة، فما يبدو فاخراً يعمل بكفاءة.',
+    skills: ['React', 'Next.js', 'Tailwind', 'PHP', 'Python', 'SQL', 'Node.js', 'Figma', 'REST APIs', 'WordPress'],
+    cTitle: 'لنتحدث عن مشروعك',
+    cSub: 'راسلني على واتساب — أرد بسرعة.',
+    name: 'اسمك', msg: 'اكتب باختصار ما تحتاجه', send: 'أرسل عبر واتساب',
+    rights: 'أحمد الصنوي · ماليزيا',
+  },
 };
 
-// --- Components ---
-
-function ProjectCard({ project, isRtl }: any) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [-20, 20]);
-  const imageSrc = resolvePublicPath(project.image);
-
-  const CardWrapper = project.link ? motion.a : motion.div;
-  const wrapperProps = project.link
-    ? {
-        href: project.link,
-        target: '_blank',
-        rel: 'noopener noreferrer'
-      }
-    : {};
-
-  return (
-    <CardWrapper
-      {...wrapperProps}
-      ref={ref}
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.5 }}
-      className="group relative glass-card rounded-[2rem] overflow-hidden border border-white/5 hover:border-accent-gold/40 transition-all duration-500 magic-glow"
-    >
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <motion.img 
-          style={{ y, scale: 1.05 }}
-          src={imageSrc} 
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.1]"
-          referrerPolicy="no-referrer"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${project.title}/800/600`;
-          }}
-        />
-        
-        {/* Overlay with glass effect on hover */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[4px]">
-          {project.link && (
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-accent-gold text-black rounded-full shadow-2xl font-bold text-xs uppercase tracking-widest flex items-center gap-2"
-            >
-              {isRtl ? 'عرض المشروع' : 'View Project'}
-              <ExternalLink size={14} />
-            </motion.div>
-          )}
-        </div>
-
-        {/* Category Badge - Always visible */}
-        <div className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-[8px] uppercase tracking-widest text-accent-gold font-bold z-20`}>
-          {project.category}
-        </div>
-      </div>
-
-      <div className="p-6 md:p-8 relative z-10 bg-gradient-to-b from-transparent to-bg/50">
-        <h4 className="text-xl md:text-2xl font-arabic mb-3 group-hover:text-accent-gold transition-colors duration-300">
-          {project.title}
-        </h4>
-        <p className="text-xs md:text-sm text-text-muted leading-relaxed line-clamp-3 group-hover:text-slate-200 transition-colors duration-300 font-light mb-6">
-          {project.desc}
-        </p>
-        
-        <div className="flex flex-wrap gap-2">
-          {project.tags?.map((tag: string, i: number) => (
-            <span key={i} className="text-[9px] uppercase tracking-tighter text-text-dim font-medium px-2 py-0.5 rounded border border-white/5 bg-white/5">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </CardWrapper>
-  );
-}
+const fade = { initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-60px' }, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as any } };
 
 export default function App() {
-  const [lang, setLang] = useState<Language>('en');
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
+  const [lang, setLang] = useState<L>(() => (localStorage.getItem('lang') as L) || (navigator.language.startsWith('ar') ? 'ar' : 'en'));
+  const [name, setName] = useState('');
+  const [msg, setMsg] = useState('');
+  const t = T[lang];
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
-
-  const t = translations[lang];
-  const isRtl = lang === 'ar';
-
-  const filteredProjects = t.projects.items.filter(project => {
-    if (activeFilter === 'all') return true;
-    
-    const cat = project.category.toLowerCase();
-    const filterMap: Record<string, string[]> = {
-      fintech: ['fintech', 'تكنولوجيا مالية'],
-      edtech: ['edtech', 'تكنولوجيا تعليمية'],
-      mobile: ['mobile', 'جوال'],
-      travel: ['travel', 'سفر']
-    };
-
-    return filterMap[activeFilter]?.some(keyword => cat.includes(keyword));
-  });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-      
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-
-      const sections = ['hero', 'about', 'projects', 'experience', 'education', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top >= -100 && rect.top <= window.innerHeight / 2) {
-            setActiveSection(section);
-          }
-        }
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleLang = () => setLang(prev => prev === 'en' ? 'ar' : 'en');
-
-  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const { name, email, message } = contactForm;
-    
-    if (!name.trim() || !message.trim()) {
-      alert(lang === 'en' ? 'Please fill in your name and message' : 'يرجى ملء الاسم والرسالة');
-      return;
-    }
-
-    // WhatsApp number - replace with actual number
-    const phoneNumber = '+60143646834'; // The phone number from contact info
-    
-    // Construct WhatsApp message
-    const whatsappMessage = `*New Contact Form Message*\n\n*Name:* ${name}\n*Email:* ${email}\n*Message:* ${message}`;
-    
-    // Encode the message for URL
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-    
-    // Create WhatsApp URL
-    const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodedMessage}`;
-    
-    // Open WhatsApp
-    window.location.href = whatsappUrl;
-    
-    // Reset form
-    setContactForm({ name: '', email: '', message: '' });
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setContactForm(prev => ({ ...prev, [field]: value }));
-  };
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    try { localStorage.setItem('lang', lang); } catch {}
+  }, [lang]);
+  const wa = `https://wa.me/${WA}?text=${encodeURIComponent(`${name ? name + ' — ' : ''}${msg || (lang === 'ar' ? 'مرحباً أحمد، أرغب بمناقشة مشروع.' : 'Hi Ahmed, I would like to discuss a project.')}`)}`;
+  const ids = ['services', 'work', 'process', 'contact'];
 
   return (
-    <div className={`min-h-screen transition-all duration-700 selection:bg-accent-blue/30 ${isRtl ? 'rtl' : 'ltr'}`}>
-      
-      {/* Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 z-[100] pointer-events-none">
-        <motion.div 
-          className="h-full bg-gradient-to-r from-accent-blue via-accent-green to-accent-blue"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
-
-      {/* Background Elements */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
-        {/* Background Image */}
-        <div
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500 ${
-            theme === 'dark' ? 'opacity-10' : 'opacity-5'
-          }`}
-          style={{
-            backgroundImage: `url('/images/Background.png')`,
-          }}
-        />
-
-        {/* Dark Theme Enhanced Background */}
-        {theme === 'dark' && (
-          <>
-            <motion.div 
-              animate={{ 
-                backgroundColor: activeSection === 'experience' ? 'rgba(139, 92, 246, 0.15)' : 
-                                 activeSection === 'projects' ? 'rgba(59, 130, 246, 0.15)' : 
-                                 'rgba(59, 130, 246, 0.1)',
-                scale: activeSection === 'hero' ? 1.2 : 1
-              }}
-              className="absolute top-[-15%] left-[-15%] w-[50%] h-[50%] blur-[150px] rounded-full animate-glow transition-all duration-1000" 
-            />
-            <motion.div 
-              animate={{ 
-                backgroundColor: activeSection === 'experience' ? 'rgba(236, 72, 153, 0.15)' : 
-                                 activeSection === 'projects' ? 'rgba(16, 185, 129, 0.15)' : 
-                                 'rgba(16, 185, 129, 0.1)',
-                scale: activeSection === 'about' ? 1.3 : 1
-              }}
-              className="absolute bottom-[-15%] right-[-15%] w-[50%] h-[50%] blur-[150px] rounded-full animate-glow transition-colors duration-1000" 
-              style={{ animationDelay: '2s' }} 
-            />
-            
-            {/* Additional Dark Theme Elements */}
-            <motion.div 
-              animate={{ 
-                backgroundColor: 'rgba(212, 175, 55, 0.08)',
-                rotate: [0, 360]
-              }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute top-[30%] right-[20%] w-[25%] h-[25%] blur-[100px] rounded-full" 
-            />
-            <motion.div 
-              animate={{ 
-                backgroundColor: 'rgba(59, 130, 246, 0.06)',
-                scale: [1, 1.2, 1]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[40%] left-[15%] w-[30%] h-[30%] blur-[120px] rounded-full" 
-            />
-          </>
-        )}
-
-        {/* Light Theme Background */}
-        {theme === 'light' && (
-          <>
-            <motion.div 
-              animate={{ 
-                backgroundColor: activeSection === 'experience' ? 'rgba(139, 92, 246, 0.05)' : 
-                                 activeSection === 'projects' ? 'rgba(59, 130, 246, 0.05)' : 
-                                 'rgba(59, 130, 246, 0.03)'
-              }}
-              className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] blur-[120px] rounded-full animate-glow transition-colors duration-1000" 
-            />
-            <motion.div 
-              animate={{ 
-                backgroundColor: activeSection === 'experience' ? 'rgba(236, 72, 153, 0.05)' : 
-                                 activeSection === 'projects' ? 'rgba(16, 185, 129, 0.05)' : 
-                                 'rgba(16, 185, 129, 0.03)'
-              }}
-              className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] blur-[120px] rounded-full animate-glow transition-colors duration-1000" 
-              style={{ animationDelay: '2s' }} 
-            />
-          </>
-        )}
-        
-        {/* Magic Floating Shapes - Enhanced for Dark Theme */}
-        <motion.div 
-          animate={{ 
-            y: [0, -20, 0],
-            rotate: [0, 10, 0],
-            scale: theme === 'dark' ? [1, 1.1, 1] : [1, 1.05, 1]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className={`absolute top-[20%] right-[15%] w-24 h-24 border ${
-            theme === 'dark' ? 'border-accent-gold/20 bg-accent-gold/5' : 'border-white/5'
-          } rounded-full backdrop-blur-sm`}
-        />
-        <motion.div 
-          animate={{ 
-            y: [0, 30, 0],
-            rotate: [0, -15, 0],
-            scale: theme === 'dark' ? [1, 1.2, 1] : [1, 1.1, 1]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className={`absolute bottom-[30%] left-[10%] w-32 h-32 border ${
-            theme === 'dark' ? 'border-accent-blue/20 bg-accent-blue/5' : 'border-white/5'
-          } rounded-2xl backdrop-blur-sm`}
-        />
-
-        {/* Dark Theme Stars */}
-        {theme === 'dark' && (
-          <>
-            <div className="absolute top-[15%] left-[25%] w-1 h-1 bg-accent-gold rounded-full animate-pulse" />
-            <div className="absolute top-[35%] right-[30%] w-1 h-1 bg-accent-blue rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-            <div className="absolute bottom-[25%] left-[35%] w-1 h-1 bg-accent-green rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-            <div className="absolute top-[45%] left-[60%] w-1 h-1 bg-accent-gold rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-            <div className="absolute bottom-[45%] right-[25%] w-1 h-1 bg-accent-blue rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
-          </>
-        )}
-      </div>
-
-      {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-bg/80 backdrop-blur-md py-4 border-b border-border' : 'bg-transparent py-8'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }}
-            className="text-lg font-mono font-bold tracking-tighter flex items-center gap-3"
-          >
-            <div className="w-10 h-10 rounded-2xl overflow-hidden border border-white/10 shadow-lg shadow-accent-blue/10">
-              <img src={resolvePublicPath('/images/alsenwi.jpg')} alt="Alsenwi" className="w-full h-full object-cover" />
-            </div>
-            <span className="hidden sm:block uppercase tracking-[0.2em] text-xs font-bold">AL-SANWI<span className="text-accent-blue">.</span>DEV</span>
-          </motion.div>
-
-          <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-            {Object.entries(t.nav).map(([key, value]) => (
-              <motion.a 
-                key={key} 
-                href={`#${key}`} 
-                whileHover={{ scale: 1.05, letterSpacing: '0.3em' }}
-                className="text-[10px] uppercase tracking-[0.25em] font-medium text-text-muted hover:text-accent-blue transition-all duration-300 relative group"
-              >
-                {value}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent-blue transition-all duration-300 group-hover:w-full" />
-              </motion.a>
-            ))}
-            <motion.button 
-              onClick={toggleTheme}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 text-text-muted hover:text-accent-gold transition-colors"
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </motion.button>
-            <motion.button 
-              onClick={toggleLang}
-              whileHover={{ scale: 1.05, borderColor: 'rgba(59,130,246,0.5)' }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-[10px] uppercase tracking-widest border border-white/10 px-4 py-2 rounded-full hover:border-accent-blue/50 transition-all"
-            >
-              <Globe size={12} className="text-accent-blue" />
-              <span>{lang === 'en' ? 'Arabic' : 'English'}</span>
-            </motion.button>
-          </div>
-
-          <button className="md:hidden text-text-muted" onClick={() => setIsMenuOpen(true)}>
-            <Menu size={24} />
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu / Sidebar */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90]"
-            />
-            <motion.div 
-              initial={{ x: isRtl ? -320 : 320 }}
-              animate={{ x: 0 }}
-              exit={{ x: isRtl ? -320 : 320 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className={`fixed top-0 bottom-0 ${isRtl ? 'left-0' : 'right-0'} w-[300px] bg-bg border-l border-border z-[100] flex flex-col shadow-2xl`}
-            >
-              {/* Sidebar Header */}
-              <div className="p-8 flex flex-col gap-6 border-b border-border">
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-accent-blue to-accent-green rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-accent-blue/20">
-                      AS
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-bold tracking-widest uppercase">Al-Sanwi</span>
-                      <span className="text-[10px] text-text-dim uppercase tracking-tighter">Software Developer</span>
-                    </div>
-                  </div>
-                  <button 
-                    onClick={() => setIsMenuOpen(false)} 
-                    className="p-2 rounded-full hover:bg-card-bg text-text-muted hover:text-text transition-colors"
-                  >
-                    <X size={20} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Sidebar Navigation */}
-              <div className="flex-1 overflow-y-auto py-8 px-4 space-y-2">
-                {Object.entries(t.nav).map(([key, value], idx) => {
-                  const Icon = {
-                    hero: User,
-                    about: User,
-                    experience: Briefcase,
-                    projects: Layout,
-                    education: GraduationCap,
-                    contact: MessageSquare
-                  }[key] || Layout;
-                  
-                  const isActive = activeSection === key;
-
-                  return (
-                    <motion.a 
-                      key={key} 
-                      href={`#${key}`} 
-                      initial={{ opacity: 0, x: isRtl ? -20 : 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + idx * 0.05 }}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-all group ${
-                        isActive 
-                          ? 'bg-accent-gold/10 text-accent-gold' 
-                          : 'text-text-muted hover:bg-card-bg hover:text-text'
-                      }`}
-                    >
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                        isActive ? 'bg-accent-gold text-black' : 'bg-card-bg group-hover:bg-border'
-                      }`}>
-                        <Icon size={18} />
-                      </div>
-                      <span className="font-medium tracking-wide">{value}</span>
-                    </motion.a>
-                  );
-                })}
-              </div>
-
-              {/* Sidebar Footer */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="p-6 border-t border-border space-y-6 bg-card-bg/30"
-              >
-                <div className="flex items-center justify-center gap-4">
-                  <button 
-                    onClick={toggleTheme}
-                    className="flex-1 flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-card-bg border border-border hover:border-accent-gold/30 transition-all group shadow-sm"
-                  >
-                    <span className="text-2xl group-hover:scale-110 transition-transform">
-                      {theme === 'dark' ? '☀️' : '🌙'}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-slate-500">
-                      {theme === 'dark' ? (lang === 'en' ? 'Light' : 'فاتح') : (lang === 'en' ? 'Dark' : 'داكن')}
-                    </span>
-                  </button>
-                  
-                  <button 
-                    onClick={toggleLang}
-                    className="flex-1 flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-card-bg border border-border hover:border-accent-blue/30 transition-all group shadow-sm"
-                  >
-                    <span className="text-2xl group-hover:scale-110 transition-transform">
-                      {lang === 'en' ? '🇸🇦' : '🇺🇸'}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-slate-500">
-                      {lang === 'en' ? 'العربية' : 'English'}
-                    </span>
-                  </button>
-                </div>
-
-                <div className="flex justify-center gap-6 pt-2">
-                  {[
-                    { icon: Github, href: "#" },
-                    { icon: Linkedin, href: "#" },
-                    { icon: Instagram, href: "#" },
-                    { icon: Mail, href: "#" }
-                  ].map((social, i) => (
-                    <motion.a 
-                      key={i}
-                      href={social.href}
-                      whileHover={{ y: -3 }}
-                      className="text-text-dim hover:text-accent-gold transition-colors"
-                    >
-                      <social.icon size={20} />
-                    </motion.a>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 relative z-10 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="glass-card rounded-[2rem] p-6 md:p-16 border border-white/5 relative magic-glow overflow-hidden"
-          >
-            {/* Decorative Corner */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
-            
-            <div className="flex flex-col items-center text-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex items-center gap-2 px-3 py-1 rounded-full border border-accent-gold/20 bg-accent-gold/5 text-accent-gold text-[8px] md:text-[10px] uppercase tracking-[0.3em] font-bold mb-6 md:mb-8"
-              >
-                <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-accent-gold animate-pulse" />
-                {t.hero.role}
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-2xl md:text-6xl font-arabic mb-4 md:mb-6 leading-tight tracking-tight text-text"
-              >
-                {t.hero.name}
-              </motion.h1>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-[8px] md:text-[10px] uppercase tracking-[0.4em] text-text-dim mb-8 md:mb-10 font-medium"
-              >
-                {lang === 'en' ? 'Bachelor of Computer Science' : 'بكلاريوس علوم الحاسوب '}
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="max-w-xl mx-auto text-xs md:text-base text-text-muted font-light mb-8 md:mb-12 leading-relaxed px-4"
-              >
-                {t.hero.summary}
-              </motion.p>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-600"
-        >
-          <ChevronDown size={24} />
-        </motion.div>
-      </section>
-
-      {/* About & Skills */}
-      <section id="about" className="py-32 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20">
-            <motion.div
-              initial={{ opacity: 0, x: isRtl ? 50 : -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="h-[1px] w-12 bg-accent-blue" />
-                <h2 className="text-[10px] uppercase tracking-[0.4em] text-accent-blue font-bold">{t.about.title}</h2>
-              </div>
-              <p className="text-2xl md:text-4xl font-arabic leading-tight mb-8">
-                {t.about.bio}
-              </p>
-              <div className="flex flex-wrap gap-4 mt-12">
-                <div className="flex items-center gap-3 text-text-muted text-sm">
-                  <Code2 size={16} className="text-accent-blue" />
-                  <span>Full-Stack</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: isRtl ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass rounded-3xl p-10"
-            >
-              <h3 className="text-xl font-bold mb-8 flex items-center gap-3">
-                <Terminal size={20} className="text-accent-green" />
-                {t.about.skillsTitle}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {t.about.skills.map((skill, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-xs text-text-muted bg-white/5 border border-white/5 px-4 py-3 rounded-xl hover:border-accent-blue/30 transition-all">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-blue/50" />
-                    {skill}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+    <div className="relative overflow-x-clip">
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[#07070a]/70 border-b border-white/5">
+        <div className="wrap h-14 flex items-center justify-between">
+          <a href="#top" className="font-semibold tracking-wide text-[15px]"><span className="gold">MR</span><span className="text-white/40 mx-2">/</span><span className="text-white/80 text-[13px]">{lang === 'ar' ? 'أحمد الصنوي' : 'Ahmed Al-Senwi'}</span></a>
+          <nav className="hidden md:flex gap-7 text-[13px] text-white/60">
+            {t.nav.map((n, i) => <a key={n} href={`#${ids[i]}`} className="hover:text-white transition">{n}</a>)}
+          </nav>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="chip hover:text-white" aria-label="language">{lang === 'en' ? 'عربي' : 'EN'}</button>
+            <a href={wa} target="_blank" rel="noreferrer" className="btn btn-gold !py-1.5 !px-4 !text-[12.5px] hidden sm:inline-flex">{t.cta}</a>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-32 bg-card-bg overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="h-[1px] w-12 bg-accent-gold" />
-                <h2 className="text-[10px] uppercase tracking-[0.4em] text-accent-gold font-bold">{t.projects.title}</h2>
-              </div>
-              <h3 className="text-3xl md:text-5xl font-arabic mb-4">{t.projects.title}</h3>
-              <p className="text-text-muted text-sm md:text-base max-w-xl mb-8">{t.projects.subtitle}</p>
-              
-              {/* Filter Buttons */}
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(t.projects.filters).map(([key, label]) => (
-                  <button
-                    key={key}
-                    onClick={() => setActiveFilter(key)}
-                    className={`px-4 py-1.5 rounded-full text-[9px] uppercase tracking-widest font-bold transition-all duration-300 border ${
-                      activeFilter === key 
-                        ? 'bg-accent-gold border-accent-gold text-black shadow-lg shadow-accent-gold/20' 
-                        : 'border-white/10 text-text-dim hover:border-white/20 hover:text-slate-300'
-                    }`}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
+      <section id="top" className="relative pt-28 pb-16 md:pt-36 md:pb-20">
+        <div className="glow drift bg-[#d4b25c] w-72 h-72 -top-10 start-[8%]" />
+        <div className="glow bg-[#3b2a7a] w-80 h-80 top-20 end-[2%]" />
+        <div className="wrap relative">
+          <motion.div {...fade} className="max-w-[720px]">
+            <span className="eyebrow">{t.eyebrow}</span>
+            <h1 className="mt-4 text-[34px] sm:text-[46px] leading-[1.12] font-semibold tracking-tight">
+              {t.h1a} <span className="gold">{t.h1b}</span>
+            </h1>
+            <p className="mt-5 text-white/60 max-w-[560px] text-[15.5px]">{t.sub}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href={wa} target="_blank" rel="noreferrer" className="btn btn-gold"><MessageCircle size={15} />{t.cta}</a>
+              <a href="#work" className="btn btn-line">{t.see}<ChevronRight size={14} className="rtl:rotate-180" /></a>
             </div>
-            <Layers size={40} className="text-white/5 hidden md:block" />
-          </div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filteredProjects.map((project, idx) => (
-              <motion.div 
-                key={`${project.title}-${idx}`} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={`${idx === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}
-              >
-                <ProjectCard project={project} isRtl={isRtl} />
-              </motion.div>
-            ))}
+            <div className="mt-8 flex flex-wrap gap-2">{t.chips.map(c => <span key={c} className="chip"><Sparkles size={11} className="text-[color:var(--gold)]" />{c}</span>)}</div>
           </motion.div>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-32 relative overflow-hidden">
-        {/* Magic Background Elements */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-accent-blue/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent-green/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="hair" />
 
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-4 mb-20">
-            <Briefcase size={24} className="text-accent-blue" />
-            <h2 className="text-[10px] uppercase tracking-[0.4em] text-accent-blue font-bold">{t.experience.title}</h2>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-12">
-            {t.experience.items.map((item, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="relative glass-card rounded-3xl p-8 border border-white/5 hover:border-accent-blue/20 transition-all group magic-glow"
-              >
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-                  {/* Small Circular Logo */}
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-accent-blue/20 bg-slate-900 group-hover:border-accent-blue/50 transition-colors">
-                      <img 
-                        src={resolvePublicPath(item.image)} 
-                        alt={item.company}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${item.company}/100/100`;
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex-grow space-y-4">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-arabic mb-1">{item.role}</h3>
-                        <div className="flex items-center gap-2 text-text font-bold text-xs md:text-sm">
-                          <span>{item.company}</span>
-                          <span className="w-1 h-1 rounded-full bg-slate-600" />
-                          <span className="text-[10px] md:text-xs text-text-muted font-normal flex items-center gap-1">
-                            <MapPin size={10} /> {item.location}, {item.country}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-[8px] md:text-[10px] text-accent-blue font-bold uppercase tracking-widest h-fit">
-                        {item.period}
-                      </div>
-                    </div>
-
-                    <p className="text-xs md:text-sm text-text-muted leading-relaxed">{item.desc}</p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                      {item.achievements.map((ach, i) => (
-                        <div key={i} className="flex items-start gap-3 group/item">
-                          <div className="mt-1.5 flex-shrink-0 w-3 h-3 md:w-4 md:h-4 rounded-full bg-accent-blue/10 flex items-center justify-center border border-accent-blue/20">
-                            <div className="w-1 h-1 rounded-full bg-accent-blue" />
-                          </div>
-                          <span className="text-[11px] md:text-sm text-slate-300 group-hover/item:text-white transition-colors">{ach}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+      <section id="services" className="py-14 scroll-mt-14">
+        <div className="wrap">
+          <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.sTitle}</motion.h2>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {t.services.map(([h, d, Icon]: any, i: number) => (
+              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.07 }} className="card p-5">
+                <Icon size={19} className="text-[color:var(--gold)]" />
+                <h3 className="mt-3.5 font-medium text-[15px]">{h}</h3>
+                <p className="mt-1.5 text-[13px] text-white/55 leading-relaxed">{d}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Education Section */}
-      <section id="education" className="py-32 bg-card-bg relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-4 mb-20">
-            <GraduationCap size={28} className="text-accent-green" />
-            <h2 className="text-[10px] uppercase tracking-[0.4em] text-accent-green font-bold">{t.education.title}</h2>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            {t.education.items.map((item, idx) => {
-              const Wrapper = item.link ? motion.a : motion.div;
-              const wrapperProps = item.link ? { href: item.link, target: '_blank', rel: 'noopener noreferrer' } : {};
-
+      <section id="work" className="py-14 scroll-mt-14">
+        <div className="wrap">
+          <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.wTitle}</motion.h2>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+            {t.work.map(([h, k, d, im, href]: string[], i: number) => {
+              const Wrap: any = href ? 'a' : 'div';
               return (
-                <Wrapper
-                  key={idx}
-                  {...wrapperProps}
-                  initial={{ opacity: 0, x: isRtl ? 30 : -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className={`glass-card rounded-3xl p-8 border border-white/5 hover:border-accent-green/20 transition-all group magic-glow ${item.link ? 'cursor-pointer' : ''}`}
-                >
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-                  {/* Small Circular Logo */}
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-accent-green/20 bg-slate-900 group-hover:border-accent-green/50 transition-colors">
-                      <img 
-                        src={resolvePublicPath(item.image)} 
-                        alt={item.school}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${item.school}/100/100`;
-                        }}
-                      />
+                <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: (i % 3) * 0.07 }}>
+                  <Wrap {...(href ? { href, target: '_blank', rel: 'noreferrer' } : {})} className="card block overflow-hidden group">
+                    <div className="h-24 sm:h-32 relative overflow-hidden bg-gradient-to-br from-[#1b1710] via-[#0d0d12] to-[#141026]">
+                      {im ? <img src={img(im)} alt={h} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.04] transition duration-500" />
+                        : <div className="h-full grid place-items-center text-[26px] font-semibold gold tracking-wide">{h}</div>}
                     </div>
-                  </div>
-
-                  <div className="flex-grow space-y-4">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-bold mb-1">{item.degree}</h3>
-                        <p className="text-base md:text-lg text-text font-arabic">{item.school}</p>
-                      </div>
-                      <div className="px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-accent-green/10 border border-accent-green/20 text-[8px] md:text-[10px] text-accent-green font-bold uppercase tracking-widest h-fit">
-                        {item.period}
-                      </div>
+                    <div className="p-4">
+                      <div className="flex items-center justify-between"><span className="eyebrow !text-[10px]">{k}</span>{href && <ArrowUpRight size={14} className="text-white/40 group-hover:text-[color:var(--gold)] transition rtl:-scale-x-100" />}</div>
+                      <h3 className="mt-1.5 font-medium text-[15px]">{h}</h3>
+                      <p className="mt-1 text-[12.5px] text-white/50 leading-relaxed">{d}</p>
                     </div>
-
-                    <div className="flex items-center gap-2 text-text-muted text-[10px] md:text-sm">
-                      <MapPin size={12} className="text-accent-green" />
-                      <span>{item.location}, {item.country}</span>
-                    </div>
-
-                    <div className="space-y-2 pt-2">
-                      {item.details.map((detail, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <div className="mt-2 w-1 h-1 rounded-full bg-accent-green opacity-50" />
-                          <span className="text-[11px] md:text-sm text-text-muted group-hover:text-slate-300 transition-colors">{detail}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Wrapper>
-            );
-          })}
-          </div>
-
-          {/* Magic Languages & Certs Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 mt-24">
-            <motion.div 
-              initial={{ opacity: 0, x: isRtl ? 30 : -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-card rounded-[2.5rem] p-12 relative overflow-hidden group magic-glow animate-pulse-glow"
-            >
-              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Globe size={120} />
-              </div>
-              <h3 className="text-2xl font-bold mb-10 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-accent-blue/10 flex items-center justify-center">
-                  <Globe size={20} className="text-accent-blue" />
-                </div>
-                {t.languages.title}
-              </h3>
-              <div className="grid grid-cols-2 gap-10">
-                {t.languages.items.map((lang, i) => (
-                  <div key={i} className="space-y-2 group/lang">
-                    <p className="text-xl font-bold text-text group-hover/lang:text-accent-blue transition-colors">{lang.name}</p>
-                    <div className="flex items-center gap-2">
-                      <div className="h-1 flex-1 bg-white/5 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '100%' }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: i * 0.1 }}
-                          className="h-full bg-accent-blue/50"
-                        />
-                      </div>
-                      <span className="text-[10px] text-accent-blue uppercase tracking-widest font-bold">{lang.level}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: isRtl ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-card rounded-[2.5rem] p-12 relative overflow-hidden group magic-glow animate-pulse-glow"
-              style={{ animationDelay: '1s' }}
-            >
-              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Cpu size={120} />
-              </div>
-              <h3 className="text-2xl font-bold mb-10 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-accent-green/10 flex items-center justify-center">
-                  <Cpu size={20} className="text-accent-green" />
-                </div>
-                {t.certifications.title}
-              </h3>
-              <div className="space-y-6">
-                {t.certifications.items.map((cert, i) => (
-                  <motion.div 
-                    key={i} 
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-4 text-text-muted hover:text-slate-200 transition-all cursor-default"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-accent-green shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                    <span className="text-lg font-light">{cert}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                  </Wrap>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="relative z-30 py-32 bg-bg border-t border-border">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-[10px] uppercase tracking-[0.4em] text-accent-blue font-bold mb-8">{t.contact.title}</h2>
-              <p className="text-4xl md:text-6xl font-arabic mb-12 leading-tight">
-                {t.contact.subtitle}
-              </p>
-              
-              <div className="space-y-8">
-                <a href={`mailto:${t.contact.email}`} className="flex items-center gap-6 group">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-accent-blue/10 transition-colors">
-                    <Mail size={20} className="text-accent-blue" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-text-dim mb-1">Email</p>
-                    <p className="text-lg font-mono">{t.contact.email}</p>
-                  </div>
-                </a>
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                    <Phone size={20} className="text-accent-green" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-text-dim mb-1">Phone</p>
-                    <p className="text-lg font-mono">{t.contact.phone}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                    <MapPin size={20} className="text-accent-blue" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-text-dim mb-1">Location</p>
-                    <p className="text-sm">{t.contact.location}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative z-40 pointer-events-auto glass-card p-10 rounded-3xl border-white/5 magic-glow"
-            >
-              <form className="relative z-50 pointer-events-auto space-y-6" onSubmit={handleContactSubmit}>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">
-                      {lang === 'en' ? 'Name' : 'الاسم'}
-                    </label>
-                    <input 
-                      type="text" 
-                      value={contactForm.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all" 
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">
-                      {lang === 'en' ? 'Email' : 'البريد الإلكتروني'}
-                    </label>
-                    <input 
-                      type="email" 
-                      value={contactForm.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all" 
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-text-dim ml-1">
-                    {lang === 'en' ? 'Message' : 'الرسالة'}
-                  </label>
-                  <textarea 
-                    rows={4} 
-                    value={contactForm.message}
-                    onChange={(e) => handleInputChange('message', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-accent-blue outline-none transition-all resize-none" 
-                    required
-                  />
-                </div>
-                <button 
-                  type="submit"
-                  className="w-full bg-accent-blue text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-accent-blue/90 transition-all flex items-center justify-center gap-2"
-                >
-                  <MessageSquare size={16} />
-                  {lang === 'en' ? 'Send via WhatsApp' : 'إرسال عبر واتساب'}
-                </button>
-              </form>
-            </motion.div>
+      <section id="process" className="py-14 scroll-mt-14">
+        <div className="wrap">
+          <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.pTitle}</motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {t.process.map(([h, d], i) => (
+              <motion.div key={h} {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} className="card p-5">
+                <div className="gold text-[26px] font-semibold leading-none">0{i + 1}</div>
+                <h3 className="mt-3 font-medium text-[15px]">{h}</h3>
+                <p className="mt-1 text-[13px] text-white/55">{d}</p>
+              </motion.div>
+            ))}
           </div>
+          <motion.div {...fade} className="card p-5 mt-3.5 md:flex gap-8 items-start">
+            <div className="md:w-1/2"><h3 className="eyebrow">{t.aTitle}</h3><p className="mt-2 text-[13.5px] text-white/60">{t.about}</p></div>
+            <div className="md:w-1/2 mt-4 md:mt-0 flex flex-wrap gap-1.5">{t.skills.map(s => <span key={s} className="chip">{s}</span>)}</div>
+          </motion.div>
+        </div>
+      </section>
 
-          <div className="mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex gap-6">
-              <motion.a 
-                href="https://www.linkedin.com/in/alsenwi-ahmed-16381136a/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                whileHover={{ y: -5, color: '#D4AF37', filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.5))' }}
-                className="text-text-dim transition-all duration-300"
-              >
-                <Linkedin size={18} />
-              </motion.a>
-              <motion.a 
-                href="https://github.com/Alsenwia3med" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                whileHover={{ y: -5, color: '#D4AF37', filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.5))' }}
-                className="text-text-dim transition-all duration-300"
-              >
-                <Github size={18} />
-              </motion.a>
-              <motion.a 
-                href="mailto:alsanwi2019@gmail.com" 
-                whileHover={{ y: -5, color: '#D4AF37', filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.5))' }}
-                className="text-text-dim transition-all duration-300"
-              >
-                <Mail size={18} />
-              </motion.a>
+      <div className="hair" />
+
+      <section id="contact" className="py-16 scroll-mt-14 relative">
+        <div className="glow bg-[#d4b25c] w-64 h-64 bottom-0 end-[10%] opacity-20" />
+        <div className="wrap relative grid md:grid-cols-2 gap-10 items-start">
+          <motion.div {...fade}>
+            <h2 className="text-[26px] font-semibold leading-tight">{t.cTitle}</h2>
+            <p className="mt-2 text-white/55 text-[14px]">{t.cSub}</p>
+            <div className="mt-6 flex flex-col gap-2.5 text-[13.5px]">
+              <a className="flex items-center gap-3 text-white/70 hover:text-white" href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer"><MessageCircle size={16} className="text-[color:var(--gold)]" />+60 11-6220 6173</a>
+              <a className="flex items-center gap-3 text-white/70 hover:text-white" href={`mailto:${MAIL}`}><Mail size={16} className="text-[color:var(--gold)]" />{MAIL}</a>
+              <a className="flex items-center gap-3 text-white/70 hover:text-white" href={LI} target="_blank" rel="noreferrer"><Linkedin size={16} className="text-[color:var(--gold)]" />LinkedIn</a>
+              <a className="flex items-center gap-3 text-white/70 hover:text-white" href={GH} target="_blank" rel="noreferrer"><Github size={16} className="text-[color:var(--gold)]" />GitHub</a>
             </div>
-            <p className="text-[10px] uppercase tracking-[0.5em] text-slate-700">
-              © 2026 {lang === 'en' ? 'Ahmed Abdulkareem Al-Senwi' : 'أحمد عبدالكريم الصنوي'} • {lang === 'en' ? 'BUILT WITH REACT' : 'بني باستخدام ريأكت'}
-            </p>
-          </div>
+          </motion.div>
+          <motion.form {...fade} onSubmit={e => { e.preventDefault(); window.open(wa, '_blank'); }} className="card p-5 flex flex-col gap-3">
+            <input value={name} onChange={e => setName(e.target.value)} placeholder={t.name} />
+            <textarea rows={4} value={msg} onChange={e => setMsg(e.target.value)} placeholder={t.msg} />
+            <button className="btn btn-gold justify-center"><MessageCircle size={15} />{t.send}</button>
+          </motion.form>
         </div>
       </section>
 
+      <footer className="border-t border-white/5 py-6 text-center text-[12px] text-white/35">© {new Date().getFullYear()} {t.rights}</footer>
     </div>
   );
 }
