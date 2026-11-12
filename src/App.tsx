@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import SkillsLab from './SkillsLab';
-import SdcLab from './SdcLab';
 import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, QrCode, Sparkles, ChevronRight, Sun, Moon, GraduationCap, Briefcase, Award, Languages as LangIcon } from 'lucide-react';
 
 type L = 'en' | 'ar';
@@ -32,7 +31,7 @@ const T = {
     work: [
       ['Inspire U', 'Education platform', 'Student registration platform with bilingual site and lead flow.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'Health AI · B2B', 'Frontend engineer on a B2B Health AI platform: Next.js, Tailwind, Motion.', 'roots.jpg', 'https://roots-ai.health/'],
-      ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
+      ['SDC Dashboard', 'Fintech analytics', 'Real-time monitoring dashboard built during an industrial training internship.', 'sdc-card.png', 'https://sdc.cx/'],
       ['Astra Bot', 'Automation', 'Python-based trading automation with its own web presence.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'Community portal', 'WordPress/Elementor portal for the Yemeni Community in Malaysia.', 'ycim.jpg', 'https://ycim.org/'],
       ['Safar Easy', 'Tourism', 'Arabic/RTL luxury redesign for a Malaysia tourism company.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
@@ -82,7 +81,7 @@ const T = {
     work: [
       ['Inspire U', 'منصة تعليمية', 'منصة تسجيل طلاب بموقع ثنائي اللغة ومسار استقبال العملاء.', 'Inspire-U.png', 'https://inspire-u.net/'],
       ['Roots AI', 'ذكاء صحي · B2B', 'مهندس واجهات أمامية في منصة ذكاء اصطناعي صحي للمؤسسات: Next.js وTailwind وMotion.', 'roots.jpg', 'https://roots-ai.health/'],
-      ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'SDC%20Dashboard.png', 'https://sdc.cx/'],
+      ['SDC Dashboard', 'تقنية مالية', 'لوحة متابعة لحظية بُنيت خلال تدريب صناعي.', 'sdc-card.png', 'https://sdc.cx/'],
       ['Astra Bot', 'أتمتة', 'أتمتة تداول بلغة بايثون مع حضور ويب خاص.', 'astra.png', 'https://astra-bot.tech/'],
       ['YCIM', 'بوابة مجتمع', 'بوابة ووردبريس/إلمنتور للجالية اليمنية في ماليزيا.', 'ycim.jpg', 'https://ycim.org/'],
       ['سفر إيز', 'سياحة', 'إعادة تصميم عربية فاخرة لشركة سياحة في ماليزيا.', 'logo:safar.jpg', 'https://paleturquoise-wasp-229356.hostingersite.com/'],
@@ -215,16 +214,7 @@ export default function App() {
         </div>
       </section>
 
-            <section id="sdc" className="pb-14 scroll-mt-14">
-        <div className="wrap">
-          <motion.div {...fade} className="skwrap p-5 sm:p-7">
-            <div className="flex items-end justify-between flex-wrap gap-2 mb-4"><div><div className="text-[11px] tracking-[.24em] uppercase font-semibold sk-gold">{lang === 'ar' ? 'دراسة حالة' : 'Case study'}</div><h3 className="mt-1 text-[20px] sm:text-[24px] font-semibold sk-ink">SDC Dashboard · {lang === 'ar' ? 'من الواجهة إلى قاعدة البيانات' : 'from interface to database'}</h3></div><div className="text-[12px] sk-mut">{lang === 'ar' ? 'منصة تقنية مالية · تدريب صناعي' : 'Fintech platform · industrial training'}</div></div>
-            <SdcLab lang={lang} dark={theme === 'dark'} />
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="process" className="py-10 scroll-mt-14">
+            <section id="process" className="py-10 scroll-mt-14">
         <div className="wrap">
           <motion.h2 {...fade} className="text-[22px] font-semibold mb-6">{t.pTitle}</motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
