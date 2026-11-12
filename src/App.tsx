@@ -28,10 +28,13 @@ const EXP_META: [string | undefined, string | undefined][] = [
 ];
 const EDU_META: [string, string] = [img('utem.png'), 'https://www.utem.edu.my/'];
 const CERT_META: [string | undefined, string | undefined][] = [
+  [fav('linkedin.com'), 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/details/certifications/'],
+  [fav('linkedin.com'), 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/details/certifications/'],
+  [fav('google.com'), 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/details/certifications/'],
+  [fav('dart.dev'), 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/details/certifications/'],
+  [fav('linkedin.com'), 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/details/certifications/'],
+  [fav('linkedin.com'), 'https://www.linkedin.com/in/alsenwi-ahmed-16381136a/details/certifications/'],
   [fav('ieee.org'), 'https://www.ieee.org/'],
-  [fav('linkedin.com'), 'https://www.linkedin.com/learning/'],
-  [fav('dart.dev'), 'https://dart.dev/'],
-  [undefined, undefined],
 ];
 function Wrap({ href, children, className }: { href?: string; children: any; className?: string; k?: string }) {
   return href ? <a href={href} target="_blank" rel="noreferrer" className={className}>{children}</a> : <div className={className}>{children}</div>;
@@ -76,7 +79,7 @@ const T = {
       ['Freelance Web Developer', 'Self-employed · Remote', 'Aug 2024 — Jun 2025', ['Landing pages and automation for local businesses and startups', 'Third-party API integrations, SEO and performance tuning']],
     ],
     edu: ['Bachelor of Computer Science (Software Development)', 'Universiti Teknikal Malaysia Melaka (UTeM) · FTMK', '2022 — 2026 · Graduated March 2026', ['Focus: full-stack development, software engineering', 'Projects: Smart Attendance System (C++/PHP, QR), Student Performance Dashboard, Melaka Tourist Guide']],
-    certTitle: 'Certifications', certs: ['IEEE Associate Software Developer Workshop (2024)', 'LinkedIn Learning: Time Management (2018)', 'Introduction to Dart', 'Basics of Software Testing'],
+    certTitle: 'Certifications', certs: ['Designing RESTful APIs · LinkedIn · Sep 2026', 'Introduction to Career Skills in Software Development · LinkedIn · Sep 2026', 'Introduction to Generative AI · Google · Sep 2026', 'Introduction to Dart · LinkedIn · Jul 2025', 'How to Learn Faster · LinkedIn · Jul 2025', 'Productivity Tips: Finding Your Productive Mindset · LinkedIn · Jul 2025', 'IEEE Associate Software Developer Workshop (2024)'],
     langTitle: 'Languages', langs: [['Arabic', 'Native'], ['English', 'Professional working'], ['Bahasa Malaysia', 'Conversational'], ['German', 'Elementary (A1)']],
     skTitle: 'Skills',
     skillGroups: [['Frontend', ['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'Figma UI/UX']], ['Backend & data', ['PHP', 'Python', 'Node.js', 'MySQL', 'REST APIs', 'Supabase']], ['Mobile', ['Flutter', 'Dart', 'C++']], ['Tools & process', ['Git/GitHub', 'WordPress/Elementor', 'Brevo APIs', 'Chart.js', 'CI/CD', 'Agile/Scrum']]],
@@ -126,7 +129,7 @@ const T = {
       ['مطوّر ويب مستقل', 'عمل حر · عن بعد', 'أغسطس 2024 — يونيو 2025', ['صفحات هبوط وأتمتة للشركات المحلية والناشئة', 'تكاملات API خارجية وتحسين SEO والأداء']],
     ],
     edu: ['بكالوريوس علوم الحاسب (تطوير البرمجيات)', 'جامعة ملقا التقنية الماليزية (UTeM) · FTMK', '2022 — 2026 · التخرج مارس 2026', ['التركيز: تطوير الواجهات الكاملة وهندسة البرمجيات', 'مشاريع: نظام الحضور الذكي (C++/PHP وQR)، لوحة أداء الطلاب، دليل ملقا السياحي']],
-    certTitle: 'الشهادات', certs: ['ورشة IEEE لمطوّر برمجيات مشارك (2024)', 'LinkedIn Learning: إدارة الوقت (2018)', 'مقدمة في لغة Dart', 'أساسيات اختبار البرمجيات'],
+    certTitle: 'الشهادات', certs: ['Designing RESTful APIs · LinkedIn · Sep 2026', 'Introduction to Career Skills in Software Development · LinkedIn · Sep 2026', 'Introduction to Generative AI · Google · Sep 2026', 'Introduction to Dart · LinkedIn · Jul 2025', 'How to Learn Faster · LinkedIn · Jul 2025', 'Productivity Tips: Finding Your Productive Mindset · LinkedIn · Jul 2025', 'IEEE Associate Software Developer Workshop (2024)'],
     langTitle: 'اللغات', langs: [['العربية', 'اللغة الأم'], ['الإنجليزية', 'مهني عملي'], ['الملايو', 'محادثة'], ['الألمانية', 'مبتدئ (A1)']],
     skTitle: 'المهارات',
     skillGroups: [['الواجهات', ['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'Figma UI/UX']], ['الخلفية والبيانات', ['PHP', 'Python', 'Node.js', 'MySQL', 'REST APIs', 'Supabase']], ['الجوال', ['Flutter', 'Dart', 'C++']], ['الأدوات والمنهجية', ['Git/GitHub', 'WordPress/Elementor', 'Brevo APIs', 'Chart.js', 'CI/CD', 'Agile/Scrum']]],
