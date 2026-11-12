@@ -95,10 +95,10 @@ html[data-theme=light] a.xhead:hover{background:rgba(168,132,31,.09)}
 
 /* ===== v8: light theme = white + sky gradients ===== */
 /* light: pure white, sky + silver gloss */
-html[data-theme=light]{--bg:#fff;--panel:#fff;--line:rgba(11,80,130,.12);--tx:#0b1622;--mut:#526477;--gold:#0b7fb8;--gold2:#2aa8e4}
+html[data-theme=light]{--bg:#fff;--panel:#fff;--line:rgba(11,80,130,.12);--tx:#0b1622;--mut:#526477;--gold:#0b7fb8;--gold2:#22b5d8}
 html[data-theme=light] body{background:radial-gradient(900px 420px at 95% -10%,rgba(56,189,248,.10),transparent 60%),#fff;background-attachment:fixed}
 html[data-theme=light] .gold{background:linear-gradient(120deg,#07507a,#1593d4 50%,#0b6fa3);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
-html[data-theme=light] .btn-gold{color:#fff;background:linear-gradient(120deg,#2aa8e4,#0b7fb8);box-shadow:0 10px 26px -10px rgba(11,127,184,.65)}
+html[data-theme=light] .btn-gold{color:#fff;background:linear-gradient(120deg,#22b5d8,#0b7fb8);box-shadow:0 10px 26px -10px rgba(11,127,184,.65)}
 html[data-theme=light] .card{background:linear-gradient(180deg,#fff,#f6fbff);border-color:rgba(11,100,160,.14);box-shadow:0 1px 2px rgba(10,60,100,.05),0 16px 36px -20px rgba(11,100,160,.28)}
 html[data-theme=light] .card::after{background:linear-gradient(110deg,transparent 35%,rgba(56,189,248,.14) 50%,transparent 65%)}
 html[data-theme=light] .card:hover{border-color:rgba(11,127,184,.5);box-shadow:0 18px 40px -18px rgba(11,127,184,.4)}
@@ -108,14 +108,14 @@ html[data-theme=light] footer,html[data-theme=light] .border-white\/10,html[data
 html[data-theme=light] [class*="text-white/"]{color:rgba(11,22,34,.64)!important}
 html[data-theme=light] .text-white\/80,html[data-theme=light] .text-white\/70{color:rgba(11,22,34,.82)!important}
 html[data-theme=light] .text-white\/40,html[data-theme=light] .text-white\/35{color:rgba(11,22,34,.46)!important}
-html[data-theme=light] ::selection{background:#2aa8e4;color:#fff}
+html[data-theme=light] ::selection{background:#22b5d8;color:#fff}
 html[data-theme=light] .hover\:text-white:hover{color:#0b1622!important}
 html[data-theme=light] .skwrap{background:#fff;border:1px solid rgba(11,127,184,.3);box-shadow:0 30px 70px -34px rgba(11,100,160,.45)}
 html[data-theme=light] .sk-gold{color:#0b7fb8}
 html[data-theme=light] .sk-card{border:1.5px solid #cfe6f5;box-shadow:0 14px 34px -18px rgba(11,100,160,.4)}
 html[data-theme=light] .sk-chip{border-color:#cfe6f5}
 html[data-theme=light] a.xhead:hover{background:rgba(11,127,184,.08)}
-html[data-theme=light] .cchip[data-on=true],html[data-theme=light] .cchip[data-on=true]:hover{background:linear-gradient(135deg,#2aa8e4,#0b7fb8)!important;color:#fff!important}
+html[data-theme=light] .cchip[data-on=true],html[data-theme=light] .cchip[data-on=true]:hover{background:linear-gradient(135deg,#22b5d8,#0b7fb8)!important;color:#fff!important}
 html[data-theme=light] .cchip{background:#fff}
 html[data-theme=light] .xlogo{border-color:rgba(11,100,160,.14)}
 html[data-theme=light] .glow{display:none}
@@ -143,10 +143,10 @@ html[data-theme=light] .xbody li:hover{color:#0b1622}
 #services .card:hover{border-color:var(--gold)}
 /* light: dark→light blue gradients */
 html[data-theme=light] section h2{background:linear-gradient(90deg,#08486f,#1593d4 60%,#6cc4f2);-webkit-background-clip:text;background-clip:text;color:transparent}
-html[data-theme=light] .card:not(:has(img))::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#08486f,#1593d4 55%,#9fdcff)}
-html[data-theme=light] .eyebrow{background:linear-gradient(90deg,#08486f,#2aa8e4);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme=light] .card:not(:has(img))::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#08486f,#1593d4 55%,#8fe3e6)}
+html[data-theme=light] .eyebrow{background:linear-gradient(90deg,#08486f,#22b5d8);-webkit-background-clip:text;background-clip:text;color:transparent}
 html[data-theme=light] .btn-gold{background:linear-gradient(120deg,#08486f,#1593d4 55%,#5ec0f0)}
-html[data-theme=light] .hair{background:linear-gradient(90deg,transparent,#08486f,#2aa8e4,transparent);opacity:.5}
+html[data-theme=light] .hair{background:linear-gradient(90deg,transparent,#08486f,#22b5d8,transparent);opacity:.5}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 html[data-theme=light] .eyebrow svg{color:#1593d4}
 
