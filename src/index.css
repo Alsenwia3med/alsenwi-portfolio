@@ -80,3 +80,7 @@ a.xhead:hover{background:rgba(226,185,79,.08)}
 .xbody>*{overflow:hidden;min-height:0;padding-inline-start:calc(40px + 12px + 1rem)}
 
 html[data-theme=light] a.xhead:hover{background:rgba(168,132,31,.09)}
+
+.cchip{border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;color:var(--mut);background:rgba(255,255,255,.03);transition:.2s;cursor:pointer}
+.cchip:hover{border-color:var(--gold);color:var(--tx)}
+.cchip[data-on=true],.cchip[data-on=true]:hover{background:linear-gradient(135deg,#f0d78a,#d4b25c);color:#14120d !important;border-color:transparent;font-weight:600}
