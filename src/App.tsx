@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import SkillsLab from './SkillsLab';
+import SdcLab from './SdcLab';
 import { ArrowUpRight, Mail, Linkedin, Github, MessageCircle, Globe, LayoutDashboard, Building2, QrCode, Sparkles, ChevronRight, Sun, Moon, GraduationCap, Briefcase, Award, Languages as LangIcon } from 'lucide-react';
 
 type L = 'en' | 'ar';
@@ -211,6 +212,15 @@ export default function App() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+            <section id="sdc" className="pb-14 scroll-mt-14">
+        <div className="wrap">
+          <motion.div {...fade} className="skwrap p-5 sm:p-7">
+            <div className="flex items-end justify-between flex-wrap gap-2 mb-4"><div><div className="text-[11px] tracking-[.24em] uppercase font-semibold sk-gold">{lang === 'ar' ? 'دراسة حالة' : 'Case study'}</div><h3 className="mt-1 text-[20px] sm:text-[24px] font-semibold sk-ink">SDC Dashboard · {lang === 'ar' ? 'من الواجهة إلى قاعدة البيانات' : 'from interface to database'}</h3></div><div className="text-[12px] sk-mut">{lang === 'ar' ? 'منصة تقنية مالية · تدريب صناعي' : 'Fintech platform · industrial training'}</div></div>
+            <SdcLab lang={lang} dark={theme === 'dark'} />
+          </motion.div>
         </div>
       </section>
 
