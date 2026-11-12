@@ -305,54 +305,60 @@ export default function App() {
         <div className="wrap">
           <motion.h2 {...fade} className="sech">{t.aTitle}</motion.h2>
           <motion.p {...fade} className="text-[14.5px] text-white/60 max-w-[680px] mb-6">{t.about}</motion.p>
-          <div className="grid lg:grid-cols-5 gap-4">
-            <motion.div {...fade} className="card lux lux-lg p-5 lg:col-span-3 flex flex-col">
-              <div className="flex items-center gap-2 eyebrow"><Briefcase size={13} />{t.jTitle}</div>
-              <div className="explist mt-4 flex-1 flex flex-col justify-between gap-6 border-s border-white/10 ps-5">
-                {t.exp.map(([r, c, d, pts]: any, i: number) => (
-                  <div key={r} className="relative xrow">
-                    <span className="absolute -start-[25px] top-3 w-2 h-2 rounded-full bg-[color:var(--gold)]" />
-                    <Wrap href={EXP_META[i][1]} className="xhead">
-                      <Logo src={EXP_META[i][0]} name={c} />
-                      <span className="min-w-0 flex-1">
-                        <span className="flex flex-wrap items-baseline justify-between gap-x-3"><h3 className="font-medium text-[15.5px]">{r}</h3><span className="text-[12.5px] text-white/40">{d}</span></span>
-                        <span className="block text-[13.5px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5" />}</span>
-                      </span>
-                    </Wrap>
-                    <div className="xbody"><div><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(openRows.includes(i) ? pts : pts.slice(0, 3)).map((x: string) => <li key={x}>{x}</li>)}</ul>
-                      {pts.length > 3 && <button type="button" className="more" onClick={() => setOpenRows(o => o.includes(i) ? o.filter(x => x !== i) : [...o, i])}>{openRows.includes(i) ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض المزيد (${pts.length - 3})` : `Show more (${pts.length - 3})`)}</button>}</div></div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-            <div className="lg:col-span-2 flex flex-col gap-3.5">
-              <motion.div {...fade} className="card lux p-5">
-                <div className="flex items-center gap-2 eyebrow"><GraduationCap size={14} />{lang === 'ar' ? 'التعليم' : 'Education'}</div>
-                <div className="xrow mt-3">
-                  <Wrap href={EDU_META[1]} className="xhead">
-                    <Logo src={EDU_META[0]} name="UTeM" size={44} />
-                    <span className="min-w-0 flex-1"><h3 className="font-medium text-[15.5px]">{t.edu[0]}</h3><span className="block text-[13.5px] text-[color:var(--gold)]">{t.edu[1]}<ArrowUpRight size={11} className="inline ms-1 -mt-0.5" /></span><span className="block text-[12.5px] text-white/40">{t.edu[2]}</span></span>
-                  </Wrap>
-                  <div className="xbody"><ul className="text-[13.5px] text-white/55 leading-relaxed list-disc ps-4 pt-1.5">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul></div>
-                </div>
+          <div className="subh"><Briefcase size={14} />{lang === 'ar' ? 'الخبرات' : 'Experience'}</div>
+          <div className="grid md:grid-cols-2 gap-4">
+            {t.exp.map(([r, c, d, pts]: any, i: number) => (
+              <motion.div key={r} {...fade} transition={{ ...fade.transition, delay: (i % 2) * 0.08 }} className="card lux exc p-6 flex flex-col">
+                <Wrap href={EXP_META[i][1]} className="xhead">
+                  <Logo src={EXP_META[i][0]} name={c} size={46} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[12.5px] text-white/40">{d}</span>
+                    <h3 className="font-semibold text-[17px] leading-snug">{r}</h3>
+                    <span className="block text-[14px] text-[color:var(--gold)]">{c}{EXP_META[i][1] && <ArrowUpRight size={12} className="inline ms-1 -mt-0.5" />}</span>
+                  </span>
+                </Wrap>
+                <div className="xbody mt-3"><div><ul className="text-[14px] text-white/60 leading-relaxed list-disc ps-4 pt-1.5">{(openRows.includes(i) ? pts : pts.slice(0, 3)).map((x: string) => <li key={x}>{x}</li>)}</ul>
+                  {pts.length > 3 && <button type="button" className="more" onClick={() => setOpenRows(o => o.includes(i) ? o.filter(x => x !== i) : [...o, i])}>{openRows.includes(i) ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض المزيد (${pts.length - 3})` : `Show more (${pts.length - 3})`)}</button>}</div></div>
               </motion.div>
-              <motion.div {...fade} className="card lux p-5">
-                <div className="flex items-center gap-2 eyebrow"><Award size={14} />{t.certTitle}</div>
-                <div className="mt-2.5 flex flex-col gap-1.5">{t.certs.map((x, i) => (i < 4 || allCerts) && (
-                  <div key={x}><Wrap href={CERT_META[i][1]} className="xhead xcert">
-                    <Logo src={CERT_META[i][0]} name={x} size={30} />
-                    <span className="flex-1 text-[13.5px] text-white/70">{x}{CERT_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5 opacity-60" />}</span>
-                  </Wrap></div>
-                ))}</div>
-                <button type="button" className="more mt-3" onClick={() => setAllCerts(v => !v)}>{allCerts ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض كل الشهادات (${t.certs.length})` : `View all certifications (${t.certs.length})`)}</button>
-              </motion.div>
-              <motion.div {...fade} className="card lux p-5">
-                <div className="flex items-center gap-2 eyebrow"><LangIcon size={14} />{t.langTitle}</div>
-                <div className="mt-2.5 flex flex-wrap gap-1.5">{t.langs.map(([n, l]: string[]) => <span key={n} className="chip">{n} · {l}</span>)}</div>
-              </motion.div>
-            </div>
+            ))}
           </div>
-          <motion.div {...fade} className="skwrap p-5 sm:p-7 mt-5">
+
+          <div className="subh mt-10"><GraduationCap size={14} />{lang === 'ar' ? 'التعليم' : 'Education'}</div>
+          <motion.div {...fade} className="card lux exc p-6">
+            <Wrap href={EDU_META[1]} className="xhead">
+              <Logo src={EDU_META[0]} name="UTeM" size={54} />
+              <span className="min-w-0 flex-1">
+                <span className="block text-[12.5px] text-white/40">{t.edu[2]}</span>
+                <h3 className="font-semibold text-[18px] leading-snug">{t.edu[0]}</h3>
+                <span className="block text-[14.5px] text-[color:var(--gold)]">{t.edu[1]}<ArrowUpRight size={12} className="inline ms-1 -mt-0.5" /></span>
+              </span>
+            </Wrap>
+            <ul className="mt-3 text-[14px] text-white/60 leading-relaxed list-disc ps-4">{(t.edu[3] as string[]).map(x => <li key={x}>{x}</li>)}</ul>
+          </motion.div>
+
+          <div className="subh mt-10"><Award size={14} />{t.certTitle}</div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {t.certs.map((x, i) => (i < 4 || allCerts) && (
+              <motion.div key={x} {...fade} transition={{ ...fade.transition, delay: (i % 4) * 0.06 }} className="contents">
+                <Wrap href={CERT_META[i][1]} className="card lux p-4 flex items-start gap-3">
+                  <Logo src={CERT_META[i][0]} name={x} size={36} />
+                  <span className="flex-1 text-[13.5px] leading-snug text-white/70">{x}{CERT_META[i][1] && <ArrowUpRight size={11} className="inline ms-1 -mt-0.5 opacity-60" />}</span>
+                </Wrap>
+              </motion.div>
+            ))}
+          </div>
+          <button type="button" className="more mt-3 !ms-0" onClick={() => setAllCerts(v => !v)}>{allCerts ? (lang === 'ar' ? 'عرض أقل' : 'Show less') : (lang === 'ar' ? `عرض كل الشهادات (${t.certs.length})` : `View all certifications (${t.certs.length})`)}</button>
+
+          <div className="subh mt-10"><LangIcon size={14} />{t.langTitle}</div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {t.langs.map(([n, l]: string[], i: number) => (
+              <motion.div key={n} {...fade} transition={{ ...fade.transition, delay: i * 0.06 }} className="card lux p-4">
+                <h3 className="font-semibold text-[15.5px]">{n}</h3>
+                <p className="mt-0.5 text-[13px] text-white/55">{l}</p>
+              </motion.div>
+            ))}
+          </div>
+          <motion.div {...fade} className="skwrap p-5 sm:p-7 mt-12">
             <div className="flex items-end justify-between flex-wrap gap-2"><div><div className="text-[11px] tracking-[.24em] uppercase font-semibold sk-gold">{t.skTitle}</div><h3 className="mt-1 text-[20px] sm:text-[24px] font-semibold sk-ink">{lang === 'ar' ? 'من الفكرة إلى نظام يعمل' : 'From idea to a working system'}</h3></div><div className="text-[12px] sk-mut">{lang === 'ar' ? 'واجهات · خلفية · جوال · أدوات' : 'Frontend · Backend · Mobile · Tooling'}</div></div>
             <SkillsLab lang={lang} dark={theme === 'dark'} />
           </motion.div>
