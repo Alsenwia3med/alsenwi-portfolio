@@ -45,6 +45,7 @@ function Counter({ to, suf }: { to: number; suf: string }) {
 
 const AR: Record<string, number> = { 'roots.jpg': 1.996, 'sdc-card.jpg': 1.79, 'Inspire-U.png': 1.482, 'ycim.jpg': 2.077, 'astra.jpg': 1.79, 'emart.jpg': 1.792 };
 const arOf = (f: string) => AR[f] ?? 1.6;
+const fitOf = (f: string) => (Math.abs(arOf(f) / 1.8 - 1) <= 0.17 ? ' fit-c' : '');
 function Mark({ src, name, size = 48 }: { src?: string; name: string; size?: number }) {
   const [bad, setBad] = useState(!src);
   return <span className="mark" style={{ width: size, height: size }}>{!bad && src ? <img src={img(src)} alt="" onError={() => setBad(true)} loading="lazy" /> : <b>{name.replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase()}</b>}</span>;
@@ -140,7 +141,7 @@ function Intro({ lang }: { lang: string }) {
     <div className={`intro ${ph}`} onClick={() => setPh('out')} role="presentation">
       <div className="in-l" /><div className="in-r" />
       <div className="in-c">
-        <svg className="in-mark" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="37" /><path d="M24 56 40 22l16 34M30 46h20" /></svg>
+        <span className="in-photo"><img src={img('alsenwi.jpg')} alt="" /></span>
         <div className="in-name" dir="ltr" aria-label={name}>{name.split('').map((c, j) => <span key={j} style={{ ['--j' as any]: j }}>{c === ' ' ? '\u00a0' : c}</span>)}</div>
         <div className="in-sub">{lang === 'ar' ? 'مهندس برمجيات · كوالالمبور' : 'Software Engineer · Kuala Lumpur'}</div>
         <div className="in-line"><i /></div>
@@ -210,7 +211,7 @@ const Reel = ({ t, onOpen }: { t: Copy; onOpen: (id: string) => void }) => {
           <div className="reel-track" ref={trk}>
             {t.projects.map((p, i) => (
               <button key={p.id} type="button" className="reel-slide" onClick={() => onOpen(p.id)} aria-haspopup="dialog">
-                <span className="rs-img"><span className={`rs-in${p.logo ? ' is-logo' : ''}`} style={{ ['--im' as any]: `url(${img(p.img)})`, ['--ar' as any]: arOf(p.img) }}><img src={img(p.img)} alt="" loading="lazy" /></span>{i === 0 && <em className="badge rs-badge"><i />{t.featured}</em>}</span>
+                <span className="rs-img"><span className={`rs-in${p.logo ? ' is-logo' : ''}${fitOf(p.img)}`}><img className="rs-bg" src={img(p.img)} alt="" aria-hidden="true" loading="lazy" /><img className="rs-fg" src={img(p.img)} alt="" loading="lazy" /></span>{i === 0 && <em className="badge rs-badge"><i />{t.featured}</em>}</span>
                 <span className="rs-cap">
                   <span className="rs-meta" dir="ltr"><span>No. {String(i + 1).padStart(2, '0')}</span><span>{p.kind}</span><span>{p.year}</span>{p.href && <span className="pc-live"><i />{t.live}</span>}</span>
                   <b>{p.name}</b>
@@ -357,7 +358,7 @@ export default function App() {
   };
   const copyMail = async () => { try { await navigator.clipboard.writeText(CONTACT.mail); setCopied(true); say(<Check size={14} />, t.copied); setTimeout(() => setCopied(false), 1800); } catch {} };
   const xp = [
-    ...t.roles.map(r => ({ key: r.id, kind: 'work' as const, now: r.current, tag: r.tag, year: Math.floor(r.date), logo: r.logo, org: r.org, role: r.role, when: r.when, place: r.place, pts: r.pts, nums: r.x.nums.slice(0, 3), open: () => setModal({ kind: 'role', id: r.id }) })),
+    ...t.roles.map(r => ({ key: r.id, kind: 'work' as const, now: r.current, tag: r.tag, year: Math.floor(r.date), logo: r.logo, org: r.org, role: r.role, when: r.when, place: r.place, pts: r.pts, nums: r.x.nums.slice(0, 3), xs: r.xs, stack: r.stack, open: () => setModal({ kind: 'role', id: r.id }) })),
     { key: 'edu', kind: 'edu' as const, now: false, tag: '', year: 2022, logo: 'utem-sq.png', org: 'UTeM', role: t.degree, when: t.edWhen, place: t.edPlace, pts: t.edProj, open: () => setModal({ kind: 'edu' }) },
   ];
 
@@ -370,6 +371,7 @@ export default function App() {
       <dl className="rb-facts">{r.x.facts.slice(0, 3).map(([k, v], i) => <div key={k} style={{ ['--i' as any]: i }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
       <p className="md-about">{r.about}</p>
       <div className="rb-nums" style={{ ['--c' as any]: Math.min(r.x.nums.length, 4) }}>{r.x.nums.slice(0, 4).map(([n, l], i) => <div key={l} style={{ ['--i' as any]: i }}><b dir="ltr">{n}</b><span>{l}</span></div>)}</div>
+      {r.xs && <><h3 className="md-sub">{t.xsT}</h3><div className="xp-story">{r.xs.map((x, k) => <span key={k} className={`xs-r xs-${k}`}><em>{t.xsK[k]}</em><span>{x}</span></span>)}</div></>}
       <h3 className="md-sub">{t.whatIDid}</h3>
       <div className="rb-tbl" role="table">
         <div className="rb-th" role="row"><span role="columnheader">{t.tblA}</span><span role="columnheader">{t.tblB}</span><span role="columnheader">{t.tblC}</span></div>
@@ -381,7 +383,7 @@ export default function App() {
   );
   const ProjectBody = ({ p }: { p: Project }) => (
     <>
-      <div className={`md-img${p.logo ? ' is-logo' : ''}`} style={{ ['--im' as any]: `url(${img(p.img)})`, ['--ar' as any]: arOf(p.img) }}><img src={img(p.img)} alt="" /></div>
+      <div className={`md-img${p.logo ? ' is-logo' : ''}${fitOf(p.img)}`}><img className="rs-bg" src={img(p.img)} alt="" aria-hidden="true" /><img className="rs-fg" src={img(p.img)} alt="" /></div>
       <span className="md-k">{p.kind} · <bdi dir="ltr">{p.year}</bdi> · {p.context}</span>
       <h2 id="md-title">{p.name}</h2>
       <p className="md-role"><i />{t.roleK}<b>{p.role}</b></p>
@@ -493,7 +495,7 @@ export default function App() {
                       <b className="xp-org">{e.org}</b>
                       <span className="xp-role">{e.role}</span>
                       <span className="xp-meta"><time>{e.when}</time><i aria-hidden="true" />{e.place}</span>
-                      {(e as any).nums ? <span className="xp-nums">{((e as any).nums as [string, string][]).map(([n, l]) => <span key={l}><b dir="ltr">{n}</b>{l}</span>)}</span> : <span className="xp-pts">{e.pts.slice(0, 3).map(x => <span key={x}><Bi text={x} />{x}</span>)}</span>}
+                      {(e as any).nums ? <span className="xp-nums">{((e as any).nums as [string, string][]).map(([n, l]) => <span key={l}><b dir="ltr">{n}</b><i>{l}</i></span>)}</span> : <span className="xp-pts">{e.pts.slice(0, 3).map(x => <span key={x}><Bi text={x} />{x}</span>)}</span>}
                       <span className="rc-more">{t.open}<ArrowUpRight size={14} className="rtl:-scale-x-100" /></span>
                     </button>
                   </li>
@@ -522,17 +524,14 @@ export default function App() {
           <div className="wrap">
             <SecHead chap={t.chap} k={t.bdK} n={3} p={t.bdH} id="bd-h" sub={t.bdSub} />
             <div className="bd-grid" data-rv>
-              {t.bd.map(([id, title, desc, num, lab, ps], i) => {
+              {t.bd.map(([id, title, desc], i) => {
                 const I = ({ dash: LayoutDashboard, plat: Layers, site: PanelsTopLeft, auto: Workflow } as Record<string, typeof Mail>)[id];
                 return (
                   <article key={id} className={`bd-card bd-${id}`} style={{ ['--i' as any]: i }}>
-                    <span className="bd-ghost" aria-hidden="true" dir="ltr">0{i + 1}</span>
-                    <span className="bd-ic"><I size={26} strokeWidth={1.7} /></span>
+                                        <span className="bd-ic"><I size={26} strokeWidth={1.7} /></span>
                     <h3>{title}</h3>
                     <p>{desc}</p>
-                    <div className="bd-stat"><b dir="ltr">{num}</b><span>{lab}</span></div>
-                    <div className="bd-chips">{ps.map(pid => { const pr = t.projects.find(x => x.id === pid); return pr ? <button key={pid} type="button" onClick={() => setModal({ kind: 'project', id: pid })}>{pr.name}<ArrowUpRight size={12} className="rtl:-scale-x-100" /></button> : null; })}</div>
-                  </article>
+                    </article>
                 );
               })}
             </div>
@@ -550,7 +549,7 @@ export default function App() {
                     <header><Ico a={(['bob', 'pulse', 'tilt', 'tilt'] as const)[gi]} d={gi} c={SKC[gi]}><I size={20} /></Ico><h3>{g.t}</h3><span className="skc-n">{g.items.length}</span></header>
                     <p className="skc-d">{g.d}</p>
                     <ul>{g.items.map(([n, use]) => (
-                      <li key={n}><SkillIco n={n} c={SKC[gi]} /><span className="sk-t"><b>{n}</b><span>{use.length ? use.join(' · ') : t.studyUse}</span></span></li>
+                      <li key={n}><SkillIco n={n} c={SKC[gi]} /><span className="sk-t"><b>{n}</b><span>{use.length ? t.usedIn(use.length) : t.studyUse}</span></span></li>
                     ))}</ul>
                   </article>
                 );
@@ -567,13 +566,19 @@ export default function App() {
               <span className="eyebrow" style={{ color: '#a6a6b0' }}>{t.ctK} · 05</span>
               <H2 p={t.ctH} id="ct-h" xl />
               <p className="lede">{t.ctSub}</p>
-              <div className="ct-clock"><i className="ck-dot" /><b className="ck-t"><Clock /></b><span className="ck-l"><em>{t.ctClock}</em>{t.loc} · UTC+8</span></div>
+              <ul className="ct-list">
+                <li><a href={`mailto:${CONTACT.mail}`}><span className="cl-i"><BrandIco k="mail" /></span><span className="cl-t"><em>Email</em><b dir="ltr">{CONTACT.mail}</b></span><ArrowUpRight size={15} className="cl-a rtl:-scale-x-100" /></a><button type="button" className="cl-copy" onClick={copyMail} aria-label={t.copy}>{copied ? <Check size={15} /> : <CopyIco size={15} />}</button></li>
+                <li><a href={waPlain} target="_blank" rel="noreferrer"><span className="cl-i"><BrandIco k="whatsapp" /></span><span className="cl-t"><em>WhatsApp</em><b dir="ltr">{CONTACT.waShow}</b></span><ArrowUpRight size={15} className="cl-a rtl:-scale-x-100" /></a></li>
+                <li><a href={CONTACT.li} target="_blank" rel="noreferrer"><span className="cl-i"><BrandIco k="linkedin" /></span><span className="cl-t"><em>LinkedIn</em><b dir="ltr">{CONTACT.li.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</b></span><ArrowUpRight size={15} className="cl-a rtl:-scale-x-100" /></a></li>
+                <li><a href={CONTACT.gh} target="_blank" rel="noreferrer"><span className="cl-i"><BrandIco k="github" /></span><span className="cl-t"><em>GitHub</em><b dir="ltr">{CONTACT.gh.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</b></span><ArrowUpRight size={15} className="cl-a rtl:-scale-x-100" /></a></li>
+              </ul>
+              <div className="ct-clock"><MapPin className="ck-pin" size={22} strokeWidth={2} aria-hidden="true" /><b className="ck-t"><Clock /></b><span className="ck-l"><em>{t.ctClock}</em>UTC+8</span></div>
             </div>
             <div className="ct-side">
               <form className="ct-form" noValidate onSubmit={e => e.preventDefault()}>
                 <span className="cf-k">{t.fHead}</span>
                 <div className="fld"><input id="cf-n" name="n" type="text" autoComplete="name" placeholder=" " required /><label htmlFor="cf-n">{t.fName}</label></div>
-                <div className="fld fld-sel"><select id="cf-t" name="t" value={topic} onChange={e => setTopic(+e.target.value)}>{t.fTopics.map((x, i) => <option key={x} value={i}>{x}</option>)}</select><label htmlFor="cf-t">{t.fTopicK}</label><ChevronDown size={16} aria-hidden="true" /></div>
+                <div className="cf-topics" role="radiogroup" aria-label={t.fTopicK}>{t.fTopics.map((x, k) => <button key={x} type="button" role="radio" aria-checked={topic === k} className={topic === k ? 'on' : ''} onClick={() => setTopic(k)}>{x}</button>)}</div>
                 <div className="fld"><textarea id="cf-m" name="m" rows={3} placeholder=" " required /><label htmlFor="cf-m">{t.fMsg}</label></div>
                 <div className="cf-act">
                   <button type="button" className="cf-send" onClick={e => sendVia('mail', e.currentTarget.form!)}><Mail size={16} />{t.fSendMail}</button>
@@ -581,13 +586,7 @@ export default function App() {
                 </div>
                 <p className="cf-note">{t.fNote}</p>
               </form>
-              <div className="ct-icons" role="list">
-                <a role="listitem" href={`mailto:${CONTACT.mail}`} data-l="Email" aria-label="Email"><BrandIco k="mail" /></a>
-                <a role="listitem" href={CONTACT.li} target="_blank" rel="noreferrer" data-l="LinkedIn" aria-label="LinkedIn"><BrandIco k="linkedin" /></a>
-                <a role="listitem" href={CONTACT.gh} target="_blank" rel="noreferrer" data-l="GitHub" aria-label="GitHub"><BrandIco k="github" /></a>
-                <a role="listitem" href={waPlain} target="_blank" rel="noreferrer" data-l="WhatsApp" aria-label="WhatsApp"><BrandIco k="whatsapp" /></a>
-                <button role="listitem" type="button" onClick={copyMail} data-l={copied ? t.copied : CONTACT.mail} aria-label={t.copy}><span className="ai">{copied ? <Check size={18} /> : <CopyIco size={18} />}</span></button>
-              </div>
+              
             </div>
           </div>
           <p className="sr-only" aria-live="polite">{copied ? t.copied : ''}</p>

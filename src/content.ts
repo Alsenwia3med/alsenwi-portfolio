@@ -115,19 +115,19 @@ const PROJECTS: ProjSrc[] = [
     line: b('Product dashboards for personal users, clinics and universities.', 'لوحات المنتج للأفراد والعيادات والجامعات.'),
     did: [b('Dashboards for personal users and clinics', 'لوحات للأفراد والعيادات'), b('A new dashboard for the universities sector', 'لوحة جديدة لقطاع الجامعات'), b('Homepage designs for the official website', 'تصميمات الصفحة الرئيسية للموقع الرسمي')],
     stack: [] },
-  { id: 'sdc', name: b('SDC investor platform', 'منصة SDC للمستثمرين'), img: 'sdc-card.jpg', href: 'https://sdc.cx/', year: '2025–26', kind: b('Fintech', 'تقنية مالية'), context: b('Industrial training', 'تدريب صناعي'),
-    line: b('Investor portal, admin panel and email automation on a live platform.', 'بوابة مستثمرين ولوحة إدارة وأتمتة بريد على منصة حية.'),
-    did: [b('Capital requests and termination flow, user and admin side', 'طلبات رأس المال ومسار الإنهاء من جهة المستخدم والإدارة'), b('Brevo email dashboard across 300+ lists', 'لوحة بريد Brevo لأكثر من 300 قائمة'), b('Live KPI dashboard with a 30-second refresh', 'لوحة مؤشرات لحظية تتحدث كل 30 ثانية')],
-    stack: ['React', 'PHP', 'MySQL', 'Chart.js'] },
-  { id: 'inspire', name: b('Inspire-U platform', 'منصة Inspire-U'), img: 'Inspire-U.png', href: 'https://inspire-u.net/', year: '2025', kind: b('Edtech', 'تعليم'), context: b('At Inspire-U', 'في Inspire-U'),
-    line: b('Registration and student management for international students.', 'التسجيل وإدارة الطلاب الدوليين.'),
-    did: [b('REST API backend in PHP and MySQL', 'خلفية REST بـ PHP وMySQL'), b('Student management system rebuilt', 'إعادة بناء نظام إدارة الطلاب'), b('About 70% of internal workflows automated', 'أتمتة نحو 70% من سير العمل')],
-    stack: ['PHP', 'MySQL', 'REST'] },
   { id: 'ycim', name: b('YCIM portal', 'بوابة YCIM'), img: 'ycim.jpg', href: 'https://ycim.org/', year: '2026', kind: b('Community', 'مجتمع'), context: b('Designed and built', 'تصميم وتنفيذ'),
     line: b('Web portal for the Yemeni Community in Malaysia, launched August 2026.', 'بوابة الجالية اليمنية في ماليزيا، أُطلقت في أغسطس 2026.'),
     did: [b('Information architecture and visual design', 'هيكلة المحتوى والتصميم البصري'), b('Arabic and English layouts', 'تخطيط بالعربية والإنجليزية'), b('Custom CSS on top of WordPress and Elementor', 'CSS مخصص فوق WordPress وElementor')],
     stack: ['WordPress', 'Elementor', 'CSS'] },
-  { id: 'safar', name: b('Safar Easy', 'سفر إيز'), img: 'safar.jpg', logo: true, href: 'https://paleturquoise-wasp-229356.hostingersite.com/', year: '2026', kind: b('Tourism', 'سياحة'), context: b('Redesign and admin', 'إعادة تصميم ولوحة إدارة'),
+  { id: 'inspire', name: b('Inspire-U platform', 'منصة Inspire-U'), img: 'Inspire-U.png', href: 'https://inspire-u.net/', year: '2025', kind: b('Edtech', 'تعليم'), context: b('At Inspire-U', 'في Inspire-U'),
+    line: b('Registration and student management for international students.', 'التسجيل وإدارة الطلاب الدوليين.'),
+    did: [b('REST API backend in PHP and MySQL', 'خلفية REST بـ PHP وMySQL'), b('Student management system rebuilt', 'إعادة بناء نظام إدارة الطلاب'), b('About 70% of internal workflows automated', 'أتمتة نحو 70% من سير العمل')],
+    stack: ['PHP', 'MySQL', 'REST'] },
+  { id: 'sdc', name: b('SDC investor platform', 'منصة SDC للمستثمرين'), img: 'sdc-card.jpg', href: 'https://sdc.cx/', year: '2025–26', kind: b('Fintech', 'تقنية مالية'), context: b('Industrial training', 'تدريب صناعي'),
+    line: b('Investor portal, admin panel and email automation on a live platform.', 'بوابة مستثمرين ولوحة إدارة وأتمتة بريد على منصة حية.'),
+    did: [b('Capital requests and termination flow, user and admin side', 'طلبات رأس المال ومسار الإنهاء من جهة المستخدم والإدارة'), b('Brevo email dashboard across 300+ lists', 'لوحة بريد Brevo لأكثر من 300 قائمة'), b('Live KPI dashboard with a 30-second refresh', 'لوحة مؤشرات لحظية تتحدث كل 30 ثانية')],
+    stack: ['React', 'PHP', 'MySQL', 'Chart.js'] },
+  { id: 'safar', name: b('Safar Ease', 'سفر إيز'), img: 'safar.jpg', logo: true, href: 'https://paleturquoise-wasp-229356.hostingersite.com/', year: '2026', kind: b('Tourism', 'سياحة'), context: b('Redesign and admin', 'إعادة تصميم ولوحة إدارة'),
     line: b('Arabic-first redesign and a full admin dashboard for a Malaysia tourism company.', 'إعادة تصميم عربية ولوحة إدارة كاملة لشركة سياحة في ماليزيا.'),
     did: [b('Home, About and Services pages on a new design system', 'الصفحات الرئيسية ومن نحن والخدمات على نظام تصميم جديد'), b('Admin for apartments, cars, tour programs and student services', 'إدارة الشقق والسيارات والبرامج السياحية وخدمات الطلاب'), b('Admin and staff roles with per-section permissions', 'أدوار المدير والموظفين بصلاحيات لكل قسم')],
     stack: ['WordPress', 'Elementor', 'PHP', 'RTL'] },
@@ -176,6 +176,26 @@ const CRA: Record<string, [L2, L2, L2]> = {
   safar: [b('An Arabic-speaking tourism brand needed a redesign and a way to manage its own listings.', 'احتاجت علامة سياحية ناطقة بالعربية إلى إعادة تصميم وإلى طريقة لإدارة عروضها بنفسها.'), b('Built the Home, About and Services pages on a new design system, plus an admin for apartments, cars, tour programs and student services.', 'بنيت صفحات الرئيسية ومن نحن والخدمات على نظام تصميم جديد، مع لوحة إدارة للشقق والسيارات والبرامج السياحية وخدمات الطلاب.'), b('A full admin dashboard behind an Arabic-first site.', 'لوحة إدارة كاملة خلف موقع عربي أولاً.')],
   astra: [b('Trading signals needed to run without manual execution.', 'احتاجت إشارات التداول إلى تنفيذ بدون تدخل يدوي.'), b('Wrote the automation logic in Python and a product website for it.', 'كتبت منطق الأتمتة ببايثون وموقعاً تعريفياً للمنتج.'), b('A personal project with its own live site.', 'مشروع شخصي بموقع خاص يعمل.')],
   emart: [b('A university brief: one shopping app for more than one platform.', 'مهمة جامعية: تطبيق تسوق واحد لأكثر من منصة.'), b('Built the product catalog and cart flow in Flutter with managed state.', 'بنيت كتالوج المنتجات ومسار السلة بـ Flutter مع إدارة الحالة.'), b('A working cross-platform shopping app.', 'تطبيق تسوق يعمل على أكثر من منصة.')],
+};
+
+
+/* experience cards: the short story (problem -> fix -> result), technical but readable */
+const XPS: Record<string, [L2, L2, L2]> = {
+  roots: [
+    b('One product for three audiences, and every public claim had to be provable.', 'منتج واحد لثلاث فئات، وكل ادعاء علني فيه يجب أن يكون قابلاً للإثبات.'),
+    b('One shared design system across every dashboard, rendered pages diffed word by word against the approved copy, then accessibility and responsive passes.', 'نظام تصميم واحد لكل اللوحات، ومقارنة الصفحات بالنص المعتمد كلمة بكلمة، ثم اختبارات الوصولية والاستجابة.'),
+    b('485 automated tests green in v1.21, and a Universities dashboard that reads as the same product.', '485 اختباراً آلياً ناجحاً في v1.21، ولوحة جامعات تبدو جزءاً من المنتج نفسه.'),
+  ],
+  sdc: [
+    b('Trading ran by hand, nobody could see user activity live, and campaigns were copy-pasted within Gmail limits.', 'التداول كان يدوياً، ولا أحد يرى نشاط المستخدمين لحظياً، والحملات تُنسخ يدوياً ضمن حدود Gmail.'),
+    b('Python strategies with position sizing, stop loss and take profit; React and Chart.js on a PHP backend polling every 30 s; a Brevo API dashboard for segmented sends.', 'استراتيجيات ببايثون بحجم مركز ووقف خسارة وجني ربح؛ React وChart.js على PHP بتحديث كل 30 ثانية؛ ولوحة Brevo API للإرسال المقسّم.'),
+    b('Five live KPIs on one screen and 300+ contact lists in one dashboard.', 'خمسة مؤشرات لحظية في شاشة واحدة وأكثر من 300 قائمة اتصال في لوحة واحدة.'),
+  ],
+  inspire: [
+    b('Staff tracked every student through admission, visa, housing and arrival by hand.', 'الموظفون كانوا يتابعون كل طالب في القبول والتأشيرة والسكن والاستقبال يدوياً.'),
+    b('Rebuilt the student system on PHP, MySQL and REST, and turned each repeated step into an automated flow.', 'أعدت بناء نظام الطلاب على PHP وMySQL وREST، وحوّلت كل خطوة متكررة إلى مسار آلي.'),
+    b('About 70% of internal workflows now run on their own, behind a bilingual public site.', 'نحو 70% من سير العمل الداخلي يعمل آلياً، خلف موقع عام بلغتين.'),
+  ],
 };
 
 /* project write-ups: story, my role, headline numbers (all from my own project documents) */
@@ -235,10 +255,10 @@ const DET_PROJ: Record<string, L2[]> = {
 /* ------------------------------ skills ------------------------------ */
 type SkillGroup = { key: 'fe' | 'be' | 'data' | 'ship'; t: L2; d: L2; items: [string, string[]][] };
 const SKILLS: SkillGroup[] = [
-  { key: 'fe', t: b('Frontend', 'الواجهات'), d: b('Interfaces for dashboards, portals and websites. React and Next.js on the ROOTS-AI product team, React with Chart.js for live dashboards at SDC, and Figma for the design work before it.', 'واجهات للوحات التحكم والبوابات والمواقع. React وNext.js مع فريق منتج ROOTS-AI، وReact مع Chart.js للوحات اللحظية في SDC، وFigma لمرحلة التصميم قبلها.'), items: [['React', ['ROOTS-AI', 'SDC']], ['Next.js', ['ROOTS-AI']], ['TypeScript', ['ROOTS-AI']], ['Tailwind CSS', ['ROOTS-AI', 'YCIM']], ['Framer Motion', ['ROOTS-AI']], ['Figma', ['SDC', 'Inspire-U']]] },
+  { key: 'fe', t: b('Frontend', 'الواجهات'), d: b('Interfaces for dashboards, portals and websites: React and Next.js for the product, Chart.js for live views, and Figma for the design pass before code.', 'واجهات للوحات التحكم والبوابات والمواقع: React وNext.js للمنتج، وChart.js للعرض اللحظي، وFigma لمرحلة التصميم قبل الكود.'), items: [['React', ['ROOTS-AI', 'SDC']], ['Next.js', ['ROOTS-AI']], ['TypeScript', ['ROOTS-AI']], ['Tailwind CSS', ['ROOTS-AI', 'YCIM']], ['Framer Motion', ['ROOTS-AI']], ['Figma', ['SDC', 'Inspire-U']]] },
   { key: 'be', t: b('Backend', 'الخلفية'), d: b('PHP behind admin panels and student systems: REST APIs, authentication middleware, session checks and payment gateway integration.', 'PHP خلف لوحات الإدارة وأنظمة الطلاب: واجهات REST وطبقة مصادقة وفحص الجلسات وربط بوابات الدفع.'), items: [['PHP', ['Inspire-U', 'SDC']], ['REST APIs', ['Inspire-U', 'SDC']], ['Node.js', []], ['Python', ['Astra Bot']], ['Auth & payments', ['SDC']], ['Flask', []]] },
-  { key: 'data', t: b('Data', 'البيانات'), d: b('MySQL behind the admin panels at SDC and Inspire-U, Supabase at Inspire-U, and Chart.js for live KPI views.', 'MySQL خلف لوحات الإدارة في SDC وInspire-U، وSupabase في Inspire-U، وChart.js لعرض المؤشرات اللحظية.'), items: [['MySQL', ['Inspire-U', 'SDC']], ['Supabase', ['Inspire-U']], ['PostgreSQL', []], ['Chart.js', ['SDC']]] },
-  { key: 'ship', t: b('Mobile & tools', 'الجوال والأدوات'), d: b('A cross-platform shopping app in Flutter, WordPress and Elementor sites with custom CSS, and email automation on the Brevo API.', 'تطبيق تسوق متعدد المنصات بـ Flutter، ومواقع WordPress وElementor بـ CSS مخصص، وأتمتة البريد على Brevo API.'), items: [['Flutter / Dart', ['E-Mart']], ['Git / GitHub', []], ['WordPress', ['YCIM', 'Safar Easy']], ['Brevo API', ['SDC']], ['C++', []], ['VS Code', []]] },
+  { key: 'data', t: b('Data', 'البيانات'), d: b('MySQL behind the admin panels, Supabase as a managed backend, and Chart.js for live KPI views.', 'MySQL خلف لوحات الإدارة، وSupabase كخلفية مُدارة، وChart.js لعرض المؤشرات اللحظية.'), items: [['MySQL', ['Inspire-U', 'SDC']], ['Supabase', ['Inspire-U']], ['PostgreSQL', []], ['Chart.js', ['SDC']]] },
+  { key: 'ship', t: b('Mobile & tools', 'الجوال والأدوات'), d: b('A cross-platform shopping app in Flutter, WordPress and Elementor sites with custom CSS, and email automation on the Brevo API.', 'تطبيق تسوق متعدد المنصات بـ Flutter، ومواقع WordPress وElementor بـ CSS مخصص، وأتمتة البريد على Brevo API.'), items: [['Flutter / Dart', ['E-Mart']], ['Git / GitHub', []], ['WordPress', ['YCIM', 'Safar Ease']], ['Brevo API', ['SDC']], ['C++', []], ['VS Code', []]] },
 ];
 
 /* ------------------------------ copy ------------------------------ */
@@ -264,10 +284,10 @@ function build(k: Lang) {
     kicker: en ? 'Kuala Lumpur, Malaysia' : 'كوالالمبور، ماليزيا',
     nowLine: en ? 'Software Engineer at ROOTS-AI' : 'مهندس برمجيات في ROOTS-AI',
     intro: en
-      ? 'I studied Computer Science (Software Development) at UTeM and graduated in March 2026. Today I work on the product team at ROOTS-AI, a health AI company.'
-      : 'درست علوم الحاسب (تطوير البرمجيات) في جامعة UTeM وتخرجت في مارس 2026. أعمل اليوم ضمن فريق المنتج في ROOTS-AI، شركة ذكاء اصطناعي صحي.',
-    b2: en ? 'Interface, logic, data.' : 'واجهة، منطق، بيانات.',
-    b2sub: en ? 'I work across all three, with most of my time on the interface.' : 'أعمل على الطبقات الثلاث، وأغلب وقتي في الواجهة.',
+      ? 'I turn messy operations into fast, clear products: dashboards, REST APIs and automation, from the first wireframe to the shipped release.'
+      : 'أحوّل العمليات المتشابكة إلى منتجات واضحة وسريعة: لوحات تحكم وواجهات REST وأتمتة، من أول تصميم حتى الإصدار النهائي.',
+    b2: en ? 'Built, shipped, in daily use.' : 'مبنية ومُطلقة وتُستخدم يومياً.',
+    b2sub: en ? 'Dashboards, platforms and portals, from the interface people touch to the data underneath.' : 'لوحات ومنصات وبوابات، من الواجهة التي يلمسها الناس إلى البيانات التي تحتها.',
     layers: en ? ['Interface', 'Logic', 'Data'] : ['الواجهة', 'المنطق', 'البيانات'],
     layerNotes: en ? ['React · Next.js · Tailwind', 'PHP · Python · REST', 'MySQL · Supabase'] : ['React · Next.js · Tailwind', 'PHP · Python · REST', 'MySQL · Supabase'],
     certView: en ? 'View credential' : 'عرض الشهادة',
@@ -277,9 +297,8 @@ function build(k: Lang) {
     profileBtn: en ? 'Profile in 30 seconds' : 'الملف في 30 ثانية',
     careerBtn: en ? 'See career' : 'المسيرة المهنية',
     scrollCue: en ? 'Scroll' : 'مرّر',
-    facts: (en
-      ? [['Now', 'ROOTS-AI'], ['Degree', 'BSc CS, UTeM'], ['Graduated', 'March 2026'], ['Languages', 'Arabic, English']]
-      : [['الآن', 'ROOTS-AI'], ['الشهادة', 'بكالوريوس علوم حاسب، UTeM'], ['التخرج', 'مارس 2026'], ['اللغات', 'العربية، الإنجليزية']]) as [string, string][],
+    avail: en ? 'Open to new roles' : 'متاح لفرص جديدة',
+    motto: en ? 'Quiet interfaces. Solid systems.' : 'واجهات هادئة. أنظمة متينة.',
 
     // stats
     stats: (en
@@ -322,6 +341,7 @@ function build(k: Lang) {
     skK: en ? 'Skills' : 'المهارات',
     skH: (en ? ['Tools I use', 'every day.'] : ['أدوات أستخدمها', 'يومياً.']) as [string, string],
     usedAt: en ? 'Used at' : 'استُخدمت في',
+    usedIn: (n: number) => (en ? (n === 1 ? 'Used in 1 project' : `Used in ${n} projects`) : (n === 1 ? 'مستخدمة في مشروع' : n === 2 ? 'مستخدمة في مشروعين' : n <= 10 ? `مستخدمة في ${n} مشاريع` : `مستخدمة في ${n} مشروعاً`)),
     studyUse: en ? 'Coursework' : 'دراسي',
 
     // education
@@ -372,11 +392,13 @@ function build(k: Lang) {
 
     // quick profile popup
     faqK: en ? 'Questions recruiters ask' : 'أسئلة يطرحها مسؤولو التوظيف',
+    xsT: en ? 'The story in short' : 'القصة باختصار',
+    xsK: (en ? ['Problem', 'Fix', 'Result'] : ['المشكلة', 'الحل', 'النتيجة']) as string[],
     crK: (en ? ['Challenge', 'Approach', 'Result'] : ['التحدي', 'المنهج', 'النتيجة']) as string[],
     faq: (en ? [
       ['Who are you?', 'A software engineer in Kuala Lumpur. BSc Computer Science (Software Development) from UTeM, graduated March 2026. I design and build web products end to end: interface, API and database.'],
       ['What do you do at ROOTS-AI?', 'I work on the product team: personal and clinic dashboards, a new dashboard for the Universities sector in the same house style, and homepage design directions. I also prepared the v1.21 website release package, with 485 automated tests passing.'],
-      ['What have you shipped?', 'The sdc.cx investor platform (six months, 450+ hours), the Inspire-U platform and site, the ycim.org community portal (launched August 2026), and a redesign with admin dashboard for Safar Easy.'],
+      ['What have you shipped?', 'The sdc.cx investor platform (six months, 450+ hours), the Inspire-U platform and site, the ycim.org community portal (launched August 2026), and a redesign with admin dashboard for Safar Ease.'],
       ['How do you work?', 'I start from the written brief, turn each requirement into a working screen, keep one design system so the product stays consistent, and verify before release: claims checked, accessibility and responsiveness tested.'],
       ['Which stack?', 'React, Next.js, TypeScript and Tailwind on the front; PHP, Python and REST on the back; MySQL, PostgreSQL and Supabase for data; Figma for design.'],
       ['Which languages?', 'Arabic (native), English (professional), Malay (conversational), German (A1), Chinese (basic).'],
@@ -384,7 +406,7 @@ function build(k: Lang) {
     ] : [
       ['من أنت؟', 'مهندس برمجيات في كوالالمبور. بكالوريوس علوم الحاسوب (تطوير البرمجيات) من UTeM، تخرجت في مارس 2026. أصمم وأبني منتجات الويب من البداية للنهاية: الواجهة وAPI وقاعدة البيانات.'],
       ['ماذا تفعل في ROOTS-AI؟', 'أعمل ضمن فريق المنتج: لوحات الأفراد والعيادات، ولوحة جديدة لقطاع الجامعات بالأسلوب نفسه، واتجاهات تصميم الصفحة الرئيسية. وجهّزت أيضاً حزمة إصدار الموقع v1.21 بـ 485 اختباراً آلياً ناجحاً.'],
-      ['ماذا أنجزت وأطلقت؟', 'منصة sdc.cx للمستثمرين (ستة أشهر وأكثر من 450 ساعة)، ومنصة Inspire-U وموقعها، وبوابة ycim.org للجالية (أُطلقت في أغسطس 2026)، وإعادة تصميم Safar Easy مع لوحة إدارة.'],
+      ['ماذا أنجزت وأطلقت؟', 'منصة sdc.cx للمستثمرين (ستة أشهر وأكثر من 450 ساعة)، ومنصة Inspire-U وموقعها، وبوابة ycim.org للجالية (أُطلقت في أغسطس 2026)، وإعادة تصميم Safar Ease مع لوحة إدارة.'],
       ['كيف تعمل؟', 'أبدأ من الوصف المكتوب، وأحوّل كل متطلب إلى شاشة تعمل، وأحافظ على نظام تصميم واحد ليبقى المنتج متسقاً، وأتحقق قبل الإصدار: مراجعة الادعاءات واختبار الوصولية والاستجابة.'],
       ['ما أدواتك؟', 'React وNext.js وTypeScript وTailwind في الواجهة؛ PHP وبايثون وREST في الخلفية؛ MySQL وPostgreSQL وSupabase للبيانات؛ وFigma للتصميم.'],
       ['ما اللغات التي تتقنها؟', 'العربية (الأم)، الإنجليزية (مهنية)، الملايو (محادثة)، الألمانية (A1)، الصينية (أساسية).'],
@@ -405,12 +427,12 @@ function build(k: Lang) {
     marq: (en ? ['Software Engineer', 'ROOTS-AI', 'UTeM', 'Six Digit Club', 'Inspire-U', 'Kuala Lumpur'] : ['مهندس برمجيات', 'ROOTS-AI', 'UTeM', 'Six Digit Club', 'Inspire-U', 'كوالالمبور']) as string[],
     creditsK: en ? 'End credits' : 'شارة النهاية',
     credits: (en
-      ? [['Role', 'Software Engineer'], ['Now', 'ROOTS-AI, Health AI'], ['Studied', 'UTeM, BSc Computer Science'], ['Based in', 'Kuala Lumpur, Malaysia'], ['Built with', 'React, Vite, Tailwind CSS']]
-      : [['الدور', 'مهندس برمجيات'], ['الآن', 'ROOTS-AI، الذكاء الصحي'], ['الدراسة', 'UTeM، بكالوريوس علوم الحاسوب'], ['المقر', 'كوالالمبور، ماليزيا'], ['بُني بـ', 'React وVite وTailwind CSS']]) as [string, string][],
+      ? [['Role', 'Software Engineer'], ['Now', 'ROOTS-AI, Health AI'], ['Studied', 'UTeM, BSc Computer Science'], ['Based in', 'Kuala Lumpur, Malaysia']]
+      : [['الدور', 'مهندس برمجيات'], ['الآن', 'ROOTS-AI، الذكاء الصحي'], ['الدراسة', 'UTeM، بكالوريوس علوم الحاسوب'], ['المقر', 'كوالالمبور، ماليزيا']]) as [string, string][],
     end: en ? 'Fin.' : 'النهاية.',
     cur: en ? 'View' : 'عرض',
 
-    roles: ROLES.map(r => ({ id: r.id, org: r.org, logo: r.logo, href: r.href, date: r.date, end: r.end, current: !!r.current, when: p(r.when), tag: r.tag ? p(r.tag) : '', role: p(r.role), place: p(r.place), about: p(r.about), pts: r.pts.map(p), ptd: (DET_ROLE[r.id] || []).map(p), stack: r.stack, x: { facts: ROLE_X[r.id].facts.map(([a, c]) => [p(a), p(c)] as [string, string]), table: ROLE_X[r.id].table.map(([a, c, d]) => [p(a), p(c), p(d)] as [string, string, string]), nums: ROLE_X[r.id].nums.map(([n, l]) => [n, p(l)] as [string, string]) } })),
+    roles: ROLES.map(r => ({ id: r.id, org: r.org, logo: r.logo, href: r.href, date: r.date, end: r.end, current: !!r.current, when: p(r.when), tag: r.tag ? p(r.tag) : '', role: p(r.role), place: p(r.place), about: p(r.about), pts: r.pts.map(p), ptd: (DET_ROLE[r.id] || []).map(p), stack: r.stack, xs: XPS[r.id].map(p) as [string, string, string], x: { facts: ROLE_X[r.id].facts.map(([a, c]) => [p(a), p(c)] as [string, string]), table: ROLE_X[r.id].table.map(([a, c, d]) => [p(a), p(c), p(d)] as [string, string, string]), nums: ROLE_X[r.id].nums.map(([n, l]) => [n, p(l)] as [string, string]) } })),
     projects: PROJECTS.map(x => ({ id: x.id, name: p(x.name), img: x.img, logo: !!x.logo, href: x.href, year: x.year, kind: p(x.kind), line: p(x.line), did: x.did.map(p), didd: (DET_PROJ[x.id] || []).map(p), stack: x.id === 'roots' ? ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Figma'] : x.stack, cra: CRA[x.id].map(p) as [string, string, string], story: p(STORY[x.id].story), role: p(STORY[x.id].role), nums: STORY[x.id].nums.map(([n, l]) => [n, p(l)] as [string, string]), context: p(x.context) })),
     skills: SKILLS.map(g => ({ key: g.key, t: p(g.t), d: p(g.d), items: g.items })),
     bdK: en ? 'Capabilities' : 'القدرات',
