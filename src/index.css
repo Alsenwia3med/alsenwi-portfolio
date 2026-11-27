@@ -2030,3 +2030,15 @@ html[dir=rtl] .fld-sel select{padding:24px 16px 10px 40px}
   .pf-head{padding-inline-end:46px}.pf-av{width:56px;height:56px}
   .qp-links .btn-ink{flex:1 1 100%}
 }
+
+/* ===== V28: glowing back-to-top ===== */
+.foot-top{position:relative;overflow:hidden;gap:8px;padding:11px 22px;border-radius:999px;color:#fff!important;font-weight:600;background:linear-gradient(135deg,#6f8cff,#8b6bff 55%,#ffa77a);box-shadow:0 0 0 1px rgba(255,255,255,.22) inset,0 14px 34px -10px rgba(111,140,255,.85),0 0 26px rgba(139,107,255,.45);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.foot-top::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:topShine 3.8s 1.2s ease-in-out infinite}
+@keyframes topShine{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.foot-top:hover{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 20px 40px -10px rgba(111,140,255,.95),0 0 36px rgba(255,167,122,.5)}
+@media (max-width:760px){
+  .foot-in{flex-direction:column!important;align-items:center!important;text-align:center;gap:18px;padding-top:44px!important}
+  .foot-top{order:-1;margin-inline:auto}
+  .foot-soc{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.foot-top::after{animation:none}}
