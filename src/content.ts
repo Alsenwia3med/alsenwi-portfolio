@@ -331,7 +331,7 @@ function build(k: Lang) {
       ['Associate Software Developer Workshop', 'IEEE', '2024'],
     ] as [string, string, string][],
     langK: en ? 'Languages' : 'اللغات',
-    langs: (en ? [['Arabic', 'Native'], ['English', 'Professional'], ['Malay', 'Conversational'], ['German', 'A1']] : [['العربية', 'اللغة الأم'], ['الإنجليزية', 'مهنية'], ['الملايو', 'محادثة'], ['الألمانية', 'A1']]) as [string, string][],
+    langs: (en ? [['Arabic', 'Native'], ['English', 'Professional'], ['Malay', 'Conversational'], ['German', 'A1'], ['Chinese', 'Basic']] : [['العربية', 'اللغة الأم'], ['الإنجليزية', 'مهنية'], ['الملايو', 'محادثة'], ['الألمانية', 'A1'], ['الصينية', 'أساسي']]) as [string, string][],
 
     // contact
     ctK: en ? 'Contact' : 'تواصل',
@@ -347,6 +347,7 @@ function build(k: Lang) {
     tblA: en ? 'Area' : 'المجال', tblB: en ? 'What I did' : 'ماذا فعلت', tblC: en ? 'Outcome' : 'النتيجة',
     fMsg: en ? 'Message' : 'الرسالة',
     fSend: en ? 'Send message' : 'إرسال الرسالة',
+    fSendMail: en ? 'Send Email' : 'أرسل بالبريد', fSendWa: en ? 'Send WhatsApp' : 'أرسل واتساب', fTopicK: en ? 'What is it about?' : 'ما موضوع رسالتك؟',
     fWa: en ? 'WhatsApp' : 'واتساب',
     fNote: en ? 'Pick a topic, write your message, then send it by email or WhatsApp.' : 'اختر الموضوع واكتب رسالتك ثم أرسلها بالبريد أو واتساب.',
     fOk: en ? 'Opening your email app' : 'جارٍ فتح تطبيق البريد',

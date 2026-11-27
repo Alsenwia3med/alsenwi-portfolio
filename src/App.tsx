@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Send, ArrowLeft, ArrowRight, Download,
   ArrowUpRight, Mail, Linkedin, Github, MessageCircle, MapPin, X, Sun, Moon, Copy as CopyIco, Check,
-  LayoutDashboard, Building2, GraduationCap, PanelsTopLeft, Monitor, Server, Database, Wrench, Award, Languages, BookOpen, ArrowUp, Route, LayoutGrid, Layers, Webhook, ShieldCheck, Timer, Workflow, Briefcase, Share2, PenTool, Users, FileText, Palette, Gauge, Sparkles, ScanLine, CodeXml,
+  LayoutDashboard, Building2, GraduationCap, PanelsTopLeft, Monitor, Server, Database, Wrench, Award, Languages, BookOpen, ArrowUp, Route, LayoutGrid, Layers, Webhook, ShieldCheck, Timer, Workflow, Briefcase, Share2, PenTool, Users, FileText, Palette, Gauge, Sparkles, ScanLine, CodeXml, ChevronDown,
 } from 'lucide-react';
 import Hero from './Hero';
 import Aurora from './Aurora';
@@ -43,6 +43,8 @@ function Counter({ to, suf }: { to: number; suf: string }) {
   return <span ref={ref}>{to + suf}</span>;
 }
 
+const AR: Record<string, number> = { 'roots.jpg': 1.996, 'sdc-card.jpg': 1.79, 'Inspire-U.png': 1.482, 'ycim.jpg': 2.077, 'astra.jpg': 1.79, 'emart.jpg': 1.792 };
+const arOf = (f: string) => AR[f] ?? 1.6;
 function Mark({ src, name, size = 48 }: { src?: string; name: string; size?: number }) {
   const [bad, setBad] = useState(!src);
   return <span className="mark" style={{ width: size, height: size }}>{!bad && src ? <img src={img(src)} alt="" onError={() => setBad(true)} loading="lazy" /> : <b>{name.replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase()}</b>}</span>;
@@ -208,7 +210,7 @@ const Reel = ({ t, onOpen }: { t: Copy; onOpen: (id: string) => void }) => {
           <div className="reel-track" ref={trk}>
             {t.projects.map((p, i) => (
               <button key={p.id} type="button" className="reel-slide" onClick={() => onOpen(p.id)} aria-haspopup="dialog">
-                <span className="rs-img"><span className={`rs-in${p.logo ? ' is-logo' : ''}`} style={{ ['--im' as any]: `url(${img(p.img)})` }}><img src={img(p.img)} alt="" loading="lazy" /></span>{i === 0 && <em className="badge rs-badge"><i />{t.featured}</em>}</span>
+                <span className="rs-img"><span className={`rs-in${p.logo ? ' is-logo' : ''}`} style={{ ['--im' as any]: `url(${img(p.img)})`, ['--ar' as any]: arOf(p.img) }}><img src={img(p.img)} alt="" loading="lazy" /></span>{i === 0 && <em className="badge rs-badge"><i />{t.featured}</em>}</span>
                 <span className="rs-cap">
                   <span className="rs-meta" dir="ltr"><span>No. {String(i + 1).padStart(2, '0')}</span><span>{p.kind}</span><span>{p.year}</span>{p.href && <span className="pc-live"><i />{t.live}</span>}</span>
                   <b>{p.name}</b>
@@ -365,9 +367,9 @@ export default function App() {
         <Mark src={r.logo} name={r.org} size={56} />
         <div><span className="md-k">{r.current ? <em className="badge"><i />{t.current}</em> : r.when}</span><h2 id="md-title">{r.role}</h2><p className="md-org">{r.org} · {r.place}</p></div>
       </div>
-      <dl className="rb-facts">{r.x.facts.map(([k, v], i) => <div key={k} style={{ ['--i' as any]: i }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+      <dl className="rb-facts">{r.x.facts.slice(0, 3).map(([k, v], i) => <div key={k} style={{ ['--i' as any]: i }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
       <p className="md-about">{r.about}</p>
-      <div className={`md-nums n${Math.min(r.x.nums.length, 3)}`}>{r.x.nums.map(([n, l], i) => <div key={l} style={{ ['--i' as any]: i }}><b dir="ltr">{n}</b><span>{l}</span></div>)}</div>
+      <div className="rb-nums" style={{ ['--c' as any]: Math.min(r.x.nums.length, 4) }}>{r.x.nums.slice(0, 4).map(([n, l], i) => <div key={l} style={{ ['--i' as any]: i }}><b dir="ltr">{n}</b><span>{l}</span></div>)}</div>
       <h3 className="md-sub">{t.whatIDid}</h3>
       <div className="rb-tbl" role="table">
         <div className="rb-th" role="row"><span role="columnheader">{t.tblA}</span><span role="columnheader">{t.tblB}</span><span role="columnheader">{t.tblC}</span></div>
@@ -379,7 +381,7 @@ export default function App() {
   );
   const ProjectBody = ({ p }: { p: Project }) => (
     <>
-      <div className={`md-img${p.logo ? ' is-logo' : ''}`} style={{ ['--im' as any]: `url(${img(p.img)})` }}><img src={img(p.img)} alt="" /></div>
+      <div className={`md-img${p.logo ? ' is-logo' : ''}`} style={{ ['--im' as any]: `url(${img(p.img)})`, ['--ar' as any]: arOf(p.img) }}><img src={img(p.img)} alt="" /></div>
       <span className="md-k">{p.kind} · <bdi dir="ltr">{p.year}</bdi> · {p.context}</span>
       <h2 id="md-title">{p.name}</h2>
       <p className="md-role"><i />{t.roleK}<b>{p.role}</b></p>
@@ -406,20 +408,20 @@ export default function App() {
   );
   const ProfileBody = () => (
     <>
-      <div className="md-head">
-        <img className="md-avatar" src={img('alsenwi.jpg')} alt="" />
-        <div><span className="md-k">{t.qpK}</span><h2 id="md-title">{t.name}</h2><p className="md-org">{t.role} · {t.loc}</p></div>
+      <div className="pf-head">
+        <span className="pf-av"><img src={img('alsenwi.jpg')} alt="" /></span>
+        <div><span className="md-k">{t.qpK}</span><h2 id="md-title">{t.name}</h2><p className="pf-role">{t.role}</p></div>
       </div>
-      <dl className="qp">{t.qpRows.map(([k, v], i) => <div key={k} style={{ ['--i' as any]: i }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+      <div className="pf-grid">{t.qpRows.slice(1).map(([k, v], i, arr) => { const I = [Building2, GraduationCap, Briefcase, CodeXml, Languages][i] || Sparkles; const last = i === arr.length - 1; return (
+        <div key={k} className={`pf-t${last ? ' wide' : ''}`} style={{ ['--i' as any]: i }}><span className="pf-i"><I size={15} strokeWidth={1.8} /></span><dt>{k}</dt>{last ? <dd className="pf-chips">{v.split(/[,،]\s*/).map(x => <span key={x}>{x}</span>)}</dd> : <dd>{v}</dd>}</div>); })}</div>
       <div className="qp-links">
-        <a href={`mailto:${CONTACT.mail}`} className="btn btn-ink"><Mail size={16} />{CONTACT.mail}</a>
-        <a href={`${import.meta.env.BASE_URL}Ahmed-Alsenwi-CV.pdf`} download="Ahmed-Alsenwi-Software-Engineering-CV.pdf" className="btn btn-line"><Download size={16} />{t.cvBtn}</a>
+        <a href={`${import.meta.env.BASE_URL}Ahmed-Alsenwi-CV.pdf`} download="Ahmed-Alsenwi-Software-Engineering-CV.pdf" className="btn btn-ink"><Download size={16} />{t.cvBtn}</a>
+        <a href={`mailto:${CONTACT.mail}`} className="btn btn-line" aria-label="Email"><Mail size={16} /></a>
         <a href={CONTACT.li} target="_blank" rel="noreferrer" className="btn btn-line" aria-label="LinkedIn"><Linkedin size={16} /></a>
         <a href={CONTACT.gh} target="_blank" rel="noreferrer" className="btn btn-line" aria-label="GitHub"><Github size={16} /></a>
       </div>
     </>
   );
-
   const modalBody = () => {
     if (!modal) return null;
     if (modal.kind === 'role') { const r = t.roles.find(x => x.id === modal.id); return r ? <RoleBody r={r} /> : null; }
@@ -502,7 +504,7 @@ export default function App() {
               </div>
               <div className="ed-lang lux">
                 <span className="ed-k"><Ico a="bob" d={2} c="teal"><Languages size={18} /></Ico>{t.langK}</span>
-                <ul>{t.langs.map(([n, l], i) => <li key={n} style={{ ['--lv' as any]: [1, .86, .6, .2][i], ['--i' as any]: i }}><span className={`ai ai-sm ai-${(['green', 'blue', 'orange', 'red'] as IC[])[i]}`} aria-hidden="true"><i>{['AR', 'EN', 'MS', 'DE'][i]}</i></span><b>{n}</b><span className="lv-t">{l}</span><i className="lv-bar" aria-hidden="true" /></li>)}</ul>
+                <ul>{t.langs.map(([n, l], i) => <li key={n} style={{ ['--lv' as any]: [1, .86, .6, .2, .15][i], ['--i' as any]: i }}><span className={`ai ai-sm ai-${(['green', 'blue', 'orange', 'red', 'purple'] as IC[])[i]}`} aria-hidden="true"><i>{['AR', 'EN', 'MS', 'DE', 'ZH'][i]}</i></span><b>{n}</b><span className="lv-t">{l}</span><i className="lv-bar" aria-hidden="true" /></li>)}</ul>
               </div>
             </div>
           </div>
@@ -568,11 +570,11 @@ export default function App() {
               <form className="ct-form" noValidate onSubmit={e => e.preventDefault()}>
                 <span className="cf-k">{t.fHead}</span>
                 <div className="fld"><input id="cf-n" name="n" type="text" autoComplete="name" placeholder=" " required /><label htmlFor="cf-n">{t.fName}</label></div>
-                <div className="cf-topics" role="radiogroup" aria-label={t.fMail}>{t.fTopics.map((x, i) => <button key={x} type="button" role="radio" aria-checked={topic === i} className={topic === i ? 'on' : ''} onClick={() => setTopic(i)}>{x}</button>)}</div>
+                <div className="fld fld-sel"><select id="cf-t" name="t" value={topic} onChange={e => setTopic(+e.target.value)}>{t.fTopics.map((x, i) => <option key={x} value={i}>{x}</option>)}</select><label htmlFor="cf-t">{t.fTopicK}</label><ChevronDown size={16} aria-hidden="true" /></div>
                 <div className="fld"><textarea id="cf-m" name="m" rows={3} placeholder=" " required /><label htmlFor="cf-m">{t.fMsg}</label></div>
                 <div className="cf-act">
-                  <button type="button" className="cf-send" onClick={e => sendVia('mail', e.currentTarget.form!)}><Mail size={16} />{t.fViaMail}</button>
-                  <button type="button" className="cf-wa" onClick={e => sendVia('wa', e.currentTarget.form!)}><BrandIco k="whatsapp" />{t.fWa}</button>
+                  <button type="button" className="cf-send" onClick={e => sendVia('mail', e.currentTarget.form!)}><Mail size={16} />{t.fSendMail}</button>
+                  <button type="button" className="cf-wa" onClick={e => sendVia('wa', e.currentTarget.form!)}><BrandIco k="whatsapp" />{t.fSendWa}</button>
                 </div>
                 <p className="cf-note">{t.fNote}</p>
               </form>
