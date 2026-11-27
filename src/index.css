@@ -2003,3 +2003,30 @@ html[dir=rtl] .fld-sel select{padding:24px 16px 10px 40px}
 .ct-icons{justify-content:center;gap:10px;padding-top:4px;position:relative}
 .ct-icons>a,.ct-icons>button{width:42px!important;height:42px!important;border-color:rgba(255,255,255,.22)}
 .ct-icons .ai{--s:20px!important}.ct-icons .ai svg{width:20px;height:20px}
+
+/* ===== V27: mobile sheet ===== */
+@media (max-width:640px){
+  .md-in{padding:0 18px calc(24px + env(safe-area-inset-bottom))!important}
+  .md-in::before{display:none!important}
+  .md-grab{display:block!important;position:sticky;top:0;z-index:5;height:26px;margin:0 -18px 6px!important;background:linear-gradient(var(--surface) 70%,transparent)}
+  .md-grab i{margin-top:9px}
+  .md-x{top:10px!important;z-index:6;width:36px;height:36px;background:var(--surface-2,var(--surface));border:1px solid var(--line-2)}
+  .md-head{display:flex;align-items:center;gap:12px;padding-inline-end:46px}
+  .md-head .mark{width:46px!important;height:46px!important;flex:none}
+  .md-head h2,.md-in h2{font-size:21px!important;line-height:1.2}
+  .md-org,.pf-role{font-size:13.5px}
+  .md-about,.md-story{font-size:14.5px;line-height:1.7}
+  .rb-facts{grid-template-columns:1fr!important;margin-top:14px}
+  .rb-facts div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 14px}
+  .rb-facts dd{margin:0;text-align:end;font-size:13px}
+  .rb-nums b{font-size:30px}
+  .rb-nums div{padding:14px 12px}
+  .md-sub{margin:20px 0 6px!important}
+  .rb-tbl{border-radius:16px}
+  .rb-tr{padding:14px 14px}
+  .rb-tr b{font-size:14.5px}
+  .rb-tr em{margin-top:4px;padding-inline-start:10px}
+  .md-img{border-radius:16px}
+  .pf-head{padding-inline-end:46px}.pf-av{width:56px;height:56px}
+  .qp-links .btn-ink{flex:1 1 100%}
+}
