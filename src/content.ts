@@ -166,6 +166,18 @@ const DET_ROLE: Record<string, L2[]> = {
   ],
 };
 
+
+/* challenge -> approach -> result, facts only (from my repos and project documents) */
+const CRA: Record<string, [L2, L2, L2]> = {
+  roots: [b('One product, three audiences (individuals, clinics, universities), and a release where every public claim had to be verifiable.', 'منتج واحد لثلاث فئات (أفراد وعيادات وجامعات)، وإصدار يجب أن يكون كل ادعاء علني فيه قابلاً للتحقق.'), b('Reused one house style across dashboards; checked homepage and legal claims before and after; compared rendered pages with the approved document word for word; tested accessibility and responsiveness.', 'أعدت استخدام أسلوب واحد عبر اللوحات؛ راجعت ادعاءات الرئيسية والصفحات القانونية قبل وبعد؛ قارنت الصفحات بالوثيقة المعتمدة كلمة بكلمة؛ واختبرت الوصولية والاستجابة.'), b('485 automated tests passing in v1.21, and a new Universities dashboard that reads as part of the same product.', '485 اختباراً آلياً ناجحاً في v1.21، ولوحة جامعات جديدة تبدو جزءاً من المنتج نفسه.')],
+  sdc: [b('Trading was run by hand, the team had no live view of user activity, and email campaigns were copy-pasted within Gmail limits.', 'كان التداول يدوياً، ولا رؤية لحظية لنشاط المستخدمين، والحملات البريدية تُنسخ يدوياً ضمن قيود Gmail.'), b('Python strategies with position sizing, stop loss and take profit; a React and Chart.js dashboard on a PHP backend, refreshed every 30 s; a Brevo API dashboard for segmented campaigns.', 'استراتيجيات ببايثون مع حجم المركز ووقف الخسارة وجني الربح؛ لوحة React وChart.js على خلفية PHP تتحدث كل 30 ثانية؛ ولوحة Brevo API للحملات المقسّمة.'), b('A runnable automation base, five live KPIs on one screen, and one dashboard for 300+ contact lists.', 'أساس أتمتة جاهز، وخمسة مؤشرات لحظية في شاشة واحدة، ولوحة واحدة لأكثر من 300 قائمة اتصال.')],
+  inspire: [b('Staff followed each international student through admission, visa, housing and arrival with manual steps.', 'كان الموظفون يتابعون كل طالب دولي في القبول والتأشيرة والسكن والاستقبال بخطوات يدوية.'), b('Rebuilt the student system on PHP, MySQL and REST APIs, and turned repeated steps into automated flows.', 'أعدت بناء نظام الطلاب على PHP وMySQL وواجهات REST، وحوّلت الخطوات المتكررة إلى مسارات آلية.'), b('About 70% of internal workflows automated, plus a bilingual public site feeding the lead flow.', 'نحو 70% من سير العمل الداخلي أصبح آلياً، مع موقع عام بلغتين يغذّي استقبال الطلبات.')],
+  ycim: [b('A community needed one trustworthy home online, readable in Arabic and English.', 'احتاجت الجالية إلى مكان واحد موثوق على الإنترنت يُقرأ بالعربية والإنجليزية.'), b('Planned the information architecture, designed the visuals, built Arabic and English layouts with custom CSS on WordPress and Elementor.', 'خططت هيكلة المحتوى وصممت المظهر وبنيت تخطيطات عربية وإنجليزية بـ CSS مخصص على WordPress وElementor.'), b('ycim.org launched in August 2026.', 'أُطلق ycim.org في أغسطس 2026.')],
+  safar: [b('An Arabic-speaking tourism brand needed a redesign and a way to manage its own listings.', 'احتاجت علامة سياحية ناطقة بالعربية إلى إعادة تصميم وإلى طريقة لإدارة عروضها بنفسها.'), b('Built the Home, About and Services pages on a new design system, plus an admin for apartments, cars, tour programs and student services.', 'بنيت صفحات الرئيسية ومن نحن والخدمات على نظام تصميم جديد، مع لوحة إدارة للشقق والسيارات والبرامج السياحية وخدمات الطلاب.'), b('A full admin dashboard behind an Arabic-first site.', 'لوحة إدارة كاملة خلف موقع عربي أولاً.')],
+  astra: [b('Trading signals needed to run without manual execution.', 'احتاجت إشارات التداول إلى تنفيذ بدون تدخل يدوي.'), b('Wrote the automation logic in Python and a product website for it.', 'كتبت منطق الأتمتة ببايثون وموقعاً تعريفياً للمنتج.'), b('A personal project with its own live site.', 'مشروع شخصي بموقع خاص يعمل.')],
+  emart: [b('A university brief: one shopping app for more than one platform.', 'مهمة جامعية: تطبيق تسوق واحد لأكثر من منصة.'), b('Built the product catalog and cart flow in Flutter with managed state.', 'بنيت كتالوج المنتجات ومسار السلة بـ Flutter مع إدارة الحالة.'), b('A working cross-platform shopping app.', 'تطبيق تسوق يعمل على أكثر من منصة.')],
+};
+
 /* project write-ups: story, my role, headline numbers (all from my own project documents) */
 const STORY: Record<string, { story: L2; role: L2; nums: [string, L2][] }> = {
   roots: {
@@ -359,6 +371,25 @@ function build(k: Lang) {
     loc: en ? 'Kuala Lumpur, Malaysia' : 'كوالالمبور، ماليزيا',
 
     // quick profile popup
+    faqK: en ? 'Questions recruiters ask' : 'أسئلة يطرحها مسؤولو التوظيف',
+    crK: (en ? ['Challenge', 'Approach', 'Result'] : ['التحدي', 'المنهج', 'النتيجة']) as string[],
+    faq: (en ? [
+      ['Who are you?', 'A software engineer in Kuala Lumpur. BSc Computer Science (Software Development) from UTeM, graduated March 2026. I design and build web products end to end: interface, API and database.'],
+      ['What do you do at ROOTS-AI?', 'I work on the product team: personal and clinic dashboards, a new dashboard for the Universities sector in the same house style, and homepage design directions. I also prepared the v1.21 website release package, with 485 automated tests passing.'],
+      ['What have you shipped?', 'The sdc.cx investor platform (six months, 450+ hours), the Inspire-U platform and site, the ycim.org community portal (launched August 2026), and a redesign with admin dashboard for Safar Easy.'],
+      ['How do you work?', 'I start from the written brief, turn each requirement into a working screen, keep one design system so the product stays consistent, and verify before release: claims checked, accessibility and responsiveness tested.'],
+      ['Which stack?', 'React, Next.js, TypeScript and Tailwind on the front; PHP, Python and REST on the back; MySQL, PostgreSQL and Supabase for data; Figma for design.'],
+      ['Which languages?', 'Arabic (native), English (professional), Malay (conversational), German (A1), Chinese (basic).'],
+      ['What are you looking for?', 'A full-time software engineering role where I can own product-facing work from design to production.'],
+    ] : [
+      ['من أنت؟', 'مهندس برمجيات في كوالالمبور. بكالوريوس علوم الحاسوب (تطوير البرمجيات) من UTeM، تخرجت في مارس 2026. أصمم وأبني منتجات الويب من البداية للنهاية: الواجهة وAPI وقاعدة البيانات.'],
+      ['ماذا تفعل في ROOTS-AI؟', 'أعمل ضمن فريق المنتج: لوحات الأفراد والعيادات، ولوحة جديدة لقطاع الجامعات بالأسلوب نفسه، واتجاهات تصميم الصفحة الرئيسية. وجهّزت أيضاً حزمة إصدار الموقع v1.21 بـ 485 اختباراً آلياً ناجحاً.'],
+      ['ماذا أنجزت وأطلقت؟', 'منصة sdc.cx للمستثمرين (ستة أشهر وأكثر من 450 ساعة)، ومنصة Inspire-U وموقعها، وبوابة ycim.org للجالية (أُطلقت في أغسطس 2026)، وإعادة تصميم Safar Easy مع لوحة إدارة.'],
+      ['كيف تعمل؟', 'أبدأ من الوصف المكتوب، وأحوّل كل متطلب إلى شاشة تعمل، وأحافظ على نظام تصميم واحد ليبقى المنتج متسقاً، وأتحقق قبل الإصدار: مراجعة الادعاءات واختبار الوصولية والاستجابة.'],
+      ['ما أدواتك؟', 'React وNext.js وTypeScript وTailwind في الواجهة؛ PHP وبايثون وREST في الخلفية؛ MySQL وPostgreSQL وSupabase للبيانات؛ وFigma للتصميم.'],
+      ['ما اللغات التي تتقنها؟', 'العربية (الأم)، الإنجليزية (مهنية)، الملايو (محادثة)، الألمانية (A1)، الصينية (أساسية).'],
+      ['ماذا تبحث عنه؟', 'وظيفة مهندس برمجيات بدوام كامل أتولى فيها العمل المواجه للمنتج من التصميم إلى الإنتاج.'],
+    ]) as [string, string][],
     qpK: en ? 'Profile' : 'الملف',
     qpRows: (en
       ? [['Who', 'Ahmed Al-Senwi, software engineer in Kuala Lumpur'], ['Working at', 'ROOTS-AI, Software Engineer'], ['Studied', 'BSc Computer Science (Software Development), UTeM, 2022–2026'], ['Before', 'Six Digit Club (fintech), Inspire-U (edtech)'], ['Builds with', 'Next.js, React, TypeScript, PHP, MySQL'], ['Languages', 'Arabic, English, Malay']]
@@ -380,7 +411,7 @@ function build(k: Lang) {
     cur: en ? 'View' : 'عرض',
 
     roles: ROLES.map(r => ({ id: r.id, org: r.org, logo: r.logo, href: r.href, date: r.date, end: r.end, current: !!r.current, when: p(r.when), tag: r.tag ? p(r.tag) : '', role: p(r.role), place: p(r.place), about: p(r.about), pts: r.pts.map(p), ptd: (DET_ROLE[r.id] || []).map(p), stack: r.stack, x: { facts: ROLE_X[r.id].facts.map(([a, c]) => [p(a), p(c)] as [string, string]), table: ROLE_X[r.id].table.map(([a, c, d]) => [p(a), p(c), p(d)] as [string, string, string]), nums: ROLE_X[r.id].nums.map(([n, l]) => [n, p(l)] as [string, string]) } })),
-    projects: PROJECTS.map(x => ({ id: x.id, name: p(x.name), img: x.img, logo: !!x.logo, href: x.href, year: x.year, kind: p(x.kind), line: p(x.line), did: x.did.map(p), didd: (DET_PROJ[x.id] || []).map(p), stack: x.id === 'roots' ? ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Figma'] : x.stack, story: p(STORY[x.id].story), role: p(STORY[x.id].role), nums: STORY[x.id].nums.map(([n, l]) => [n, p(l)] as [string, string]), context: p(x.context) })),
+    projects: PROJECTS.map(x => ({ id: x.id, name: p(x.name), img: x.img, logo: !!x.logo, href: x.href, year: x.year, kind: p(x.kind), line: p(x.line), did: x.did.map(p), didd: (DET_PROJ[x.id] || []).map(p), stack: x.id === 'roots' ? ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Figma'] : x.stack, cra: CRA[x.id].map(p) as [string, string, string], story: p(STORY[x.id].story), role: p(STORY[x.id].role), nums: STORY[x.id].nums.map(([n, l]) => [n, p(l)] as [string, string]), context: p(x.context) })),
     skills: SKILLS.map(g => ({ key: g.key, t: p(g.t), d: p(g.d), items: g.items })),
     bdK: en ? 'Capabilities' : 'القدرات',
     bdH: (en ? ['Four kinds of work', 'I build.'] : ['أربعة أنواع من الأعمال', 'التي أبنيها.']) as [string, string],

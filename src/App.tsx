@@ -388,6 +388,7 @@ export default function App() {
       <h3 className="md-sub">{t.aboutK}</h3>
       <p className="md-story">{p.story}</p>
       {p.nums.length > 0 && <div className={`md-nums n${p.nums.length}`}>{p.nums.map(([n, l], i) => <div key={n + l} style={{ ['--i' as any]: i }}><b dir="ltr">{n}</b><span>{l}</span></div>)}</div>}
+      <ol className="cra">{p.cra.map((x, i) => <li key={i} style={{ ['--i' as any]: i }}><span className="cra-k"><i>{i + 1}</i>{t.crK[i]}</span><p>{x}</p></li>)}</ol>
       <h3 className="md-sub">{t.whatIDid}</h3>
       <ul className="md-list">{p.did.map((x, i) => <li key={x} style={{ ['--i' as any]: i }}><Bi text={x} /><span className="md-t"><b>{x}</b>{p.didd[i] && <em>{p.didd[i]}</em>}</span></li>)}</ul>
       {p.stack.length > 0 && <><h3 className="md-sub">{t.stackT}</h3><ul className="chips">{p.stack.map(s => <li key={s}>{s}</li>)}</ul></>}
@@ -414,6 +415,8 @@ export default function App() {
       </div>
       <div className="pf-grid">{t.qpRows.slice(1).map(([k, v], i, arr) => { const I = [Building2, GraduationCap, Briefcase, CodeXml, Languages][i] || Sparkles; const last = i === arr.length - 1; return (
         <div key={k} className={`pf-t${last ? ' wide' : ''}`} style={{ ['--i' as any]: i }}><span className="pf-i"><I size={15} strokeWidth={1.8} /></span><dt>{k}</dt>{last ? <dd className="pf-chips">{v.split(/[,،]\s*/).map(x => <span key={x}>{x}</span>)}</dd> : <dd>{v}</dd>}</div>); })}</div>
+      <h3 className="md-sub">{t.faqK}</h3>
+      <div className="faq">{t.faq.map(([q, an], i) => <details key={q} name="faq" open={i === 0}><summary>{q}<ChevronDown size={16} aria-hidden="true" /></summary><p>{an}</p></details>)}</div>
       <div className="qp-links">
         <a href={`${import.meta.env.BASE_URL}Ahmed-Alsenwi-CV.pdf`} download="Ahmed-Alsenwi-Software-Engineering-CV.pdf" className="btn btn-ink"><Download size={16} />{t.cvBtn}</a>
         <a href={`mailto:${CONTACT.mail}`} className="btn btn-line" aria-label="Email"><Mail size={16} /></a>
@@ -600,7 +603,6 @@ export default function App() {
         <div className="wrap foot-mark" aria-hidden="true">{t.name}</div>
         <div className="wrap foot-in">
           <span>© {new Date().getFullYear()} {t.rights} · {t.footLine}</span>
-          <a href="#top" className="foot-top"><ArrowUp size={15} />{t.top}</a>
           <div className="foot-soc">
             <a href={CONTACT.li} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a>
             <a href={CONTACT.gh} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={18} /></a>
