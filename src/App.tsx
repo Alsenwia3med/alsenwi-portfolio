@@ -311,8 +311,13 @@ export default function App() {
     const sc = () => { raf = 0; const h = root.scrollHeight - innerHeight; root.style.setProperty('--sprog', String(h > 0 ? scrollY / h : 0)); };
     const on = () => { if (!raf) raf = requestAnimationFrame(sc); };
     const mv = (e: PointerEvent) => { root.style.setProperty('--mx', e.clientX + 'px'); root.style.setProperty('--my', e.clientY + 'px'); };
-    addEventListener('scroll', on, { passive: true }); addEventListener('pointermove', mv, { passive: true }); sc();
-    return () => { removeEventListener('scroll', on); removeEventListener('pointermove', mv); };
+    const scr = () => root.classList.toggle('scrolled', scrollY > 30);
+    const MS = '.btn,.cf-send,.cf-wa,.cf-topics button,.ct-icons>a,.ct-icons>button,.top-nav a,.ctl a,.rc-more,.nav-cta';
+    let mt: HTMLElement | null = null, tx = 0, ty = 0, cx = 0, cy = 0, mr = 0;
+    const mloop = () => { cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18; if (mt) mt.style.translate = `${cx.toFixed(2)}px ${cy.toFixed(2)}px`; if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) mr = requestAnimationFrame(mloop); else { mr = 0; if (!tx && !ty && mt) { mt.style.translate = ''; mt = null; } } };
+    const mm = (e: PointerEvent) => { if (e.pointerType !== 'mouse') return; const el = (e.target as HTMLElement)?.closest?.(MS) as HTMLElement | null; if (el !== mt && mt) { mt.style.translate = ''; cx = cy = tx = ty = 0; } if (!el) { tx = ty = 0; if (mt && !mr) mr = requestAnimationFrame(mloop); return; } mt = el; const r = el.getBoundingClientRect(); tx = (e.clientX - (r.left + r.width / 2)) * 0.28; ty = (e.clientY - (r.top + r.height / 2)) * 0.34; if (!mr) mr = requestAnimationFrame(mloop); };
+    addEventListener('scroll', on, { passive: true }); addEventListener('scroll', scr, { passive: true }); addEventListener('pointermove', mv, { passive: true }); addEventListener('pointermove', mm, { passive: true }); sc(); scr();
+    return () => { removeEventListener('scroll', on); removeEventListener('scroll', scr); removeEventListener('pointermove', mv); removeEventListener('pointermove', mm); cancelAnimationFrame(mr); };
   }, []);
   useEffect(() => { try { if (parent !== window) parent.postMessage({ type: 'state', lang, theme }, '*'); } catch {} }, [lang, theme]);
   useEffect(() => {
@@ -339,15 +344,18 @@ export default function App() {
   useReveal(lang);
 
   const waPlain = `https://wa.me/${CONTACT.wa}`;
-  const sendForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); const f = new FormData(e.currentTarget); const n = String(f.get('n') || '').trim(), em = String(f.get('e') || '').trim(), m = String(f.get('m') || '').trim();
-    if (!n || !m || !/^\S+@\S+\.\S+$/.test(em)) { say(<ShieldCheck size={14} />, t.fErr); (e.currentTarget.querySelector(':invalid, input[name=n]') as HTMLElement | null)?.focus(); return; }
+  const [topic, setTopic] = useState(0);
+  const sendVia = (how: 'mail' | 'wa', f: HTMLFormElement) => {
+    const n = (f.elements.namedItem('n') as HTMLInputElement).value.trim(), m = (f.elements.namedItem('m') as HTMLTextAreaElement).value.trim();
+    if (!n || !m) { say(<ShieldCheck size={14} />, t.fErr); (f.querySelector(n ? 'textarea' : 'input[name=n]') as HTMLElement | null)?.focus(); return; }
+    const subj = t.fTopics[topic], text = `${t.fHi},\n${m}\n\n— ${n}`;
     say(<Send size={14} />, t.fOk);
-    location.href = `mailto:${CONTACT.mail}?subject=${encodeURIComponent(`${t.fSubj} · ${n}`)}&body=${encodeURIComponent(`${m}\n\n— ${n} (${em})`)}`;
+    if (how === 'mail') location.href = `mailto:${CONTACT.mail}?subject=${encodeURIComponent(`${subj} · ${n}`)}&body=${encodeURIComponent(text)}`;
+    else window.open(`https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(`[${subj}] ${text}`)}`, '_blank', 'noopener');
   };
   const copyMail = async () => { try { await navigator.clipboard.writeText(CONTACT.mail); setCopied(true); say(<Check size={14} />, t.copied); setTimeout(() => setCopied(false), 1800); } catch {} };
   const xp = [
-    ...t.roles.map(r => ({ key: r.id, kind: 'work' as const, now: r.current, tag: r.tag, year: Math.floor(r.date), logo: r.logo, org: r.org, role: r.role, when: r.when, place: r.place, pts: r.pts, open: () => setModal({ kind: 'role', id: r.id }) })),
+    ...t.roles.map(r => ({ key: r.id, kind: 'work' as const, now: r.current, tag: r.tag, year: Math.floor(r.date), logo: r.logo, org: r.org, role: r.role, when: r.when, place: r.place, pts: r.pts, nums: r.x.nums.slice(0, 3), open: () => setModal({ kind: 'role', id: r.id }) })),
     { key: 'edu', kind: 'edu' as const, now: false, tag: '', year: 2022, logo: 'utem-sq.png', org: 'UTeM', role: t.degree, when: t.edWhen, place: t.edPlace, pts: t.edProj, open: () => setModal({ kind: 'edu' }) },
   ];
 
@@ -357,9 +365,14 @@ export default function App() {
         <Mark src={r.logo} name={r.org} size={56} />
         <div><span className="md-k">{r.current ? <em className="badge"><i />{t.current}</em> : r.when}</span><h2 id="md-title">{r.role}</h2><p className="md-org">{r.org} · {r.place}</p></div>
       </div>
+      <dl className="rb-facts">{r.x.facts.map(([k, v], i) => <div key={k} style={{ ['--i' as any]: i }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
       <p className="md-about">{r.about}</p>
+      <div className={`md-nums n${Math.min(r.x.nums.length, 3)}`}>{r.x.nums.map(([n, l], i) => <div key={l} style={{ ['--i' as any]: i }}><b dir="ltr">{n}</b><span>{l}</span></div>)}</div>
       <h3 className="md-sub">{t.whatIDid}</h3>
-      <ul className="md-list">{r.pts.map((x, i) => <li key={x} style={{ ['--i' as any]: i }}><Bi text={x} /><span className="md-t"><b>{x}</b>{r.ptd[i] && <em>{r.ptd[i]}</em>}</span></li>)}</ul>
+      <div className="rb-tbl" role="table">
+        <div className="rb-th" role="row"><span role="columnheader">{t.tblA}</span><span role="columnheader">{t.tblB}</span><span role="columnheader">{t.tblC}</span></div>
+        {r.x.table.map(([a, b2, c], i) => <div className="rb-tr" role="row" key={a} style={{ ['--i' as any]: i }}><b role="cell"><Bi text={a + ' ' + b2} />{a}</b><span role="cell">{b2}</span><em role="cell">{c}</em></div>)}
+      </div>
       {r.stack.length > 0 && <><h3 className="md-sub">{t.stackT}</h3><ul className="chips">{r.stack.map(s => <li key={s}>{s}</li>)}</ul></>}
       {r.href && <a className="btn btn-ink md-cta" href={r.href} target="_blank" rel="noreferrer">{t.visit}<ArrowUpRight size={16} className="rtl:-scale-x-100" /></a>}
     </>
@@ -475,7 +488,7 @@ export default function App() {
                       <b className="xp-org">{e.org}</b>
                       <span className="xp-role">{e.role}</span>
                       <span className="xp-meta"><time>{e.when}</time><i aria-hidden="true" />{e.place}</span>
-                      <span className="xp-pts">{e.pts.slice(0, 3).map(x => <span key={x}><Bi text={x} />{x}</span>)}</span>
+                      {(e as any).nums ? <span className="xp-nums">{((e as any).nums as [string, string][]).map(([n, l]) => <span key={l}><b dir="ltr">{n}</b>{l}</span>)}</span> : <span className="xp-pts">{e.pts.slice(0, 3).map(x => <span key={x}><Bi text={x} />{x}</span>)}</span>}
                       <span className="rc-more">{t.open}<ArrowUpRight size={14} className="rtl:-scale-x-100" /></span>
                     </button>
                   </li>
@@ -489,7 +502,7 @@ export default function App() {
               </div>
               <div className="ed-lang lux">
                 <span className="ed-k"><Ico a="bob" d={2} c="teal"><Languages size={18} /></Ico>{t.langK}</span>
-                <ul>{t.langs.map(([n, l], i) => <li key={n}><span className={`ai ai-sm ai-${(['green', 'blue', 'orange', 'red'] as IC[])[i]}`} aria-hidden="true"><i>{['AR', 'EN', 'MS', 'DE'][i]}</i></span><div><b>{n}</b><span>{l}</span></div></li>)}</ul>
+                <ul>{t.langs.map(([n, l], i) => <li key={n} style={{ ['--lv' as any]: [1, .86, .6, .2][i], ['--i' as any]: i }}><span className={`ai ai-sm ai-${(['green', 'blue', 'orange', 'red'] as IC[])[i]}`} aria-hidden="true"><i>{['AR', 'EN', 'MS', 'DE'][i]}</i></span><b>{n}</b><span className="lv-t">{l}</span><i className="lv-bar" aria-hidden="true" /></li>)}</ul>
               </div>
             </div>
           </div>
@@ -545,7 +558,6 @@ export default function App() {
         <section id="contact" className="sec contact" aria-labelledby="ct-h">
           <div className="wrap ct" data-rv>
             <Aurora dark sun={false} />
-            <div className="ct-rings" aria-hidden="true"><i /><i /><i /><i /></div>
             <div className="ct-copy">
               <span className="eyebrow" style={{ color: '#a6a6b0' }}>{t.ctK} · 05</span>
               <H2 p={t.ctH} id="ct-h" xl />
@@ -553,16 +565,14 @@ export default function App() {
               <div className="ct-clock"><i className="ck-dot" /><b className="ck-t"><Clock /></b><span className="ck-l"><em>{t.ctClock}</em>{t.loc} · UTC+8</span></div>
             </div>
             <div className="ct-side">
-              <form className="ct-form" noValidate onSubmit={sendForm}>
+              <form className="ct-form" noValidate onSubmit={e => e.preventDefault()}>
                 <span className="cf-k">{t.fHead}</span>
-                <div className="cf-row">
-                  <div className="fld"><input id="cf-n" name="n" type="text" autoComplete="name" placeholder=" " required /><label htmlFor="cf-n">{t.fName}</label></div>
-                  <div className="fld"><input id="cf-e" name="e" type="email" autoComplete="email" placeholder=" " required dir="ltr" /><label htmlFor="cf-e">{t.fMail}</label></div>
-                </div>
-                <div className="fld"><textarea id="cf-m" name="m" rows={4} placeholder=" " required /><label htmlFor="cf-m">{t.fMsg}</label></div>
+                <div className="fld"><input id="cf-n" name="n" type="text" autoComplete="name" placeholder=" " required /><label htmlFor="cf-n">{t.fName}</label></div>
+                <div className="cf-topics" role="radiogroup" aria-label={t.fMail}>{t.fTopics.map((x, i) => <button key={x} type="button" role="radio" aria-checked={topic === i} className={topic === i ? 'on' : ''} onClick={() => setTopic(i)}>{x}</button>)}</div>
+                <div className="fld"><textarea id="cf-m" name="m" rows={3} placeholder=" " required /><label htmlFor="cf-m">{t.fMsg}</label></div>
                 <div className="cf-act">
-                  <button type="submit" className="cf-send"><Send size={16} />{t.fSend}</button>
-                  <a className="cf-wa" href={waPlain} target="_blank" rel="noreferrer"><BrandIco k="whatsapp" />{t.fWa}</a>
+                  <button type="button" className="cf-send" onClick={e => sendVia('mail', e.currentTarget.form!)}><Mail size={16} />{t.fViaMail}</button>
+                  <button type="button" className="cf-wa" onClick={e => sendVia('wa', e.currentTarget.form!)}><BrandIco k="whatsapp" />{t.fWa}</button>
                 </div>
                 <p className="cf-note">{t.fNote}</p>
               </form>

@@ -69,6 +69,45 @@ const ROLES: RoleSrc[] = [
   },
 ];
 
+
+/* ------------------------------ company pages: facts, table, numbers (from my own repos and project docs) ------------------------------ */
+type RX = { facts: [L2, L2][]; table: [L2, L2, L2][]; nums: [string, L2][] };
+const ROLE_X: Record<string, RX> = {
+  roots: {
+    facts: [[b('Period', 'الفترة'), b('Mar 2026 – Present', 'مارس 2026 – حالياً')], [b('Type', 'النوع'), b('Full-time, product team', 'دوام كامل، فريق المنتج')], [b('Sector', 'القطاع'), b('Health AI', 'ذكاء اصطناعي صحي')], [b('Stack', 'الأدوات'), b('React, Next.js, TypeScript', 'React وNext.js وTypeScript')]],
+    nums: [['485', b('automated tests passing, v1.21 release', 'اختبار آلي ناجح في إصدار v1.21')], ['12', b('sidebar pages, Personal dashboard', 'صفحة جانبية في لوحة الأفراد')], ['56', b('concept screens, one per concept', 'شاشة مفاهيم، لكل مفهوم شاشة')], ['195', b('features from 20 platforms reviewed', 'ميزة من 20 منصة تمت مراجعتها')]],
+    table: [
+      [b('Product dashboards', 'لوحات المنتج'), b('Personal and clinic dashboards, built on the team’s own design.', 'لوحات الأفراد والعيادات على تصميم الفريق نفسه.'), b('The screens customers use every day', 'الشاشات التي يستخدمها العملاء يومياً')],
+      [b('Universities sector', 'قطاع الجامعات'), b('A new dashboard in the same house style.', 'لوحة جديدة بالأسلوب نفسه.'), b('One product, not three', 'منتج واحد متناسق لا ثلاثة')],
+      [b('Official website', 'الموقع الرسمي'), b('Several homepage design directions for roots-ai.health, prepared side by side.', 'عدة اتجاهات لتصميم الصفحة الرئيسية، مجهّزة جنباً إلى جنب.'), b('Ready for review and approval', 'جاهزة للمراجعة والاعتماد')],
+      [b('Release v1.21', 'إصدار v1.21'), b('Checked every claim on the homepage and legal pages before and after, compared pages with the approved document word for word, tested accessibility and responsiveness.', 'راجعت كل ادعاء في الرئيسية والصفحات القانونية قبل وبعد، وقارنت الصفحات بالوثيقة المعتمدة كلمة بكلمة، واختبرت الوصولية والاستجابة.'), b('485 tests passing', '485 اختباراً ناجحاً')],
+      [b('Sign-off', 'الاعتماد'), b('Sent the doctor a full page-by-page status of the Personal dashboard.', 'أرسلت للطبيب حالة كاملة للوحة الأفراد صفحة بصفحة.'), b('Clear approval path', 'مسار اعتماد واضح')],
+    ],
+  },
+  sdc: {
+    facts: [[b('Period', 'الفترة'), b('Oct 2025 – Mar 2026', 'أكتوبر 2025 – مارس 2026')], [b('Duration', 'المدة'), b('6 months · 450+ hours', '6 أشهر · أكثر من 450 ساعة')], [b('Type', 'النوع'), b('Industrial training', 'تدريب صناعي')], [b('Sector', 'القطاع'), b('Fintech and trading', 'تقنية مالية وتداول')]],
+    nums: [['6', b('months on a live platform', 'أشهر على منصة حية')], ['450+', b('hours of production work', 'ساعة عمل فعلي')], ['300+', b('contact lists managed', 'قائمة اتصال تُدار')], ['60+', b('pages redesigned in Figma', 'صفحة أُعيد تصميمها في Figma')], ['5', b('live KPIs, refreshed every 30 s', 'مؤشرات لحظية تتحدث كل 30 ثانية')]],
+    table: [
+      [b('Trading automation', 'أتمتة التداول'), b('Strategy logic in Python with position sizing, stop loss and take profit, trade logging for backtesting, and config kept apart from logic.', 'منطق الاستراتيجيات ببايثون مع حجم المركز ووقف الخسارة وجني الربح وتسجيل الصفقات للاختبار الخلفي، والإعدادات منفصلة عن المنطق.'), b('A runnable base instead of manual clicking', 'أساس جاهز بدل التنفيذ اليدوي')],
+      [b('Live user dashboard', 'لوحة المستخدمين اللحظية'), b('React and Chart.js: Total Users, Active Today, Logged This Week, New This Week, Verified Users, with loading and error states.', 'React وChart.js: إجمالي المستخدمين والنشطون اليوم والدخول هذا الأسبوع والجدد والموثّقون، مع حالات التحميل والخطأ.'), b('Auto-refresh every 30 s from PHP', 'تحديث تلقائي كل 30 ثانية من PHP')],
+      [b('Email automation', 'أتمتة البريد'), b('A Brevo API dashboard for batches, media, templates and segmented lists.', 'لوحة على Brevo API للدفعات والوسائط والقوالب والقوائم المقسّمة.'), b('Replaced copy-paste campaigns and Gmail limits', 'استبدلت الحملات اليدوية وقيود Gmail')],
+      [b('Investor portal and admin', 'بوابة المستثمر والإدارة'), b('Capital requests and the termination flow, on both sides of the platform.', 'طلبات رأس المال ومسار الإنهاء على جهتي المنصة.'), b('User and admin handle the same request', 'المستخدم والمسؤول على الطلب نفسه')],
+      [b('Referrals and payments', 'الإحالات والدفع'), b('Referral tracking, e-learning access, payment gateways and PHP auth middleware.', 'تتبّع الإحالات والوصول التعليمي وبوابات الدفع وطبقة مصادقة PHP.'), b('Protected pages, verified sessions', 'صفحات محمية وجلسات موثّقة')],
+      [b('Design', 'التصميم'), b('Redesigned 60+ pages in Figma, then rebuilt the landing, 30/60-day and Early Bird pages.', 'أعدت تصميم أكثر من 60 صفحة في Figma ثم بنيت صفحات الهبوط و30/60 يوم والـ Early Bird.'), b('Design and code in one hand', 'التصميم والكود في يد واحدة')],
+    ],
+  },
+  inspire: {
+    facts: [[b('Period', 'الفترة'), b('Aug 2025 – Present', 'أغسطس 2025 – حالياً')], [b('Type', 'النوع'), b('Part-time', 'دوام جزئي')], [b('Sector', 'القطاع'), b('Edtech, Melaka', 'تعليم، ملقا')], [b('Stack', 'الأدوات'), b('PHP, MySQL, REST', 'PHP وMySQL وREST')]],
+    nums: [['70%', b('of internal workflows automated', 'من سير العمل الداخلي أُتمت')], ['4', b('stages tracked: admission, visa, housing, arrival', 'مراحل تُتابع: قبول وتأشيرة وسكن واستقبال')], ['2', b('languages on the public site', 'لغتان في الموقع العام')]],
+    table: [
+      [b('Platform', 'المنصة'), b('Architecture on PHP, MySQL and REST APIs between screens and data.', 'معمارية على PHP وMySQL وواجهات REST بين الشاشات والبيانات.'), b('One backend behind every screen', 'خلفية واحدة وراء كل شاشة')],
+      [b('Student system', 'نظام الطلاب'), b('Rebuilt the system staff use to follow each international student.', 'أعدت بناء النظام الذي يتابع به الموظفون كل طالب دولي.'), b('Admission to arrival in one place', 'من القبول إلى الاستقبال في مكان واحد')],
+      [b('Automation', 'الأتمتة'), b('Replaced manual internal steps with automated flows.', 'استبدلت الخطوات اليدوية الداخلية بمسارات آلية.'), b('About 70% automated', 'نحو 70% آلي')],
+      [b('Public site', 'الموقع العام'), b('inspire-u.net: responsive, bilingual, clear calls to action and consultation forms, semantic SEO-friendly markup, custom domain.', 'inspire-u.net: متجاوب وبلغتين مع أزرار دعوة واضحة ونماذج استشارة وترميز دلالي مناسب للسيو ونطاق مخصص.'), b('Feeds the registration and lead flow', 'يغذّي مسار التسجيل واستقبال الطلبات')],
+    ],
+  },
+};
+
 /* ------------------------------ projects ------------------------------ */
 type ProjSrc = { id: string; name: L2; img: string; logo?: boolean; href?: string; year: string; kind: L2; line: L2; did: L2[]; stack: string[]; context: L2 };
 const PROJECTS: ProjSrc[] = [
@@ -300,11 +339,16 @@ function build(k: Lang) {
     ctSub: en ? 'For roles, interviews or technical questions.' : 'للوظائف والمقابلات والأسئلة التقنية.',
     fHead: en ? 'Send a message' : 'أرسل رسالة',
     fName: en ? 'Your name' : 'اسمك',
-    fMail: en ? 'Your email' : 'بريدك الإلكتروني',
+    fMail: en ? 'Subject' : 'الموضوع',
+    fTopics: (en ? ['Job opportunity', 'Freelance project', 'Collaboration', 'Just saying hi'] : ['فرصة عمل', 'مشروع مستقل', 'تعاون', 'مجرد سلام']) as string[],
+    fVia: en ? 'Send via' : 'أرسل عبر',
+    fViaMail: en ? 'Email' : 'البريد',
+    fHi: en ? 'Hi Ahmed' : 'مرحباً أحمد',
+    tblA: en ? 'Area' : 'المجال', tblB: en ? 'What I did' : 'ماذا فعلت', tblC: en ? 'Outcome' : 'النتيجة',
     fMsg: en ? 'Message' : 'الرسالة',
     fSend: en ? 'Send message' : 'إرسال الرسالة',
     fWa: en ? 'WhatsApp' : 'واتساب',
-    fNote: en ? 'Opens your email app with the message ready to send.' : 'يفتح تطبيق البريد لديك والرسالة جاهزة للإرسال.',
+    fNote: en ? 'Pick a topic, write your message, then send it by email or WhatsApp.' : 'اختر الموضوع واكتب رسالتك ثم أرسلها بالبريد أو واتساب.',
     fOk: en ? 'Opening your email app' : 'جارٍ فتح تطبيق البريد',
     fErr: en ? 'Please fill in every field' : 'يرجى تعبئة كل الحقول',
     fSubj: en ? 'Message from the portfolio' : 'رسالة من الموقع',
@@ -334,7 +378,7 @@ function build(k: Lang) {
     end: en ? 'Fin.' : 'النهاية.',
     cur: en ? 'View' : 'عرض',
 
-    roles: ROLES.map(r => ({ id: r.id, org: r.org, logo: r.logo, href: r.href, date: r.date, end: r.end, current: !!r.current, when: p(r.when), tag: r.tag ? p(r.tag) : '', role: p(r.role), place: p(r.place), about: p(r.about), pts: r.pts.map(p), ptd: (DET_ROLE[r.id] || []).map(p), stack: r.stack })),
+    roles: ROLES.map(r => ({ id: r.id, org: r.org, logo: r.logo, href: r.href, date: r.date, end: r.end, current: !!r.current, when: p(r.when), tag: r.tag ? p(r.tag) : '', role: p(r.role), place: p(r.place), about: p(r.about), pts: r.pts.map(p), ptd: (DET_ROLE[r.id] || []).map(p), stack: r.stack, x: { facts: ROLE_X[r.id].facts.map(([a, c]) => [p(a), p(c)] as [string, string]), table: ROLE_X[r.id].table.map(([a, c, d]) => [p(a), p(c), p(d)] as [string, string, string]), nums: ROLE_X[r.id].nums.map(([n, l]) => [n, p(l)] as [string, string]) } })),
     projects: PROJECTS.map(x => ({ id: x.id, name: p(x.name), img: x.img, logo: !!x.logo, href: x.href, year: x.year, kind: p(x.kind), line: p(x.line), did: x.did.map(p), didd: (DET_PROJ[x.id] || []).map(p), stack: x.id === 'roots' ? ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Figma'] : x.stack, story: p(STORY[x.id].story), role: p(STORY[x.id].role), nums: STORY[x.id].nums.map(([n, l]) => [n, p(l)] as [string, string]), context: p(x.context) })),
     skills: SKILLS.map(g => ({ key: g.key, t: p(g.t), d: p(g.d), items: g.items })),
     bdK: en ? 'Capabilities' : 'القدرات',
